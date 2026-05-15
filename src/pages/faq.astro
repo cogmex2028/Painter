@@ -1,0 +1,129 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+import InlineFAQ from '~/components/page/InlineFAQ.astro';
+import QuoteCTA from '~/components/page/QuoteCTA.astro';
+
+import FAQSchema from '~/components/schema/FAQSchema.astro';
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'FAQ', href: '/faq' },
+];
+
+const title = 'FAQ — PaintHub Dubai Painting Marketplace';
+const description =
+  'Frequently asked questions about hiring painters in Dubai through PaintHub. Pricing, warranty, scheduling, vendor verification and dispute resolution.';
+
+const groups = [
+  {
+    name: 'Getting started',
+    faqs: [
+      {
+        question: 'How does PaintHub work?',
+        answer:
+          'You tell us your area, property type and what you need painted. We instantly match you with up to 5 verified painters in your community. You compare ratings, prices and portfolios, then chat directly on WhatsApp or book through our concierge.',
+      },
+      {
+        question: 'Is PaintHub really free to use?',
+        answer:
+          'Yes — homeowners and businesses pay nothing to use PaintHub. We earn from the painters in our network through subscription and per-lead fees. The quote you get from a painter is the price you pay them, no platform fee added.',
+      },
+      {
+        question: 'How fast can I get quotes?',
+        answer:
+          'Most requests get the first quote within 15 minutes, and all five quotes within 60-90 minutes during opening hours (8am-10pm). At night or on Friday mornings, expect quotes by 9am the next day.',
+      },
+    ],
+  },
+  {
+    name: 'Pricing & quotes',
+    faqs: [
+      {
+        question: 'Are the prices on PaintHub real?',
+        answer:
+          'Yes. The starting prices shown on PaintHub are actual averages from our network. Your final quote is locked in writing after a free site survey — what you see is what you pay, with no hidden additions.',
+      },
+      {
+        question: 'Why do quotes vary between painters for the same job?',
+        answer:
+          'Price differences usually come down to paint brand, crew size, scaffolding, prep depth and warranty length. Premium painters use higher-grade materials and longer warranties; budget painters may skip some prep steps. PaintHub shows what\'s included in each quote so you can compare apples to apples.',
+      },
+      {
+        question: 'Can I negotiate the quote?',
+        answer:
+          'Yes — quotes are between you and the painter directly. Many painters are open to package discounts (e.g. combining interior + exterior) or seasonal offers. We never take a cut, so the savings stay with you.',
+      },
+      {
+        question: 'What if my actual scope changes after the quote?',
+        answer:
+          'If scope grows (an extra room, a feature wall), the painter will provide a written variation quote before doing the extra work. You can always say no. No painter on PaintHub is allowed to invoice for unauthorised work.',
+      },
+    ],
+  },
+  {
+    name: 'Quality & warranty',
+    faqs: [
+      {
+        question: 'How are painters verified?',
+        answer:
+          'Every PaintHub painter must hold an active Dubai trade licence, AED 1M+ third-party liability insurance, and a verifiable reference job. We re-check paperwork every 6 months and remove vendors who drop below a 4.0 average rating.',
+      },
+      {
+        question: 'What\'s covered by the 12-month warranty?',
+        answer:
+          'Workmanship defects — peeling, flaking, blistering or visible inconsistencies in finish — are covered for 12 months from completion. Damage from leaks, plumbing or third-party renovations is not covered. Exterior coatings can have warranties up to 5 years depending on the system used.',
+      },
+      {
+        question: 'What if I\'m unhappy with the result?',
+        answer:
+          'Flag it within 14 days. The painter is contractually required to return and fix any workmanship issue at no extra cost. If you can\'t agree on a fix, PaintHub mediates and, if necessary, refunds you from our quality fund.',
+      },
+    ],
+  },
+  {
+    name: 'Vendors & joining',
+    faqs: [
+      {
+        question: 'How do I list my painting business on PaintHub?',
+        answer:
+          'Visit /vendor-signup and submit your trade licence, insurance certificate and a reference job. Our verification team reviews within 5 working days. Approved vendors can be live within 24 hours of approval.',
+      },
+      {
+        question: 'How much does it cost to be a PaintHub vendor?',
+        answer:
+          'PaintHub vendors pay either a monthly subscription (Premium tier — unlimited leads) or a per-lead fee (Basic tier — AED 30-100 per verified lead). The pricing depends on area and service type.',
+      },
+      {
+        question: 'Can I be removed from PaintHub?',
+        answer:
+          'Yes. Vendors who fall below a 4.0 average rating, fail to respond within 4 hours, miss appointments without notice, or fail the 6-month re-verification are removed. We don\'t protect under-performers.',
+      },
+    ],
+  },
+];
+
+const allFaqs = groups.flatMap((g) => g.faqs);
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    eyebrow="Help centre"
+    title="Everything you need to know about PaintHub"
+    subtitle="Pricing, scheduling, warranty, vendor verification — answered. If you can't find what you're looking for, just WhatsApp us."
+    breadcrumbs={breadcrumbs}
+  />
+
+  {groups.map((g, i) => (
+    <Section eyebrow={g.name} title={g.name} bg={i % 2 === 0 ? 'white' : 'ink-50'}>
+      <InlineFAQ faqs={g.faqs} />
+    </Section>
+  ))}
+
+  <QuoteCTA title="Still have questions?" subtitle="Our concierge is available 8am-10pm daily on WhatsApp and phone." secondary="Open WhatsApp" />
+
+  <FAQSchema faqs={allFaqs} slot="head" />
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+</BaseLayout>

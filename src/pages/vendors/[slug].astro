@@ -1,0 +1,276 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+import InlineFAQ from '~/components/page/InlineFAQ.astro';
+import QuoteCTA from '~/components/page/QuoteCTA.astro';
+
+import VendorSchema from '~/components/schema/VendorSchema.astro';
+import FAQSchema from '~/components/schema/FAQSchema.astro';
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+
+import { vendors } from '~/data/vendors';
+import { areas } from '~/data/areas';
+import { services } from '~/data/services';
+import { whatsappUrl, site } from '~/data/site';
+import { imageForVendor, imageUrl } from '~/data/images';
+import Img from '~/components/Img.astro';
+
+export async function getStaticPaths() {
+  return vendors.map((vendor) => ({
+    params: { slug: vendor.slug },
+    props: { vendor },
+  }));
+}
+
+const { vendor } = Astro.props;
+
+const vendorAreas = areas.filter((a) => vendor.areas.includes(a.slug));
+const vendorServices = services.filter((s) => vendor.services.includes(s.slug));
+
+const badgeStyles: Record<string, string> = {
+  'top-rated': 'bg-amber-100 text-amber-800 ring-amber-200',
+  premium: 'bg-violet-100 text-violet-800 ring-violet-200',
+  rising: 'bg-emerald-100 text-emerald-800 ring-emerald-200',
+};
+const badgeLabel: Record<string, string> = {
+  'top-rated': '★ Top rated',
+  premium: 'Premium',
+  rising: 'Rising talent',
+};
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Painters', href: '/#vendors' },
+  { name: vendor.name, href: `/vendors/${vendor.slug}` },
+];
+---
+
+<BaseLayout
+  title={vendor.seoTitle}
+  description={vendor.seoDescription}
+  image={imageUrl(site.url, imageForVendor(vendor.slug))}
+  type="profile"
+>
+  <section class="relative overflow-hidden bg-gradient-to-b from-brand-50/60 via-white to-white">
+    <div class="absolute inset-0 bg-grid mask-fade-b opacity-50" aria-hidden="true"></div>
+    <div class="absolute -top-32 -left-20 h-80 w-80 rounded-full bg-brand-300/30 blur-3xl" aria-hidden="true"></div>
+
+    <div class="container-x relative pt-10 pb-14 sm:pt-14 sm:pb-20">
+      <nav aria-label="Breadcrumb" class="text-sm">
+        <ol class="flex flex-wrap items-center gap-1 text-ink-500">
+          {breadcrumbs.map((b, i) => (
+            <li class="flex items-center gap-1">
+              {i > 0 && (
+                <svg class="h-3 w-3 text-ink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 18l6-6-6-6"/>
+                </svg>
+              )}
+              {i === breadcrumbs.length - 1 ? (
+                <span class="text-ink-700 font-medium" aria-current="page">{b.name}</span>
+              ) : (
+                <a href={b.href} class="hover:text-ink-900 transition-colors">{b.name}</a>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+      <div class="mt-6 grid items-start gap-8 lg:grid-cols-12">
+        <div class="lg:col-span-7">
+          <Img slot={imageForVendor(vendor.slug)} aspect="3/2" priority sizes="(min-width: 1024px) 580px, 100vw" class="shadow-2xl shadow-ink-900/10" />
+        </div>
+      </div>
+
+      <div class="mt-8 grid items-start gap-8 lg:grid-cols-12">
+        <div class="lg:col-span-8">
+          <div class="flex items-start gap-5">
+            <div class={`grid h-20 w-20 shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${vendor.accent} text-2xl font-extrabold text-white shadow-lg`}>
+              {vendor.initials}
+            </div>
+            <div class="min-w-0 flex-1">
+              <div class="flex flex-wrap items-center gap-2">
+                {vendor.badge && (
+                  <span class={`rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider ring-1 ${badgeStyles[vendor.badge]}`}>{badgeLabel[vendor.badge]}</span>
+                )}
+                {vendor.verified && <span class="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-emerald-800 ring-1 ring-emerald-200">✓ Verified</span>}
+                {vendor.insured && <span class="rounded-full bg-sky-100 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-sky-800 ring-1 ring-sky-200">Insured</span>}
+              </div>
+              <h1 class="mt-3 text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">{vendor.name}</h1>
+              <p class="mt-2 text-ink-600">{vendor.tagline}</p>
+              <div class="mt-4 flex flex-wrap items-center gap-4 text-sm">
+                <div class="flex items-center gap-1.5">
+                  <div class="flex items-center text-amber-500" aria-label={`Rated ${vendor.rating} out of 5`}>
+                    {[1,2,3,4,5].map((n) => (
+                      <svg class={`h-4 w-4 ${n <= Math.round(vendor.rating) ? 'fill-current' : 'fill-ink-200'}`} viewBox="0 0 20 20" aria-hidden="true">
+                        <path d="M10 1.5l2.6 5.3 5.9.85-4.25 4.15 1 5.85L10 14.9l-5.25 2.75 1-5.85L1.5 7.65l5.9-.85L10 1.5z"/>
+                      </svg>
+                    ))}
+                  </div>
+                  <strong class="text-ink-900">{vendor.rating}</strong>
+                  <span class="text-ink-500">({vendor.reviewCount} reviews)</span>
+                </div>
+                <span class="text-ink-300">·</span>
+                <span class="text-ink-600"><strong class="text-ink-900">{vendor.jobsCompleted}+</strong> jobs done</span>
+                <span class="text-ink-300">·</span>
+                <span class="text-ink-600"><strong class="text-ink-900">{vendor.yearsExperience}</strong> years experience</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+            <a href={whatsappUrl(`Hi, I would like to get a quote from ${vendor.name}.`)} target="_blank" rel="noopener" class="btn-whatsapp text-base">
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true">
+                <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.157 5.335 5.493 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24z"/>
+              </svg>
+              Message {vendor.name.split(' ')[0]} on WhatsApp
+            </a>
+            <a href="/#quote" class="btn-primary text-base">Get matched with 4 more</a>
+          </div>
+        </div>
+
+        <aside class="lg:col-span-4">
+          <div class="rounded-2xl bg-white p-6 ring-1 ring-ink-200/70 shadow-sm">
+            <h2 class="text-base font-bold text-ink-900">At a glance</h2>
+            <dl class="mt-4 space-y-3 text-sm">
+              <div class="flex justify-between gap-3"><dt class="text-ink-500">Response time</dt><dd class="font-bold text-emerald-700">{vendor.responseTime}</dd></div>
+              <div class="flex justify-between gap-3"><dt class="text-ink-500">Price range</dt><dd class="font-semibold text-ink-900">{vendor.priceRange}</dd></div>
+              <div class="flex justify-between gap-3"><dt class="text-ink-500">Areas served</dt><dd class="font-semibold text-ink-900">{vendor.areas.length}</dd></div>
+              <div class="flex justify-between gap-3"><dt class="text-ink-500">Services</dt><dd class="font-semibold text-ink-900">{vendor.services.length}</dd></div>
+              <div class="border-t border-ink-200/60 pt-3">
+                <dt class="text-ink-500">Warranty</dt>
+                <dd class="mt-1 text-sm font-medium text-ink-900">{vendor.warranty}</dd>
+              </div>
+            </dl>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bio -->
+  <Section eyebrow="About" title={`Inside ${vendor.name}`} bg="white">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <p class="text-base leading-relaxed text-ink-700 sm:text-lg">{vendor.bio}</p>
+
+        <h3 class="mt-8 text-lg font-bold text-ink-900">Specialities</h3>
+        <ul class="mt-4 space-y-2">
+          {vendor.specialities.map((sp) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12l5 5L20 7"/>
+                </svg>
+              </span>
+              <span class="text-sm text-ink-700">{sp}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <aside class="lg:col-span-5">
+        <div class="rounded-2xl bg-ink-50 p-6 ring-1 ring-ink-200/70">
+          <h3 class="text-lg font-bold text-ink-900">Credentials</h3>
+          <ul class="mt-4 space-y-2.5">
+            {vendor.certifications.map((c) => (
+              <li class="flex items-start gap-2.5 text-sm text-ink-700">
+                <svg class="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.4l-4.8 2.5.9-5.4-3.9-3.8 5.4-.8L12 2z"/>
+                </svg>
+                {c}
+              </li>
+            ))}
+          </ul>
+
+          <h3 class="mt-6 text-base font-bold text-ink-900">Paint brands</h3>
+          <ul class="mt-3 flex flex-wrap gap-1.5">
+            {vendor.paintBrands.map((b) => (
+              <li class="rounded-md bg-white px-2.5 py-1 text-xs font-medium text-ink-700 ring-1 ring-ink-200">{b}</li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </Section>
+
+  <!-- Services -->
+  <Section eyebrow="Services" title="What this painter does best" bg="ink-50">
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {vendorServices.map((s) => (
+        <li>
+          <a href={`/services/${s.slug}`} class="card group flex h-full flex-col p-6">
+            <h3 class="text-lg font-bold text-ink-900">{s.name}</h3>
+            <p class="mt-2 text-sm text-ink-600">{s.short}</p>
+            <p class="mt-3 text-sm font-semibold text-ink-900">From AED {s.startingPrice.toLocaleString()} <span class="font-medium text-ink-500">/ {s.unit.split('/')[1]?.trim() ?? 'unit'}</span></p>
+            <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 transition-transform group-hover:translate-x-1">
+              Learn more
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <!-- Areas served -->
+  <Section eyebrow="Areas served" title={`${vendor.name.split(' ')[0]} services these communities`} bg="white">
+    <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {vendorAreas.map((a) => (
+        <li>
+          <a href={`/areas/${a.slug}`} class="card group flex items-center justify-between p-5">
+            <div>
+              <p class="font-semibold text-ink-900">Painters in {a.name}</p>
+              <p class="mt-0.5 text-xs text-ink-500">{a.sector}</p>
+            </div>
+            <svg class="h-5 w-5 text-ink-400 transition-transform group-hover:translate-x-1 group-hover:text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <!-- Reviews -->
+  <Section eyebrow="Reviews" title={`What customers say about ${vendor.name}`} subtitle={`${vendor.reviewCount} verified reviews · ${vendor.rating}★ average`} bg="ink-50">
+    <ul class="grid gap-5 md:grid-cols-3">
+      {vendor.reviews.map((r) => (
+        <li class="card flex h-full flex-col p-6">
+          <div class="flex items-center text-amber-500" aria-label={`Rated ${r.rating} out of 5`}>
+            {Array.from({ length: r.rating }).map(() => (
+              <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M10 1.5l2.6 5.3 5.9.85-4.25 4.15 1 5.85L10 14.9l-5.25 2.75 1-5.85L1.5 7.65l5.9-.85L10 1.5z"/>
+              </svg>
+            ))}
+          </div>
+          <blockquote class="mt-3 flex-1 text-sm leading-relaxed text-ink-800">"{r.body}"</blockquote>
+          <div class="mt-5 flex items-center justify-between border-t border-ink-200/70 pt-4">
+            <div>
+              <p class="text-sm font-semibold text-ink-900">{r.author}</p>
+              <p class="text-xs text-ink-500">{r.project}</p>
+            </div>
+            <time datetime={r.date} class="text-xs text-ink-400">{new Date(r.date).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}</time>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <!-- FAQ -->
+  <Section eyebrow="FAQ" title={`Questions about ${vendor.name}`} bg="white">
+    <InlineFAQ faqs={vendor.faqs} />
+  </Section>
+
+  <QuoteCTA
+    title={`Get a quote from ${vendor.name}`}
+    subtitle="Or compare with 4 other top-rated painters in your area — all in one place."
+    primary="Compare 5 painters"
+  />
+
+  <VendorSchema vendor={vendor} slot="head" />
+  <FAQSchema faqs={vendor.faqs} slot="head" />
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+</BaseLayout>

@@ -1,0 +1,95 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+
+import { site } from '~/data/site';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Privacy', href: '/privacy' },
+];
+
+const title = 'Privacy Policy — PaintHub Dubai';
+const description = `How PaintHub Dubai collects, uses and protects your personal information. UAE Personal Data Protection Law compliant. Last updated ${new Date().toLocaleDateString('en-GB')}.`;
+const lastUpdated = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    eyebrow="Legal"
+    title="Privacy Policy"
+    subtitle={`How we handle your personal information. Last updated ${lastUpdated}.`}
+    breadcrumbs={breadcrumbs}
+    ctaPrimary={{ label: 'Contact us', href: '/contact' }}
+  />
+
+  <Section bg="white">
+    <div class="prose prose-ink mx-auto max-w-3xl text-ink-700">
+      <h2 class="text-xl font-bold text-ink-900">1. Who we are</h2>
+      <p class="mt-3 text-sm sm:text-base">
+        {site.legalName} ("PaintHub", "we", "us") is a UAE-registered company operating the website {site.url} and the matching service it provides. Our office is at {site.address.streetAddress}, {site.address.addressLocality}.
+      </p>
+
+      <h2 class="mt-8 text-xl font-bold text-ink-900">2. What information we collect</h2>
+      <ul class="mt-3 space-y-2 text-sm sm:text-base">
+        <li>Contact details you submit (name, phone, email, area, property type)</li>
+        <li>Project details you share with painters through our platform</li>
+        <li>Reviews and ratings you leave for vendors</li>
+        <li>Technical data automatically collected (IP, browser, pages visited) for analytics</li>
+      </ul>
+
+      <h2 class="mt-8 text-xl font-bold text-ink-900">3. How we use your information</h2>
+      <ul class="mt-3 space-y-2 text-sm sm:text-base">
+        <li>Match you with painters in your area</li>
+        <li>Send your project details to matched painters so they can quote you</li>
+        <li>Improve our service through aggregated, anonymous analytics</li>
+        <li>Respond to your questions, complaints and warranty claims</li>
+      </ul>
+
+      <h2 class="mt-8 text-xl font-bold text-ink-900">4. Who we share information with</h2>
+      <p class="mt-3 text-sm sm:text-base">
+        Your contact details are shared only with the painters you choose to receive quotes from. We never sell your data to third parties or use it for unrelated marketing. We may share anonymised, aggregate statistics for industry research.
+      </p>
+
+      <h2 class="mt-8 text-xl font-bold text-ink-900">5. How long we keep your information</h2>
+      <p class="mt-3 text-sm sm:text-base">
+        Quote requests are kept for 24 months to support warranty claims and customer service. Reviews remain public indefinitely (unless you request deletion). Anonymised analytics data may be retained longer for trend analysis.
+      </p>
+
+      <h2 class="mt-8 text-xl font-bold text-ink-900">6. Your rights</h2>
+      <p class="mt-3 text-sm sm:text-base">
+        Under UAE Federal Decree-Law No. 45 of 2021 (Personal Data Protection Law), you have the right to access, correct, or request deletion of your personal data, as well as to object to processing for marketing purposes. To exercise any of these rights, email <a href={`mailto:${site.email}`} class="text-brand-600 hover:underline">{site.email}</a>.
+      </p>
+
+      <h2 class="mt-8 text-xl font-bold text-ink-900">7. Cookies</h2>
+      <p class="mt-3 text-sm sm:text-base">
+        We use only essential cookies for the site to function and privacy-respecting analytics (no cross-site tracking). You may disable cookies in your browser without losing site functionality, though some features (quote form, WhatsApp click tracking) may be limited.
+      </p>
+
+      <h2 class="mt-8 text-xl font-bold text-ink-900">8. Security</h2>
+      <p class="mt-3 text-sm sm:text-base">
+        We use HTTPS encryption, restricted admin access, and a vetted hosting provider. No system is 100% secure, but we follow industry best practice and notify affected users in the event of a data breach.
+      </p>
+
+      <h2 class="mt-8 text-xl font-bold text-ink-900">9. Children</h2>
+      <p class="mt-3 text-sm sm:text-base">
+        PaintHub is intended for users 18 and over. We do not knowingly collect data from minors. If you believe a minor has provided us data, contact us and we will delete it.
+      </p>
+
+      <h2 class="mt-8 text-xl font-bold text-ink-900">10. Changes to this policy</h2>
+      <p class="mt-3 text-sm sm:text-base">
+        We may update this policy occasionally. Material changes will be highlighted on the homepage for 30 days. The "last updated" date at the top of this page always reflects the current version.
+      </p>
+
+      <h2 class="mt-8 text-xl font-bold text-ink-900">11. Contact</h2>
+      <p class="mt-3 text-sm sm:text-base">
+        Privacy queries: <a href={`mailto:${site.email}`} class="text-brand-600 hover:underline">{site.email}</a> · {site.phone} · {site.address.streetAddress}, {site.address.addressLocality}.
+      </p>
+    </div>
+  </Section>
+
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+</BaseLayout>

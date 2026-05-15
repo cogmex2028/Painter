@@ -1,0 +1,67 @@
+---
+import JsonLd from './JsonLd.astro';
+import { site } from '~/data/site';
+import type { Area } from '~/data/areas';
+import { imageForArea, imageExistsForArea } from '~/data/images';
+
+export interface Props {
+  area: Area;
+}
+const { area } = Astro.props;
+
+const url = `${site.url}/areas/${area.slug}`;
+const heroImg = imageExistsForArea(area.slug)
+  ? `${site.url}/images/${imageForArea(area.slug)}.jpg`
+  : `${site.url}/og-default.jpg`;
+
+const data = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
+  '@id': `${url}#localbusiness`,
+  name: `${site.name} — ${area.name}`,
+  description: area.intro,
+  url,
+  image: heroImg,
+  logo: `${site.url}/logo.png`,
+  telephone: site.phoneE164,
+  email: site.email,
+  priceRange: `From AED ${area.startingFrom}`,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: area.name,
+    addressRegion: 'Dubai',
+    addressCountry: 'AE',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: area.geo.latitude,
+    longitude: area.geo.longitude,
+  },
+  areaServed: {
+    '@type': 'Place',
+    name: `${area.name}, Dubai`,
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: area.geo.latitude,
+      longitude: area.geo.longitude,
+    },
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '08:00',
+      closes: '22:00',
+    },
+  ],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: site.stats.averageRating,
+    reviewCount: Math.round(site.stats.reviewCount * (area.vendorCount / site.stats.vendors)),
+    bestRating: 5,
+    worstRating: 1,
+  },
+};
+---
+
+<JsonLd data={data} />

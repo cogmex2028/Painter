@@ -1,0 +1,122 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+import JsonLd from '~/components/schema/JsonLd.astro';
+
+import { site, whatsappUrl } from '~/data/site';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Contact', href: '/contact' },
+];
+
+const title = 'Contact PaintHub Dubai — WhatsApp, Phone & Email';
+const description =
+  'Reach PaintHub Dubai by WhatsApp, phone or email. Office in Downtown Dubai. Open 8am-10pm, seven days a week. Free quotes within 60 seconds.';
+
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: title,
+  description,
+  url: `${site.url}/contact`,
+  mainEntity: { '@id': `${site.url}/#organization` },
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    eyebrow="Contact us"
+    title="Three ways to reach a real human"
+    subtitle="Free quotes in 60 seconds on WhatsApp, or pick the channel that suits you. Our concierge is staffed 8am-10pm, seven days a week."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <Section bg="white">
+    <div class="grid gap-5 lg:grid-cols-3">
+      <a href={whatsappUrl()} target="_blank" rel="noopener" class="group card relative overflow-hidden p-7 hover:shadow-lg">
+        <span class="grid h-12 w-12 place-items-center rounded-xl bg-[#25D366] text-white shadow-md">
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor" aria-hidden="true">
+            <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.157 5.335 5.493 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24z"/>
+          </svg>
+        </span>
+        <h2 class="mt-5 text-xl font-bold text-ink-900">WhatsApp</h2>
+        <p class="mt-1 text-sm text-ink-500">Fastest way to a free quote</p>
+        <p class="mt-4 text-sm text-ink-700">Send us your area and service type. We reply in under 5 minutes during opening hours.</p>
+        <p class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-emerald-600 transition-transform group-hover:translate-x-1">
+          Open chat
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </p>
+      </a>
+
+      <a href={`tel:${site.phoneE164}`} class="group card relative overflow-hidden p-7 hover:shadow-lg">
+        <span class="grid h-12 w-12 place-items-center rounded-xl bg-ink-900 text-white">
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>
+          </svg>
+        </span>
+        <h2 class="mt-5 text-xl font-bold text-ink-900">Call us</h2>
+        <p class="mt-1 text-sm text-ink-500">Talk to a real person</p>
+        <p class="mt-4 text-base font-bold text-ink-900">{site.phone}</p>
+        <p class="mt-1 text-xs text-ink-500">8am-10pm · Mon-Sun</p>
+      </a>
+
+      <a href={`mailto:${site.email}`} class="group card relative overflow-hidden p-7 hover:shadow-lg">
+        <span class="grid h-12 w-12 place-items-center rounded-xl bg-brand-500 text-white">
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M3 7l9 6 9-6"/>
+          </svg>
+        </span>
+        <h2 class="mt-5 text-xl font-bold text-ink-900">Email</h2>
+        <p class="mt-1 text-sm text-ink-500">Best for vendors & partnerships</p>
+        <p class="mt-4 text-base font-bold text-ink-900 break-all">{site.email}</p>
+        <p class="mt-1 text-xs text-ink-500">Reply within 24 hours</p>
+      </a>
+    </div>
+  </Section>
+
+  <Section eyebrow="Office" title="Visit us in Downtown Dubai" bg="ink-50">
+    <div class="grid gap-8 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <address class="not-italic space-y-2 text-sm text-ink-700">
+          <p class="text-base font-bold text-ink-900">{site.legalName}</p>
+          <p>{site.address.streetAddress}</p>
+          <p>{site.address.addressLocality}</p>
+          <p>{site.address.addressRegion}, {site.address.addressCountry === 'AE' ? 'United Arab Emirates' : site.address.addressCountry}</p>
+        </address>
+
+        <dl class="mt-6 space-y-3 text-sm">
+          <div class="flex justify-between gap-3"><dt class="text-ink-500">Hours</dt><dd class="font-semibold text-ink-900">8am - 10pm · Daily</dd></div>
+          <div class="flex justify-between gap-3"><dt class="text-ink-500">Phone</dt><dd class="font-semibold text-ink-900">{site.phone}</dd></div>
+          <div class="flex justify-between gap-3"><dt class="text-ink-500">Email</dt><dd class="font-semibold text-ink-900 break-all">{site.email}</dd></div>
+        </dl>
+
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+          <a href={whatsappUrl()} target="_blank" rel="noopener" class="btn-whatsapp text-sm">Chat on WhatsApp</a>
+          <a href="/#quote" class="btn-primary text-sm">Get a free quote</a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7">
+        <div class="overflow-hidden rounded-2xl ring-1 ring-ink-200/70">
+          <iframe
+            src={`https://maps.google.com/maps?q=${site.geo.latitude},${site.geo.longitude}&z=14&output=embed`}
+            title="PaintHub Dubai office location"
+            class="aspect-video w-full"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+  <JsonLd data={contactSchema} slot="head" />
+</BaseLayout>

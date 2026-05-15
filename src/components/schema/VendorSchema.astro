@@ -1,0 +1,78 @@
+---
+import JsonLd from './JsonLd.astro';
+import { site } from '~/data/site';
+import type { Vendor } from '~/data/vendors';
+import { areas } from '~/data/areas';
+import { services } from '~/data/services';
+import { imageForVendor } from '~/data/images';
+
+export interface Props {
+  vendor: Vendor;
+}
+const { vendor } = Astro.props;
+
+const url = `${site.url}/vendors/${vendor.slug}`;
+const vendorAreas = areas.filter((a) => vendor.areas.includes(a.slug));
+const vendorServices = services.filter((s) => vendor.services.includes(s.slug));
+const vendorImg = `${site.url}/images/${imageForVendor(vendor.slug)}.jpg`;
+
+const data = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'HomeAndConstructionBusiness', 'PaintingService'],
+  '@id': `${url}#vendor`,
+  name: vendor.name,
+  description: vendor.bio,
+  url,
+  image: vendorImg,
+  telephone: site.phoneE164,
+  priceRange: vendor.priceRange,
+  foundingDate: String(new Date().getFullYear() - vendor.yearsExperience),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Dubai',
+    addressRegion: 'Dubai',
+    addressCountry: 'AE',
+  },
+  areaServed: vendorAreas.map((a) => ({
+    '@type': 'Place',
+    name: `${a.name}, Dubai`,
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: a.geo.latitude,
+      longitude: a.geo.longitude,
+    },
+  })),
+  makesOffer: vendorServices.map((s) => ({
+    '@type': 'Offer',
+    itemOffered: {
+      '@type': 'Service',
+      name: s.name,
+      serviceType: s.name,
+    },
+    priceCurrency: 'AED',
+    price: s.startingPrice,
+  })),
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: vendor.rating,
+    reviewCount: vendor.reviewCount,
+    bestRating: 5,
+    worstRating: 1,
+  },
+  review: vendor.reviews.map((r) => ({
+    '@type': 'Review',
+    author: { '@type': 'Person', name: r.author },
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: r.rating,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    datePublished: r.date,
+    reviewBody: r.body,
+    itemReviewed: { '@id': `${url}#vendor` },
+  })),
+};
+---
+
+<JsonLd data={data} />

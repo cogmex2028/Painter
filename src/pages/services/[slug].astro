@@ -1,0 +1,182 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+import InlineFAQ from '~/components/page/InlineFAQ.astro';
+import VendorCard from '~/components/page/VendorCard.astro';
+import QuoteCTA from '~/components/page/QuoteCTA.astro';
+
+import ServiceSchema from '~/components/schema/ServiceSchema.astro';
+import FAQSchema from '~/components/schema/FAQSchema.astro';
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+
+import { services } from '~/data/services';
+import { vendors } from '~/data/vendors';
+import { areas } from '~/data/areas';
+import { imageForService, imageUrl } from '~/data/images';
+import { site } from '~/data/site';
+
+export async function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+
+const matchingVendors = vendors.filter((v) => v.services.includes(service.slug)).slice(0, 4);
+const popularAreasForService = areas.filter((a) => a.popularServices?.includes(service.slug)).slice(0, 6);
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services' },
+  { name: service.name, href: `/services/${service.slug}` },
+];
+---
+
+<BaseLayout
+  title={service.seoTitle}
+  description={service.seoDescription}
+  image={imageUrl(site.url, imageForService(service.slug))}
+  type="website"
+>
+  <PageHero
+    eyebrow="Painting service"
+    title={service.seoTitle.split('—')[0].trim()}
+    subtitle={service.intro}
+    breadcrumbs={breadcrumbs}
+    imageSlot={imageForService(service.slug)}
+    stats={[
+      { label: 'Starting from', value: `AED ${service.startingPrice.toLocaleString()}` },
+      { label: 'Unit', value: service.unit },
+      { label: 'Verified pros', value: `${matchingVendors.length}+` },
+      { label: 'Warranty', value: '12 mo+' },
+    ]}
+  />
+
+  <!-- What's included -->
+  <Section eyebrow="What's included" title={`Everything you get with ${service.name.toLowerCase()}`} bg="white">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <ul class="space-y-3">
+          {service.inclusions.map((item) => (
+            <li class="flex items-start gap-3 rounded-xl bg-white p-4 ring-1 ring-ink-200/70">
+              <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12l5 5L20 7"/>
+                </svg>
+              </span>
+              <span class="text-sm text-ink-700">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="sticky top-24 rounded-2xl bg-gradient-to-br from-brand-50 to-amber-50 p-6 ring-1 ring-brand-100">
+          <h3 class="text-lg font-bold text-ink-900">Best for</h3>
+          <ul class="mt-4 space-y-2">
+            {service.bestFor.map((b) => (
+              <li class="flex items-center gap-2 text-sm text-ink-700">
+                <span class="grid h-1.5 w-1.5 rounded-full bg-brand-500"></span>
+                {b}
+              </li>
+            ))}
+          </ul>
+          <a href="/#quote" class="btn-primary mt-6 w-full text-sm">Get a free quote</a>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Process -->
+  <Section eyebrow="How it works" title={`Our ${service.name.toLowerCase()} process`} bg="ink-50">
+    <ol class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {service.process.map((p, i) => (
+        <li class="card relative p-6">
+          <span class="absolute right-5 top-5 text-3xl font-extrabold tracking-tighter text-ink-100">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <h3 class="text-base font-bold text-ink-900">{p.step}</h3>
+          <p class="mt-2 text-sm text-ink-600">{p.detail}</p>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <!-- Pricing table -->
+  <Section eyebrow="Pricing" title={`${service.name} prices in Dubai`} subtitle="Real pricing from our verified vendors. Your final quote is locked in writing after a free site survey." bg="white">
+    <div class="overflow-hidden rounded-2xl ring-1 ring-ink-200/70 bg-white">
+      <table class="w-full text-sm">
+        <thead class="bg-ink-50">
+          <tr class="text-left">
+            <th class="px-5 py-4 font-semibold text-ink-700">Tier</th>
+            <th class="px-5 py-4 font-semibold text-ink-700 hidden sm:table-cell">Scope</th>
+            <th class="px-5 py-4 font-semibold text-ink-700 text-right">From</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-ink-200/60">
+          {service.priceTable.map((row) => (
+            <tr class="hover:bg-ink-50/50 transition-colors">
+              <td class="px-5 py-4 font-medium text-ink-900">
+                {row.tier}
+                <p class="sm:hidden mt-1 text-xs text-ink-500">{row.scope}</p>
+              </td>
+              <td class="px-5 py-4 text-ink-600 hidden sm:table-cell">{row.scope}</td>
+              <td class="px-5 py-4 text-right font-bold text-ink-900 whitespace-nowrap">
+                AED {row.from.toLocaleString()}
+                <span class="block text-[10px] font-medium uppercase tracking-wider text-ink-400">{row.unit}</span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-xs text-ink-500">All prices include materials, two coats, prep, protection and waste removal. Quote is fixed after free site survey.</p>
+  </Section>
+
+  <!-- Top vendors for this service -->
+  {matchingVendors.length > 0 && (
+    <Section eyebrow="Specialists" title={`Top-rated ${service.name.toLowerCase()} pros`} subtitle={`Hand-picked vendors with strong ratings on ${service.name.toLowerCase()} projects.`} bg="ink-50">
+      <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {matchingVendors.map((v) => <li><VendorCard vendor={v} compact /></li>)}
+      </ul>
+    </Section>
+  )}
+
+  <!-- Popular areas -->
+  {popularAreasForService.length > 0 && (
+    <Section eyebrow="Areas covered" title={`Where ${service.name.toLowerCase()} is most popular`} bg="white">
+      <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {popularAreasForService.map((a) => (
+          <li>
+            <a href={`/areas/${a.slug}`} class="card group flex items-center justify-between p-5">
+              <div>
+                <p class="font-semibold text-ink-900">{a.name}</p>
+                <p class="mt-0.5 text-xs text-ink-500">{a.vendorCount} painters available</p>
+              </div>
+              <svg class="h-5 w-5 text-ink-400 transition-transform group-hover:translate-x-1 group-hover:text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </Section>
+  )}
+
+  <!-- FAQs -->
+  <Section eyebrow="FAQ" title={`${service.name} questions answered`} bg="ink-50">
+    <InlineFAQ faqs={service.faqs} />
+  </Section>
+
+  <QuoteCTA
+    title={`Get free ${service.name.toLowerCase()} quotes today`}
+    subtitle="Compare 5 verified pros in your area. Pick the best fit and book in minutes."
+  />
+
+  <!-- Schemas -->
+  <ServiceSchema service={service} slot="head" />
+  <FAQSchema faqs={service.faqs} slot="head" />
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+</BaseLayout>

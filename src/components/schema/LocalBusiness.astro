@@ -1,0 +1,81 @@
+---
+import JsonLd from './JsonLd.astro';
+import { site } from '~/data/site';
+import { areas } from '~/data/areas';
+import { services } from '~/data/services';
+
+const data = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
+  '@id': `${site.url}/#localbusiness`,
+  name: site.name,
+  url: site.url,
+  image: `${site.url}/og-default.jpg`,
+  logo: `${site.url}/logo.png`,
+  telephone: site.phoneE164,
+  email: site.email,
+  priceRange: site.priceRange,
+  description: site.description,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.streetAddress,
+    addressLocality: site.address.addressLocality,
+    addressRegion: site.address.addressRegion,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.addressCountry,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: site.geo.latitude,
+    longitude: site.geo.longitude,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '08:00',
+      closes: '22:00',
+    },
+  ],
+  areaServed: areas.map((a) => ({
+    '@type': 'Place',
+    name: `${a.name}, Dubai`,
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: a.geo.latitude,
+      longitude: a.geo.longitude,
+    },
+  })),
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Painting Services',
+    itemListElement: services.map((s) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: s.name,
+        description: s.description,
+        serviceType: s.name,
+      },
+      priceCurrency: 'AED',
+      price: s.startingPrice,
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        priceCurrency: 'AED',
+        price: s.startingPrice,
+        unitText: s.unit,
+      },
+    })),
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: site.stats.averageRating,
+    reviewCount: site.stats.reviewCount,
+    bestRating: 5,
+    worstRating: 1,
+  },
+  sameAs: Object.values(site.social),
+};
+---
+
+<JsonLd data={data} />

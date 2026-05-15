@@ -1,0 +1,33 @@
+---
+import { site } from '~/data/site';
+
+const items = [
+  { label: 'Verified painters', value: `${site.stats.vendors}+`, icon: 'badge' },
+  { label: 'Areas covered', value: `${site.stats.areasCovered}+`, icon: 'map' },
+  { label: 'Jobs completed', value: `${(site.stats.jobsCompleted / 1000).toFixed(1)}k+`, icon: 'check' },
+  { label: 'Average rating', value: `${site.stats.averageRating} ★`, icon: 'star' },
+];
+
+const icons: Record<string, string> = {
+  badge: '<path d="M12 2l2.39 4.84L20 7.71l-4 3.9.94 5.49L12 14.77l-4.94 2.33L8 11.61l-4-3.9 5.61-.87L12 2z" stroke-linejoin="round"/>',
+  map: '<path d="M9 4l-6 2v14l6-2 6 2 6-2V4l-6 2-6-2zm0 0v14m6-12v14"/>',
+  check: '<path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round"/>',
+  star: '<path d="M12 2l2.6 5.3 5.9.85-4.25 4.15 1 5.85L12 15.4l-5.25 2.75 1-5.85L3.5 8.15l5.9-.85L12 2z" stroke-linejoin="round"/>',
+};
+---
+
+<section class="border-y border-ink-200/60 bg-white">
+  <div class="container-x grid grid-cols-2 gap-px overflow-hidden rounded-none py-2 sm:grid-cols-4">
+    {items.map((item) => (
+      <div class="flex items-center gap-3 px-4 py-5">
+        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-50 ring-1 ring-brand-100 text-brand-600">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" set:html={icons[item.icon]} />
+        </span>
+        <div>
+          <p class="text-xl font-extrabold tracking-tight text-ink-900 sm:text-2xl">{item.value}</p>
+          <p class="text-xs text-ink-500">{item.label}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

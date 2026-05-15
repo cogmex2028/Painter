@@ -1,0 +1,106 @@
+---
+import { whatsappUrl } from '~/data/site';
+import Img from '~/components/Img.astro';
+
+export interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle?: string;
+  breadcrumbs: { name: string; href: string }[];
+  ctaPrimary?: { label: string; href: string };
+  ctaSecondary?: { label: string; href: string };
+  stats?: { label: string; value: string }[];
+  imageSlot?: string;
+}
+const {
+  eyebrow,
+  title,
+  subtitle,
+  breadcrumbs,
+  ctaPrimary = { label: 'Get free quote', href: '/#quote' },
+  ctaSecondary,
+  stats = [],
+  imageSlot,
+} = Astro.props;
+
+const wa = whatsappUrl();
+---
+
+<section class="relative overflow-hidden bg-gradient-to-b from-brand-50/60 via-white to-white">
+  <div class="absolute inset-0 bg-grid mask-fade-b opacity-50" aria-hidden="true"></div>
+  <div class="absolute -top-32 -left-20 h-80 w-80 rounded-full bg-brand-300/30 blur-3xl" aria-hidden="true"></div>
+  <div class="absolute -top-24 right-0 h-80 w-80 rounded-full bg-amber-200/30 blur-3xl" aria-hidden="true"></div>
+
+  <div class="container-x relative pt-10 pb-14 sm:pt-14 sm:pb-20">
+    <!-- Breadcrumbs -->
+    <nav aria-label="Breadcrumb" class="text-sm">
+      <ol class="flex flex-wrap items-center gap-1 text-ink-500">
+        {breadcrumbs.map((b, i) => (
+          <li class="flex items-center gap-1">
+            {i > 0 && (
+              <svg class="h-3 w-3 text-ink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            )}
+            {i === breadcrumbs.length - 1 ? (
+              <span class="text-ink-700 font-medium" aria-current="page">{b.name}</span>
+            ) : (
+              <a href={b.href} class="hover:text-ink-900 transition-colors">{b.name}</a>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+
+    <div class={imageSlot ? "mt-6 grid items-start gap-10 lg:grid-cols-12" : "mt-6 max-w-3xl"}>
+      <div class={imageSlot ? "lg:col-span-7" : ""}>
+      <span class="eyebrow">{eyebrow}</span>
+      <h1 class="mt-5 text-3xl font-extrabold tracking-tight text-ink-900 sm:text-5xl">
+        {title}
+      </h1>
+      {subtitle && (
+        <p class="mt-5 text-base text-ink-600 sm:text-lg">{subtitle}</p>
+      )}
+
+      <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <a href={ctaPrimary.href} class="btn-primary text-base">
+          {ctaPrimary.label}
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+        {ctaSecondary ? (
+          <a href={ctaSecondary.href} class="btn-ghost text-base">{ctaSecondary.label}</a>
+        ) : (
+          <a href={wa} target="_blank" rel="noopener" class="btn-whatsapp text-base">
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true">
+              <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.157 5.335 5.493 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24z"/>
+            </svg>
+            Chat on WhatsApp
+          </a>
+        )}
+      </div>
+
+      {stats.length > 0 && (
+        <dl class={`mt-9 grid grid-cols-2 gap-4 ${imageSlot ? 'sm:grid-cols-2' : 'sm:grid-cols-4'}`}>
+          {stats.map((s) => (
+            <div class="rounded-2xl bg-white/70 px-4 py-3 ring-1 ring-ink-200/70 backdrop-blur">
+              <dt class="text-xs font-medium text-ink-500">{s.label}</dt>
+              <dd class="mt-0.5 text-lg font-extrabold tracking-tight text-ink-900 sm:text-xl">{s.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+      </div>
+
+      {imageSlot && (
+        <div class="lg:col-span-5">
+          <div class="relative">
+            <div class="absolute -inset-2 rounded-3xl bg-gradient-to-br from-brand-500/30 via-amber-300/20 to-transparent blur-xl" aria-hidden="true"></div>
+            <Img slot={imageSlot} aspect="3/2" priority sizes="(min-width: 1024px) 480px, 100vw" class="relative shadow-2xl shadow-ink-900/10 ring-1 ring-white/40" />
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

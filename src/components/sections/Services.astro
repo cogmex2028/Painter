@@ -1,0 +1,76 @@
+---
+import { services } from '~/data/services';
+import { imageForService } from '~/data/images';
+import Img from '~/components/Img.astro';
+
+const icons: Record<string, string> = {
+  roller: '<path d="M3 8h12v6H3z M9 14v3a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-1h4V8h-4" stroke-linejoin="round"/>',
+  building: '<path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h2m2 0h2M9 11h2m2 0h2M9 15h2m2 0h2M9 21v-3a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v3" stroke-linejoin="round"/>',
+  home: '<path d="M3 11l9-8 9 8M5 10v10h14V10" stroke-linejoin="round"/>',
+  apartment: '<path d="M4 21V7l8-4 8 4v14M8 21V11M16 21V11M9 7h6" stroke-linejoin="round"/>',
+  office: '<path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h2m2 0h2M9 13h2m2 0h2M9 17h6" stroke-linejoin="round"/>',
+  sparkle: '<path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3zM18 16l.75 2.25L21 19l-2.25.75L18 22l-.75-2.25L15 19l2.25-.75L18 16z" stroke-linejoin="round"/>',
+};
+---
+
+<section id="services" class="bg-ink-50/60 py-20 sm:py-24">
+  <div class="container-x">
+    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Services</span>
+        <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">
+          From a single feature wall to your entire villa
+        </h2>
+        <p class="mt-3 text-ink-600">
+          Whatever your space, there's a verified PaintHub painter ready to quote.
+        </p>
+      </div>
+      <a href="/#quote" class="btn-ghost text-sm self-start md:self-auto">Get a free quote</a>
+    </div>
+
+    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((s) => (
+        <li>
+          <a
+            href={`/services/${s.slug}`}
+            class="card group relative flex h-full flex-col overflow-hidden"
+          >
+            <div class="relative">
+              <Img slot={imageForService(s.slug)} aspect="3/2" rounded={false} sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw" />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-950/40 via-transparent to-transparent" aria-hidden="true"></div>
+              <span class="absolute left-4 top-4 grid h-11 w-11 place-items-center rounded-xl bg-white/95 text-brand-600 shadow-md ring-1 ring-white/40 backdrop-blur transition-transform group-hover:scale-105">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" set:html={icons[s.icon] ?? icons.roller} />
+              </span>
+              {s.popular && (
+                <span class="absolute right-4 top-4 rounded-full bg-amber-100 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-800 ring-1 ring-amber-200">
+                  Popular
+                </span>
+              )}
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="text-lg font-bold text-ink-900">{s.name}</h3>
+              <p class="mt-1 text-sm text-ink-500">{s.short}</p>
+              <p class="mt-3 text-sm text-ink-600">{s.description}</p>
+
+              <div class="mt-auto flex items-center justify-between border-t border-ink-200/70 pt-4">
+                <div>
+                  <p class="text-[11px] font-semibold uppercase tracking-wider text-ink-400">Starting from</p>
+                  <p class="text-base font-bold text-ink-900">
+                    AED {s.startingPrice.toLocaleString()}
+                    <span class="text-xs font-medium text-ink-500"> / {s.unit.split('/')[1]?.trim() ?? 'unit'}</span>
+                  </p>
+                </div>
+                <span class="inline-flex items-center gap-1 text-sm font-semibold text-brand-600 transition-transform group-hover:translate-x-1">
+                  Quote
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

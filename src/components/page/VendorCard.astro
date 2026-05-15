@@ -1,0 +1,93 @@
+---
+import { whatsappUrl } from '~/data/site';
+import { areas } from '~/data/areas';
+import type { Vendor } from '~/data/vendors';
+import { imageForVendor } from '~/data/images';
+import Img from '~/components/Img.astro';
+
+export interface Props {
+  vendor: Vendor;
+  compact?: boolean;
+}
+const { vendor, compact = false } = Astro.props;
+
+const areaName = (slug: string) => areas.find((a) => a.slug === slug)?.name ?? slug;
+const badgeStyles: Record<string, string> = {
+  'top-rated': 'bg-amber-100 text-amber-800 ring-amber-200',
+  premium: 'bg-violet-100 text-violet-800 ring-violet-200',
+  rising: 'bg-emerald-100 text-emerald-800 ring-emerald-200',
+};
+const badgeLabel: Record<string, string> = {
+  'top-rated': '★ Top rated',
+  premium: 'Premium',
+  rising: 'Rising talent',
+};
+---
+
+<div class="card flex h-full flex-col overflow-hidden">
+  <div class="relative">
+    <Img slot={imageForVendor(vendor.slug)} aspect="3/2" rounded={false} sizes="(min-width: 1280px) 300px, (min-width: 640px) 50vw, 100vw" />
+    <div class="absolute inset-0 bg-gradient-to-t from-ink-950/40 via-transparent to-transparent" aria-hidden="true"></div>
+    <div class={`absolute left-4 bottom-4 grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br ${vendor.accent} text-sm font-extrabold text-white shadow-lg ring-2 ring-white/60`}>
+      {vendor.initials}
+    </div>
+    {vendor.badge && (
+      <span class={`absolute right-4 top-4 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider ring-1 ${badgeStyles[vendor.badge]}`}>
+        {badgeLabel[vendor.badge]}
+      </span>
+    )}
+  </div>
+
+  <div class="flex flex-1 flex-col p-6">
+  <h3 class="text-lg font-bold text-ink-900">{vendor.name}</h3>
+  <p class="text-sm text-ink-500">{vendor.tagline}</p>
+
+  <div class="mt-4 flex items-center gap-1.5">
+    <div class="flex items-center text-amber-500" aria-label={`Rated ${vendor.rating} out of 5`}>
+      {[1,2,3,4,5].map((n) => (
+        <svg class={`h-4 w-4 ${n <= Math.round(vendor.rating) ? 'fill-current' : 'fill-ink-200'}`} viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M10 1.5l2.6 5.3 5.9.85-4.25 4.15 1 5.85L10 14.9l-5.25 2.75 1-5.85L1.5 7.65l5.9-.85L10 1.5z"/>
+        </svg>
+      ))}
+    </div>
+    <span class="text-sm font-bold text-ink-900">{vendor.rating}</span>
+    <span class="text-xs text-ink-500">({vendor.reviewCount})</span>
+  </div>
+
+  {!compact && (
+    <dl class="mt-4 grid grid-cols-2 gap-y-2 text-xs">
+      <dt class="text-ink-500">Jobs</dt>
+      <dd class="text-right font-semibold text-ink-900">{vendor.jobsCompleted}+</dd>
+      <dt class="text-ink-500">Response</dt>
+      <dd class="text-right font-semibold text-emerald-700">{vendor.responseTime}</dd>
+      <dt class="text-ink-500">Experience</dt>
+      <dd class="text-right font-semibold text-ink-900">{vendor.yearsExperience} yrs</dd>
+      <dt class="text-ink-500">Price</dt>
+      <dd class="text-right font-semibold text-ink-900">{vendor.priceRange}</dd>
+    </dl>
+  )}
+
+  <div class="mt-4 flex flex-wrap gap-1.5">
+    {vendor.areas.slice(0, 3).map((slug) => (
+      <span class="inline-flex items-center rounded-md bg-ink-100 px-2 py-0.5 text-[11px] font-medium text-ink-700">
+        {areaName(slug)}
+      </span>
+    ))}
+    {vendor.areas.length > 3 && (
+      <span class="text-[11px] font-medium text-ink-500">+{vendor.areas.length - 3}</span>
+    )}
+  </div>
+
+  <div class="mt-5 grid grid-cols-2 gap-2 border-t border-ink-200/70 pt-5">
+    <a href={`/vendors/${vendor.slug}`} class="btn-ghost py-2 text-xs">View profile</a>
+    <a
+      href={whatsappUrl(`Hi, I'd like a quote from ${vendor.name}.`)}
+      target="_blank"
+      rel="noopener"
+      class="btn-whatsapp py-2 text-xs"
+    >
+      WhatsApp
+    </a>
+  </div>
+  </div>
+</div>

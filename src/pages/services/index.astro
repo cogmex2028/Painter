@@ -1,0 +1,97 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+import QuoteCTA from '~/components/page/QuoteCTA.astro';
+
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+import JsonLd from '~/components/schema/JsonLd.astro';
+
+import { services } from '~/data/services';
+import { site } from '~/data/site';
+import { imageForService } from '~/data/images';
+import Img from '~/components/Img.astro';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services' },
+];
+
+const title = 'Painting Services in Dubai — Interior & Exterior';
+const description =
+  'All painting services in Dubai — interior, exterior, villa, apartment, commercial and decorative. Free quotes from 120+ verified pros. Same-day starts.';
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': `${site.url}/services#collection`,
+  name: title,
+  description,
+  url: `${site.url}/services`,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: services.length,
+    itemListElement: services.map((s, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${site.url}/services/${s.slug}`,
+      name: s.name,
+    })),
+  },
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    eyebrow="All services"
+    title="Every painting service you'll need in Dubai"
+    subtitle="From a single feature wall to a full villa repaint, our verified pros cover every type of painting job — residential, commercial and decorative."
+    breadcrumbs={breadcrumbs}
+    stats={[
+      { label: 'Services', value: `${services.length}+` },
+      { label: 'Verified pros', value: '120+' },
+      { label: 'Avg. response', value: 'Under 1 hr' },
+      { label: 'Warranty', value: '12 mo+' },
+    ]}
+  />
+
+  <Section bg="white">
+    <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((s) => (
+        <li>
+          <a href={`/services/${s.slug}`} class="card group relative flex h-full flex-col overflow-hidden">
+            <div class="relative">
+              <Img slot={imageForService(s.slug)} aspect="3/2" rounded={false} sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw" />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-950/40 via-transparent to-transparent" aria-hidden="true"></div>
+              {s.popular && (
+                <span class="absolute right-4 top-4 rounded-full bg-amber-100 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-800 ring-1 ring-amber-200">Popular</span>
+              )}
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <h2 class="text-lg font-bold text-ink-900">{s.name}</h2>
+              <p class="mt-1 text-sm text-ink-500">{s.short}</p>
+              <p class="mt-3 text-sm text-ink-600 line-clamp-3">{s.description}</p>
+              <div class="mt-auto flex items-center justify-between border-t border-ink-200/70 pt-4">
+                <div>
+                  <p class="text-[11px] font-semibold uppercase tracking-wider text-ink-400">From</p>
+                  <p class="text-base font-bold text-ink-900">AED {s.startingPrice.toLocaleString()}</p>
+                </div>
+                <span class="inline-flex items-center gap-1 text-sm font-semibold text-brand-600 transition-transform group-hover:translate-x-1">
+                  Learn more
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <QuoteCTA title="Not sure which service you need?" subtitle="Tell us a bit about your space and we'll match you with the right specialist." />
+
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+  <JsonLd data={itemListSchema} slot="head" />
+</BaseLayout>

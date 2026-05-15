@@ -1,0 +1,96 @@
+---
+import Logo from './Logo.astro';
+import { site, whatsappUrl } from '~/data/site';
+import { services } from '~/data/services';
+import { areas } from '~/data/areas';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="relative mt-24 bg-ink-950 text-ink-300">
+  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-500/60 to-transparent"></div>
+
+  <div class="container-x grid gap-10 py-16 lg:grid-cols-12 lg:gap-12">
+    <div class="lg:col-span-4">
+      <div class="text-white"><Logo variant="light" size="lg" /></div>
+      <p class="mt-4 text-sm text-ink-400 max-w-sm">
+        {site.description}
+      </p>
+
+      <address class="not-italic mt-6 space-y-2 text-sm">
+        <p class="text-ink-400">{site.address.streetAddress}</p>
+        <p class="text-ink-400">{site.address.addressLocality}, {site.address.addressRegion} {site.address.postalCode}</p>
+        <p class="pt-2">
+          <a href={`tel:${site.phoneE164}`} class="text-white hover:text-brand-400">{site.phone}</a>
+        </p>
+        <p>
+          <a href={`mailto:${site.email}`} class="text-white hover:text-brand-400">{site.email}</a>
+        </p>
+      </address>
+
+      <div class="mt-6 flex items-center gap-3">
+        {Object.entries(site.social).map(([platform, url]) => (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener"
+            aria-label={`PaintHub on ${platform}`}
+            class="grid h-9 w-9 place-items-center rounded-lg bg-white/5 ring-1 ring-white/10 text-ink-300 transition-colors hover:bg-brand-500 hover:text-white hover:ring-brand-500"
+          >
+            <span class="text-xs font-bold uppercase">{platform.charAt(0)}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="lg:col-span-2">
+      <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Services</h3>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        {services.map((s) => (
+          <li>
+            <a href={`/services/${s.slug}`} class="hover:text-brand-400 transition-colors">{s.name}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="lg:col-span-3">
+      <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Popular areas</h3>
+      <ul class="mt-4 grid grid-cols-2 gap-y-2.5 gap-x-4 text-sm">
+        {areas.slice(0, 8).map((a) => (
+          <li>
+            <a href={`/areas/${a.slug}`} class="hover:text-brand-400 transition-colors">{a.name}</a>
+          </li>
+        ))}
+      </ul>
+      <a href="/#areas" class="mt-4 inline-block text-sm font-semibold text-brand-400 hover:text-brand-300">
+        View all areas →
+      </a>
+    </div>
+
+    <div class="lg:col-span-3">
+      <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Need help?</h3>
+      <p class="mt-4 text-sm text-ink-400">
+        Get matched with verified painters in under 60 seconds.
+      </p>
+      <div class="mt-4 flex flex-col gap-2">
+        <a href="/#quote" class="btn-primary text-sm">Get a free quote</a>
+        <a href={whatsappUrl()} target="_blank" rel="noopener" class="btn-whatsapp text-sm">
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-white/5">
+    <div class="container-x flex flex-col-reverse gap-4 py-6 text-xs text-ink-500 sm:flex-row sm:items-center sm:justify-between">
+      <p>© {year} {site.legalName}. All rights reserved.</p>
+      <ul class="flex flex-wrap gap-x-5 gap-y-2">
+        <li><a href="/privacy" class="hover:text-ink-300">Privacy</a></li>
+        <li><a href="/terms" class="hover:text-ink-300">Terms</a></li>
+        <li><a href="/sitemap-index.xml" class="hover:text-ink-300">Sitemap</a></li>
+        <li><a href="/vendor-signup" class="hover:text-ink-300">List your business</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

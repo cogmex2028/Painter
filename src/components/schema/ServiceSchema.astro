@@ -1,0 +1,72 @@
+---
+import JsonLd from './JsonLd.astro';
+import { site } from '~/data/site';
+import type { Service } from '~/data/services';
+import { imageForService } from '~/data/images';
+
+export interface Props {
+  service: Service;
+}
+const { service } = Astro.props;
+
+const data = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${site.url}/services/${service.slug}#service`,
+  name: service.name,
+  serviceType: service.name,
+  description: service.intro,
+  url: `${site.url}/services/${service.slug}`,
+  image: `${site.url}/images/${imageForService(service.slug)}.jpg`,
+  provider: { '@id': `${site.url}/#localbusiness` },
+  areaServed: {
+    '@type': 'City',
+    name: 'Dubai',
+    containedInPlace: {
+      '@type': 'Country',
+      name: 'United Arab Emirates',
+    },
+  },
+  category: 'Painting Service',
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'AED',
+    price: service.startingPrice,
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      priceCurrency: 'AED',
+      price: service.startingPrice,
+      unitText: service.unit,
+    },
+    availability: 'https://schema.org/InStock',
+    url: `${site.url}/services/${service.slug}`,
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: `${service.name} Pricing`,
+    itemListElement: service.priceTable.map((p, i) => ({
+      '@type': 'Offer',
+      position: i + 1,
+      name: p.tier,
+      description: p.scope,
+      priceCurrency: 'AED',
+      price: p.from,
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        priceCurrency: 'AED',
+        price: p.from,
+        unitText: p.unit,
+      },
+    })),
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: site.stats.averageRating,
+    reviewCount: site.stats.reviewCount,
+    bestRating: 5,
+    worstRating: 1,
+  },
+};
+---
+
+<JsonLd data={data} />

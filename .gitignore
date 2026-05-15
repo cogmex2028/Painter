@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.production
+.DS_Store
+*.log
+.vercel
+.netlify
+dist-audit.html
+test-img.*
+
+# Claude Code local settings (per-developer)
+.claude/settings.local.json
+public/images/manifest.json
+

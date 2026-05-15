@@ -1,0 +1,121 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+import QuoteCTA from '~/components/page/QuoteCTA.astro';
+
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+import JsonLd from '~/components/schema/JsonLd.astro';
+
+import { areas } from '~/data/areas';
+import { site } from '~/data/site';
+import { imageForArea, imageExistsForArea } from '~/data/images';
+import Img from '~/components/Img.astro';
+
+const sectors = [...new Set(areas.map((a) => a.sector))];
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Areas', href: '/areas' },
+];
+
+const title = 'Painters by Area — 35+ Dubai Communities';
+const description =
+  'Find verified painters in every Dubai community. Marina, Downtown, JLT, Jumeirah, Palm, Ranches, Mirdif, JVC and more. Free quotes, fast response.';
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  description,
+  url: `${site.url}/areas`,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: areas.length,
+    itemListElement: areas.map((a, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${site.url}/areas/${a.slug}`,
+      name: a.name,
+    })),
+  },
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    eyebrow="All areas"
+    title="Painters in every Dubai community"
+    subtitle="Pick your neighbourhood and meet the painters who serve it. Every vendor is verified, insured and rated by real homeowners."
+    breadcrumbs={breadcrumbs}
+    stats={[
+      { label: 'Areas covered', value: '35+' },
+      { label: 'Active painters', value: '120+' },
+      { label: 'Avg. response', value: 'Under 1 hr' },
+      { label: 'Avg. rating', value: '4.8 ★' },
+    ]}
+  />
+
+  {sectors.map((sector) => (
+    <Section eyebrow={sector} title={`Painters across ${sector}`} bg={sectors.indexOf(sector) % 2 === 0 ? 'white' : 'ink-50'}>
+      <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {areas.filter((a) => a.sector === sector).map((a) => (
+          <li>
+            <a href={`/areas/${a.slug}`} class="card group relative flex h-full flex-col overflow-hidden">
+              {imageExistsForArea(a.slug) ? (
+                <div class="relative">
+                  <Img slot={imageForArea(a.slug)} aspect="3/2" rounded={false} sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-ink-950/60 via-ink-950/10 to-transparent" aria-hidden="true"></div>
+                  <h2 class="absolute left-5 bottom-4 right-16 text-xl font-bold text-white drop-shadow-sm">Painters in {a.name}</h2>
+                  <span class="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-xl bg-white/95 text-brand-600 shadow-md ring-1 ring-white/40 backdrop-blur transition-colors group-hover:bg-brand-500 group-hover:text-white">
+                    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M12 22s8-7.58 8-13a8 8 0 1 0-16 0c0 5.42 8 13 8 13z"/>
+                      <circle cx="12" cy="9" r="3"/>
+                    </svg>
+                  </span>
+                </div>
+              ) : (
+                <div class="relative p-6">
+                  <div class="absolute right-5 top-5 grid h-10 w-10 place-items-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100 transition-colors group-hover:bg-brand-500 group-hover:text-white">
+                    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M12 22s8-7.58 8-13a8 8 0 1 0-16 0c0 5.42 8 13 8 13z"/>
+                      <circle cx="12" cy="9" r="3"/>
+                    </svg>
+                  </div>
+                  <h2 class="text-xl font-bold text-ink-900">Painters in {a.name}</h2>
+                </div>
+              )}
+              <div class="flex flex-1 flex-col p-6 pt-4">
+                <div class="flex flex-wrap gap-1.5">
+                  {a.highlights.map((h) => (
+                    <span class="inline-flex rounded-md bg-ink-100 px-2 py-0.5 text-[11px] font-medium text-ink-700">{h}</span>
+                  ))}
+                </div>
+                <div class="mt-auto flex items-end justify-between border-t border-ink-200/70 pt-4">
+                  <div>
+                    <p class="flex items-center gap-1.5 text-sm text-ink-600">
+                      <span class="grid h-2 w-2 rounded-full bg-emerald-500"></span>
+                      <strong class="text-ink-900">{a.vendorCount}</strong> painters
+                    </p>
+                    <p class="mt-1 text-xs text-ink-500">From AED {a.startingFrom.toLocaleString()}</p>
+                  </div>
+                  <span class="inline-flex items-center gap-1 text-sm font-semibold text-brand-600 transition-transform group-hover:translate-x-1">
+                    View
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </Section>
+  ))}
+
+  <QuoteCTA title="Don't see your area?" subtitle="We serve 35+ Dubai communities. Tell us where you are and we'll match you with a painter." />
+
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+  <JsonLd data={itemListSchema} slot="head" />
+</BaseLayout>

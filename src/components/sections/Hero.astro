@@ -1,0 +1,229 @@
+---
+import { site, whatsappUrl } from '~/data/site';
+import { areas } from '~/data/areas';
+import { services } from '~/data/services';
+
+const topAreas = areas.slice(0, 6);
+const propertyTypes = ['Apartment', 'Villa', 'Townhouse', 'Office', 'Retail'];
+---
+
+<section class="relative overflow-hidden bg-gradient-to-b from-brand-50/60 via-white to-white">
+  <!-- Decorative grid -->
+  <div class="absolute inset-0 bg-grid mask-fade-b opacity-60" aria-hidden="true"></div>
+  <!-- Glow -->
+  <div class="absolute -top-32 -left-20 h-96 w-96 rounded-full bg-brand-300/30 blur-3xl" aria-hidden="true"></div>
+  <div class="absolute -top-32 right-0 h-96 w-96 rounded-full bg-amber-200/40 blur-3xl" aria-hidden="true"></div>
+
+  <div class="container-x relative grid items-center gap-12 py-14 lg:grid-cols-12 lg:gap-10 lg:py-24">
+    <!-- Copy -->
+    <div class="lg:col-span-7">
+      <span class="eyebrow">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-500 opacity-75"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-brand-500"></span>
+        </span>
+        Now serving 35+ Dubai communities
+      </span>
+
+      <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-ink-900 sm:text-5xl lg:text-6xl">
+        Dubai's top-rated painters,
+        <span class="relative whitespace-nowrap">
+          <span class="relative z-10 bg-gradient-to-r from-brand-600 to-amber-500 bg-clip-text text-transparent">
+            compared in 60 seconds.
+          </span>
+          <svg class="absolute -bottom-2 left-0 z-0 h-3 w-full text-brand-300" viewBox="0 0 200 8" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 5 Q 50 0, 100 4 T 200 3" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" />
+          </svg>
+        </span>
+      </h1>
+
+      <p class="mt-6 max-w-xl text-lg text-ink-600">
+        Tell us what you need and get up to <strong class="text-ink-900">5 free quotes</strong>
+        from verified, insured painters in your area. No call centres. No spam. Compare, chat, and book —
+        all in one place.
+      </p>
+
+      <!-- Inline CTAs -->
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <a href="#quote" class="btn-primary text-base">
+          Get my free quotes
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a href={whatsappUrl()} target="_blank" rel="noopener" class="btn-whatsapp text-base">
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true">
+            <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.157 5.335 5.493 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+          </svg>
+          Or WhatsApp us
+        </a>
+      </div>
+
+      <!-- Trust pills -->
+      <ul class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-ink-600">
+        <li class="flex items-center gap-2">
+          <svg class="h-5 w-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="9"/>
+          </svg>
+          100% free quotes
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="h-5 w-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="9"/>
+          </svg>
+          Verified & insured
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="h-5 w-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="9"/>
+          </svg>
+          No spam calls
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="h-5 w-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="9"/>
+          </svg>
+          12-month warranty
+        </li>
+      </ul>
+
+      <!-- Reviewed by -->
+      <div class="mt-10 flex items-center gap-4 rounded-2xl bg-white/70 px-4 py-3 ring-1 ring-ink-200/60 backdrop-blur w-fit">
+        <div class="flex -space-x-2.5">
+          {['AM', 'RK', 'SL', 'JD'].map((i, idx) => (
+            <span class={`grid h-9 w-9 place-items-center rounded-full text-xs font-bold text-white ring-2 ring-white ${
+              ['bg-rose-500', 'bg-amber-500', 'bg-sky-500', 'bg-emerald-500'][idx]
+            }`}>{i}</span>
+          ))}
+        </div>
+        <div>
+          <div class="flex items-center gap-1 text-amber-500" aria-label={`Rated ${site.stats.averageRating} out of 5`}>
+            {[1,2,3,4,5].map(() => (
+              <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M10 1.5l2.6 5.3 5.9.85-4.25 4.15 1 5.85L10 14.9l-5.25 2.75 1-5.85L1.5 7.65l5.9-.85L10 1.5z"/>
+              </svg>
+            ))}
+            <span class="ml-1 text-xs font-bold text-ink-900">{site.stats.averageRating}</span>
+          </div>
+          <p class="text-xs text-ink-600">
+            <strong class="text-ink-900">{site.stats.reviewCount.toLocaleString()}+</strong> reviews ·
+            <strong class="text-ink-900">{site.stats.jobsCompleted.toLocaleString()}+</strong> jobs done
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote form -->
+    <div class="lg:col-span-5">
+      <div id="quote" class="relative scroll-mt-24">
+        <div class="absolute -inset-1 rounded-3xl bg-gradient-to-br from-brand-500/30 via-amber-400/20 to-transparent blur-xl" aria-hidden="true"></div>
+        <form
+          method="POST"
+          action="https://api.web3forms.com/submit"
+          class="relative overflow-hidden rounded-3xl bg-white p-6 shadow-2xl shadow-ink-900/10 ring-1 ring-ink-200/80 sm:p-7"
+        >
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY" />
+          <input type="hidden" name="subject" value="New painting quote request" />
+          <input type="hidden" name="from_name" value="PaintHub Dubai Lead Form" />
+
+          <div class="flex items-center justify-between">
+            <h2 class="text-xl font-bold text-ink-900">Get 5 free quotes</h2>
+            <span class="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-200">
+              ~60 sec
+            </span>
+          </div>
+          <p class="mt-1 text-sm text-ink-500">Tell us what you need. We'll match you with the best painters in your area.</p>
+
+          <div class="mt-5 space-y-3.5">
+            <div class="grid grid-cols-2 gap-3">
+              <label class="block">
+                <span class="mb-1 block text-xs font-semibold text-ink-700">Name</span>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  placeholder="Your name"
+                  class="w-full rounded-xl border-0 bg-ink-50 px-3.5 py-2.5 text-sm text-ink-900 ring-1 ring-inset ring-ink-200 placeholder:text-ink-400 focus:bg-white focus:ring-2 focus:ring-brand-500"
+                />
+              </label>
+              <label class="block">
+                <span class="mb-1 block text-xs font-semibold text-ink-700">Phone</span>
+                <input
+                  type="tel"
+                  name="phone"
+                  required
+                  placeholder="+971 5X XXX XXXX"
+                  class="w-full rounded-xl border-0 bg-ink-50 px-3.5 py-2.5 text-sm text-ink-900 ring-1 ring-inset ring-ink-200 placeholder:text-ink-400 focus:bg-white focus:ring-2 focus:ring-brand-500"
+                />
+              </label>
+            </div>
+
+            <label class="block">
+              <span class="mb-1 block text-xs font-semibold text-ink-700">Area in Dubai</span>
+              <select
+                name="area"
+                required
+                class="w-full rounded-xl border-0 bg-ink-50 px-3.5 py-2.5 text-sm text-ink-900 ring-1 ring-inset ring-ink-200 focus:bg-white focus:ring-2 focus:ring-brand-500"
+              >
+                <option value="">Select your area</option>
+                {topAreas.map((a) => <option value={a.slug}>{a.name}</option>)}
+                <option value="other">Other area</option>
+              </select>
+            </label>
+
+            <div class="grid grid-cols-2 gap-3">
+              <label class="block">
+                <span class="mb-1 block text-xs font-semibold text-ink-700">Property</span>
+                <select
+                  name="property_type"
+                  required
+                  class="w-full rounded-xl border-0 bg-ink-50 px-3.5 py-2.5 text-sm text-ink-900 ring-1 ring-inset ring-ink-200 focus:bg-white focus:ring-2 focus:ring-brand-500"
+                >
+                  <option value="">Property type</option>
+                  {propertyTypes.map((p) => <option value={p}>{p}</option>)}
+                </select>
+              </label>
+              <label class="block">
+                <span class="mb-1 block text-xs font-semibold text-ink-700">Service</span>
+                <select
+                  name="service"
+                  required
+                  class="w-full rounded-xl border-0 bg-ink-50 px-3.5 py-2.5 text-sm text-ink-900 ring-1 ring-inset ring-ink-200 focus:bg-white focus:ring-2 focus:ring-brand-500"
+                >
+                  <option value="">Choose service</option>
+                  {services.map((s) => <option value={s.slug}>{s.name}</option>)}
+                </select>
+              </label>
+            </div>
+
+            <label class="block">
+              <span class="mb-1 block text-xs font-semibold text-ink-700">Brief details (optional)</span>
+              <textarea
+                name="details"
+                rows="2"
+                placeholder="e.g. 2BR apartment, all walls, white emulsion, weekend job"
+                class="w-full resize-none rounded-xl border-0 bg-ink-50 px-3.5 py-2.5 text-sm text-ink-900 ring-1 ring-inset ring-ink-200 placeholder:text-ink-400 focus:bg-white focus:ring-2 focus:ring-brand-500"
+              ></textarea>
+            </label>
+
+            <button type="submit" class="btn-primary w-full text-base mt-1">
+              Send me 5 free quotes
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            <p class="text-center text-[11px] text-ink-500">
+              By submitting, you agree to our <a href="/terms" class="underline hover:text-ink-700">Terms</a> &
+              <a href="/privacy" class="underline hover:text-ink-700">Privacy</a>. We never sell your data.
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,139 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+import QuoteCTA from '~/components/page/QuoteCTA.astro';
+
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+import JsonLd from '~/components/schema/JsonLd.astro';
+
+import { site } from '~/data/site';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+];
+
+const title = 'About PaintHub Dubai — Trusted Painting Marketplace';
+const description =
+  'PaintHub Dubai connects homeowners with verified, insured painters across 35+ Dubai communities. Learn how we vet vendors and what makes us different.';
+
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: title,
+  description,
+  url: `${site.url}/about`,
+  mainEntity: { '@id': `${site.url}/#organization` },
+};
+
+const values = [
+  {
+    title: 'Painters we trust',
+    desc: 'Every painter is verified for an active Dubai trade licence, third-party liability insurance and a minimum of one completed reference job. We re-check every 6 months.',
+    icon: '<path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z M9 12l2 2 4-4" stroke-linejoin="round" stroke-linecap="round"/>',
+  },
+  {
+    title: 'Quotes you can compare',
+    desc: 'You see ratings, response times, photos, prices and warranty terms side-by-side. No mystery, no pressure, no hidden charges.',
+    icon: '<path d="M4 6h16M4 12h12M4 18h8" stroke-linecap="round"/>',
+  },
+  {
+    title: 'A real safety net',
+    desc: 'If something isn\'t right, we step in. Disputes are mediated by our team and every job is backed by a 12-month workmanship warranty.',
+    icon: '<path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z" stroke-linejoin="round"/>',
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    eyebrow="About PaintHub"
+    title="We make hiring a painter in Dubai actually easy"
+    subtitle="PaintHub Dubai is a marketplace for residential and commercial painting services. We match homeowners and businesses with hand-picked, verified painters in their community — and stay involved until the job is done right."
+    breadcrumbs={breadcrumbs}
+    stats={[
+      { label: 'Founded', value: site.founded },
+      { label: 'Painters', value: `${site.stats.vendors}+` },
+      { label: 'Communities', value: `${site.stats.areasCovered}+` },
+      { label: 'Jobs done', value: `${(site.stats.jobsCompleted / 1000).toFixed(1)}k+` },
+    ]}
+  />
+
+  <Section eyebrow="Why we exist" title="Hiring a painter shouldn't be a gamble" bg="white">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <div class="space-y-5 text-base leading-relaxed text-ink-700 sm:text-lg">
+          <p>
+            Anyone who has tried to paint an apartment or villa in Dubai knows the problem: you call five numbers off Dubizzle, two pick up, one shows up, the quote feels like a guess and you cross your fingers.
+          </p>
+          <p>
+            PaintHub fixes that by doing the boring work for you — checking trade licences, insurance certificates, real customer ratings and prices — and then putting five matched, ready-to-quote painters in front of you in under a minute.
+          </p>
+          <p>
+            We don't employ painters. We curate them. Every vendor on the platform passes our verification check, agrees to our customer-service standards, and earns their slot through real ratings from real homeowners.
+          </p>
+        </div>
+      </div>
+      <aside class="lg:col-span-5">
+        <div class="rounded-2xl bg-gradient-to-br from-brand-50 to-amber-50 p-6 ring-1 ring-brand-100">
+          <h3 class="text-lg font-bold text-ink-900">By the numbers</h3>
+          <dl class="mt-4 grid grid-cols-2 gap-4">
+            <div class="rounded-xl bg-white px-4 py-3 ring-1 ring-ink-200/60">
+              <dt class="text-xs text-ink-500">Average rating</dt>
+              <dd class="mt-1 text-2xl font-extrabold text-ink-900">{site.stats.averageRating} ★</dd>
+            </div>
+            <div class="rounded-xl bg-white px-4 py-3 ring-1 ring-ink-200/60">
+              <dt class="text-xs text-ink-500">Verified reviews</dt>
+              <dd class="mt-1 text-2xl font-extrabold text-ink-900">{site.stats.reviewCount.toLocaleString()}+</dd>
+            </div>
+            <div class="rounded-xl bg-white px-4 py-3 ring-1 ring-ink-200/60">
+              <dt class="text-xs text-ink-500">Response time</dt>
+              <dd class="mt-1 text-2xl font-extrabold text-ink-900">&lt; 1 hr</dd>
+            </div>
+            <div class="rounded-xl bg-white px-4 py-3 ring-1 ring-ink-200/60">
+              <dt class="text-xs text-ink-500">Warranty</dt>
+              <dd class="mt-1 text-2xl font-extrabold text-ink-900">12 mo+</dd>
+            </div>
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </Section>
+
+  <Section eyebrow="What we stand for" title="Three things we promise" bg="ink-50">
+    <ul class="grid gap-5 md:grid-cols-3">
+      {values.map((v) => (
+        <li class="card p-7">
+          <span class="grid h-12 w-12 place-items-center rounded-xl bg-ink-900 text-white">
+            <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" set:html={v.icon} />
+          </span>
+          <h3 class="mt-5 text-lg font-bold text-ink-900">{v.title}</h3>
+          <p class="mt-2 text-sm text-ink-600">{v.desc}</p>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section eyebrow="Verification" title="How we vet every painter" bg="white">
+    <ol class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      {[
+        { n: '01', title: 'Document check', desc: 'Active Dubai trade licence, Emirates ID for owners and AED 1M+ insurance.' },
+        { n: '02', title: 'Reference job', desc: 'Minimum one completed job we can verify with the homeowner directly.' },
+        { n: '03', title: 'Site test', desc: 'Spot-visit on a live job to assess prep, protection and finish quality.' },
+        { n: '04', title: 'Ongoing rating', desc: 'Real-time customer ratings and 6-month re-verification of paperwork.' },
+      ].map((step) => (
+        <li class="card p-6">
+          <span class="text-3xl font-extrabold tracking-tighter text-brand-100">{step.n}</span>
+          <h3 class="mt-2 text-base font-bold text-ink-900">{step.title}</h3>
+          <p class="mt-1 text-sm text-ink-600">{step.desc}</p>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <QuoteCTA title="Ready to skip the guessing game?" subtitle="Get matched with vetted painters in your area — and back to your day in minutes." />
+
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+  <JsonLd data={aboutSchema} slot="head" />
+</BaseLayout>
