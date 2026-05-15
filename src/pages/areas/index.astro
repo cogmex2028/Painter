@@ -56,6 +56,41 @@ const itemListSchema = {
     ]}
   />
 
+  <Section bg="white">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <span class="eyebrow">Why hyperlocal matters</span>
+        <h2 class="mt-4 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">The right painter knows your building</h2>
+        <div class="prose mt-6 space-y-4 text-base leading-relaxed text-ink-700">
+          <p>
+            Dubai is not one painting market — it is hundreds. The crew that paints a 1-bedroom in Marina Princess Tower has a very different workflow from the team that recoats a Palm Jumeirah Frond villa exterior. Marina jobs rely on building security passes, service-lift slots and 9am-to-5pm windows. Palm jobs rely on Nakheel NOCs, scaffolding and silicone-based salt-resistant coatings. Same trade, different specialism.
+          </p>
+          <p>
+            PaintHub indexes painters by community so that the vendor you book has already worked in your building, knows the access rules, and carries the right insurance and permits. That is what "hyperlocal" means in practice — and why our quote turnaround averages under an hour and same-day starts are routine.
+          </p>
+          <p>
+            Browse below by sector — Marina & JBR, Downtown & Business Bay, Jumeirah, the suburbs — or send us your address and we will match you with up to five verified painters who already cover it.
+          </p>
+        </div>
+      </div>
+      <aside class="lg:col-span-5">
+        <div class="rounded-2xl bg-gradient-to-br from-brand-50 to-amber-50 p-6 ring-1 ring-brand-100">
+          <h3 class="text-lg font-bold text-ink-900">Coverage at a glance</h3>
+          <dl class="mt-5 space-y-4 text-sm">
+            <div class="flex justify-between gap-3"><dt class="text-ink-600">Active communities</dt><dd class="font-bold text-ink-900">35+</dd></div>
+            <div class="flex justify-between gap-3"><dt class="text-ink-600">Avg. vendors per community</dt><dd class="font-bold text-ink-900">8-18</dd></div>
+            <div class="flex justify-between gap-3"><dt class="text-ink-600">Avg. quote response</dt><dd class="font-bold text-emerald-700">Under 1 hour</dd></div>
+            <div class="flex justify-between gap-3"><dt class="text-ink-600">Same-day starts</dt><dd class="font-bold text-emerald-700">Available</dd></div>
+            <div class="flex justify-between gap-3"><dt class="text-ink-600">All NOC paperwork</dt><dd class="font-bold text-ink-900">Handled for you</dd></div>
+          </dl>
+          <p class="mt-5 text-xs text-ink-500">
+            Emaar Community Management, Nakheel Community Management, DMCC, Dubai Properties, JLT Cluster Authority — all communities our vendors hold active contractor NOCs with.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </Section>
+
   {sectors.map((sector) => (
     <Section eyebrow={sector} title={`Painters across ${sector}`} bg={sectors.indexOf(sector) % 2 === 0 ? 'white' : 'ink-50'}>
       <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -113,6 +148,29 @@ const itemListSchema = {
       </ul>
     </Section>
   ))}
+
+  <Section eyebrow="Coverage map" title="Dubai's painting landscape, neighbourhood by neighbourhood" bg="white">
+    <div class="grid gap-6 md:grid-cols-3">
+      <article class="card p-7">
+        <h3 class="text-lg font-bold text-ink-900">Marina, JBR, Palm Jumeirah</h3>
+        <p class="mt-3 text-sm leading-relaxed text-ink-600">
+          High-rise apartments dominate, with most work tied to building access protocols. Palm Jumeirah villas face the heaviest salt and sun exposure in the city, so silicone-based exterior systems are the norm. Our coastal vendors hold active access permits with Nakheel, Emaar and Atlantis Royal concierge teams.
+        </p>
+      </article>
+      <article class="card p-7">
+        <h3 class="text-lg font-bold text-ink-900">Downtown, Business Bay, DIFC</h3>
+        <p class="mt-3 text-sm leading-relaxed text-ink-600">
+          A mix of premium residential towers and commercial office buildings. Decorative work (Marmorino, Stucco Veneziano) is most common here. Commercial work runs after-hours and weekends. Every vendor holds Emaar or Dubai Properties contractor NOCs as standard.
+        </p>
+      </article>
+      <article class="card p-7">
+        <h3 class="text-lg font-bold text-ink-900">Suburbs: Ranches, Mirdif, JVC</h3>
+        <p class="mt-3 text-sm leading-relaxed text-ink-600">
+          Villa and townhouse country. Full-villa repaints, boundary walls and sun-damaged facade restoration dominate. Pricing is 15-25% lower than the Marina / Downtown corridor due to local crew bases and lower vendor overhead. The work and materials are identical.
+        </p>
+      </article>
+    </div>
+  </Section>
 
   <QuoteCTA title="Don't see your area?" subtitle="We serve 35+ Dubai communities. Tell us where you are and we'll match you with a painter." />
 

@@ -27,6 +27,9 @@ const images = [
   { slot: 'area-jumeirah',         id: 'photo-1564013799919-ab600027ffc6', alt: 'Modern villa exterior in Jumeirah' },
   { slot: 'area-business-bay',     id: 'photo-1611577810610-642f8ac05c32', alt: 'Dubai high-rise residential buildings' },
   { slot: 'area-jlt',              id: 'photo-1615747476205-991a14cd2358', alt: 'Dubai lake-front tower cluster' },
+  { slot: 'area-arabian-ranches',  id: 'photo-1652429249283-e83e3ca0ee66', alt: 'Suburban villa community at dusk' },
+  { slot: 'area-mirdif',           id: 'photo-1704738428819-5b19ec6d9c10', alt: 'Family villa exterior with garden' },
+  { slot: 'area-jvc',              id: 'photo-1624343385944-b99336163b50', alt: 'Modern townhouse row in Dubai' },
   // Vendor portfolio (reuse across vendor cards)
   { slot: 'vendor-elite',          id: 'photo-1616137466211-f939a420be84', alt: 'Premium interior with decorative wall finish' },
   { slot: 'vendor-royal',          id: 'photo-1521587760476-6c12a4b040da', alt: 'Bright modern apartment after repaint' },

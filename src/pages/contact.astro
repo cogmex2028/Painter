@@ -36,6 +36,69 @@ const contactSchema = {
   />
 
   <Section bg="white">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <span class="eyebrow">Which channel and when</span>
+        <h2 class="mt-4 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">Pick the channel that suits your project</h2>
+        <div class="prose mt-6 space-y-4 text-base leading-relaxed text-ink-700">
+          <p>
+            We answer most enquiries in under an hour during opening hours. The fastest way to a written quote is <strong>WhatsApp</strong> — share a few photos of the space, the area, and what you want painted, and our concierge will route you to up to five verified vendors with quotes back within 60 minutes.
+          </p>
+          <p>
+            For larger projects (full villa repaints, commercial fit-outs, decorative work above AED 25,000) we recommend a <strong>phone call</strong>. A senior consultant will walk through the brief, recommend the right specialist, and often arrange an in-person site visit the same week.
+          </p>
+          <p>
+            <strong>Email</strong> is best for vendor enquiries (joining the PaintHub network), partnership requests (architects, interior designers, property managers) and any documented complaint or warranty claim — we keep a written audit trail for accountability.
+          </p>
+          <p>
+            Whatever the channel, we reply with a real name and a single point of contact for the project. No call-centre handoffs, no anonymous tickets. About 80% of our work comes from referrals, and the rapport starts with the first reply.
+          </p>
+        </div>
+      </div>
+      <aside class="lg:col-span-5">
+        <div class="rounded-2xl bg-gradient-to-br from-brand-50 to-amber-50 p-6 ring-1 ring-brand-100">
+          <h3 class="text-lg font-bold text-ink-900">Response time guarantee</h3>
+          <dl class="mt-5 space-y-3 text-sm">
+            <div class="flex justify-between gap-3"><dt class="text-ink-600">WhatsApp (08:00-22:00)</dt><dd class="font-bold text-emerald-700">Under 30 min</dd></div>
+            <div class="flex justify-between gap-3"><dt class="text-ink-600">Phone</dt><dd class="font-bold text-emerald-700">Immediate</dd></div>
+            <div class="flex justify-between gap-3"><dt class="text-ink-600">Email</dt><dd class="font-bold text-ink-900">Within 24 hr</dd></div>
+            <div class="flex justify-between gap-3"><dt class="text-ink-600">Quote turnaround</dt><dd class="font-bold text-ink-900">Under 1 hour</dd></div>
+            <div class="flex justify-between gap-3"><dt class="text-ink-600">On-site visit</dt><dd class="font-bold text-ink-900">Within 48 hr</dd></div>
+          </dl>
+          <p class="mt-5 text-xs text-ink-500">
+            Outside hours? Send a message anyway — most overnight enquiries get a reply by 9am the following morning.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </Section>
+
+  <Section bg="ink-50" eyebrow="Before you reach out" title="What to have ready for the fastest quote" subtitle="A few details upfront cut your quote turnaround in half.">
+    <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <li class="card p-5">
+        <span class="text-2xl font-extrabold tracking-tighter text-brand-100">01</span>
+        <h3 class="mt-2 text-base font-bold text-ink-900">Your area</h3>
+        <p class="mt-1 text-sm text-ink-600">Community or building name. Helps us check vendor coverage and NOC paperwork.</p>
+      </li>
+      <li class="card p-5">
+        <span class="text-2xl font-extrabold tracking-tighter text-brand-100">02</span>
+        <h3 class="mt-2 text-base font-bold text-ink-900">Property type</h3>
+        <p class="mt-1 text-sm text-ink-600">Studio, 1-3BR apartment, villa size, or commercial space.</p>
+      </li>
+      <li class="card p-5">
+        <span class="text-2xl font-extrabold tracking-tighter text-brand-100">03</span>
+        <h3 class="mt-2 text-base font-bold text-ink-900">Service needed</h3>
+        <p class="mt-1 text-sm text-ink-600">Interior, exterior, full villa, commercial, decorative — we route accordingly.</p>
+      </li>
+      <li class="card p-5">
+        <span class="text-2xl font-extrabold tracking-tighter text-brand-100">04</span>
+        <h3 class="mt-2 text-base font-bold text-ink-900">A few photos</h3>
+        <p class="mt-1 text-sm text-ink-600">Phone snaps of the rooms or facade help us quote without a site visit.</p>
+      </li>
+    </ul>
+  </Section>
+
+  <Section bg="white">
     <div class="grid gap-5 lg:grid-cols-3">
       <a href={whatsappUrl()} target="_blank" rel="noopener" class="group card relative overflow-hidden p-7 hover:shadow-lg">
         <span class="grid h-12 w-12 place-items-center rounded-xl bg-[#25D366] text-white shadow-md">

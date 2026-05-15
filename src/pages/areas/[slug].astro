@@ -15,6 +15,7 @@ import { vendors } from '~/data/vendors';
 import { services } from '~/data/services';
 import { imageForArea, imageExistsForArea, imageUrl } from '~/data/images';
 import { site } from '~/data/site';
+import { areaExtended } from '~/data/area-extended';
 
 export async function getStaticPaths() {
   return areas.map((area) => ({
@@ -28,6 +29,7 @@ const { area } = Astro.props;
 const matchingVendors = vendors.filter((v) => v.areas.includes(area.slug)).slice(0, 5);
 const matchingServices = services.filter((s) => area.popularServices?.includes(s.slug));
 const nearbyAreas = areas.filter((a) => area.nearbyAreas?.includes(a.slug));
+const extended = areaExtended[area.slug];
 
 const breadcrumbs = [
   { name: 'Home', href: '/' },
@@ -127,9 +129,73 @@ const breadcrumbs = [
     </div>
   </Section>
 
+  <!-- What to expect -->
+  {extended && (
+    <Section eyebrow="On the day" title={`What to expect when painting in ${area.name}`} bg="ink-50">
+      <div class="grid gap-10 lg:grid-cols-12">
+        <div class="lg:col-span-7">
+          <p class="text-base leading-relaxed text-ink-700 sm:text-lg">{extended.whatToExpect}</p>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="rounded-2xl bg-white p-6 ring-1 ring-ink-200/70">
+            <h3 class="text-lg font-bold text-ink-900">Owner preparation checklist</h3>
+            <ul class="mt-4 space-y-2.5">
+              {extended.preparation.map((p) => (
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                    <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M5 12l5 5L20 7"/>
+                    </svg>
+                  </span>
+                  <span class="text-sm text-ink-700">{p}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Section>
+  )}
+
+  <!-- Best season + community access -->
+  {extended && (
+    <Section bg="white">
+      <div class="grid gap-10 lg:grid-cols-2">
+        <article>
+          <span class="eyebrow">Timing</span>
+          <h2 class="mt-4 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">Best season for painting in {area.name}</h2>
+          <p class="mt-5 text-base leading-relaxed text-ink-700">{extended.bestSeason}</p>
+        </article>
+        <article>
+          <span class="eyebrow">Access & paperwork</span>
+          <h2 class="mt-4 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">Community access & NOCs</h2>
+          <p class="mt-5 text-base leading-relaxed text-ink-700">{extended.communityAccess}</p>
+        </article>
+      </div>
+    </Section>
+  )}
+
+  <!-- Cost factors -->
+  {extended && (
+    <Section eyebrow="What drives the price" title={`Cost factors specific to ${area.name}`} bg="ink-50">
+      <ul class="grid gap-3 sm:grid-cols-2">
+        {extended.costFactors.map((c) => (
+          <li class="card flex items-start gap-3 p-5">
+            <span class="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-50 text-brand-700 ring-1 ring-brand-100">
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 8v8M8 12h8"/>
+              </svg>
+            </span>
+            <span class="text-sm text-ink-700">{c}</span>
+          </li>
+        ))}
+      </ul>
+    </Section>
+  )}
+
   <!-- Popular services -->
   {matchingServices.length > 0 && (
-    <Section eyebrow="Most requested" title={`Popular services in ${area.name}`} bg="ink-50">
+    <Section eyebrow="Most requested" title={`Popular services in ${area.name}`} bg="white">
       <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {matchingServices.map((s) => (
           <li>

@@ -55,6 +55,18 @@ export const imageSlots = [
     "alt": "Dubai lake-front tower cluster"
   },
   {
+    "slot": "area-arabian-ranches",
+    "alt": "Suburban villa community at dusk"
+  },
+  {
+    "slot": "area-mirdif",
+    "alt": "Family villa exterior with garden"
+  },
+  {
+    "slot": "area-jvc",
+    "alt": "Modern townhouse row in Dubai"
+  },
+  {
     "slot": "vendor-elite",
     "alt": "Premium interior with decorative wall finish"
   },
@@ -96,7 +108,7 @@ export const imageForService = (slug: string) => serviceSlotMap[slug] ?? 'servic
 export const imageForVendor = (slug: string) => vendorSlotMap[slug] ?? 'vendor-elite';
 
 export const imageExistsForArea = (slug: string) =>
-  ['dubai-marina', 'downtown-dubai', 'palm-jumeirah', 'jumeirah', 'business-bay', 'jlt'].includes(slug);
+  ['dubai-marina', 'downtown-dubai', 'palm-jumeirah', 'jumeirah', 'business-bay', 'jlt', 'arabian-ranches', 'mirdif', 'jvc'].includes(slug);
 
 export const imageUrl = (siteUrl: string, slot: string, ext: 'jpg' | 'webp' = 'jpg') =>
   `${siteUrl}/images/${slot}.${ext}`;
