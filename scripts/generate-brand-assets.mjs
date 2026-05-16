@@ -10,17 +10,26 @@ async function ensureDir(file) {
   await mkdir(dirname(file), { recursive: true });
 }
 
+// Logo mark: gradient orange badge with custom "M" monogram + paint-drop accent.
+// Scaled from the 64-unit Logo.astro design to a 512-unit canvas (×8).
 const logoSvg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#f97316"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="55%" stop-color="#f97316"/>
       <stop offset="100%" stop-color="#c2410c"/>
     </linearGradient>
+    <radialGradient id="shine" cx="0.25" cy="0.15" r="0.75">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.32"/>
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="512" height="512" rx="112" fill="url(#g)"/>
-  <path d="M144 352 L144 192 Q144 144 192 144 L336 144 Q384 144 384 192 L384 224 L208 224 L208 352 Z" fill="white"/>
-  <circle cx="160" cy="384" r="32" fill="white"/>
+  <rect width="512" height="512" rx="128" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="128" fill="url(#shine)"/>
+  <path d="M96 392 L96 120 L160 120 L256 280 L352 120 L416 120 L416 392 L368 392 L368 216 L272 352 L240 352 L144 216 L144 392 Z" fill="white"/>
+  <path d="M256 416 C238.4 436 238.4 460 256 472 C273.6 460 273.6 436 256 416 Z" fill="white"/>
+  <ellipse cx="248" cy="440" rx="7" ry="11" fill="#fed7aa" opacity="0.65"/>
 </svg>`;
 
 const ogSvg = `<?xml version="1.0" encoding="UTF-8"?>
@@ -46,10 +55,10 @@ const ogSvg = `<?xml version="1.0" encoding="UTF-8"?>
   <circle cx="100" cy="100" r="220" fill="#fdba74" opacity="0.4"/>
   <circle cx="1100" cy="550" r="260" fill="#fed7aa" opacity="0.6"/>
 
-  <!-- Logo mark -->
-  <rect x="72" y="72" width="88" height="88" rx="20" fill="url(#brand)"/>
-  <path d="M96 132 L96 102 Q96 92 106 92 L132 92 Q142 92 142 102 L142 108 L110 108 L110 132 Z" fill="white"/>
-  <circle cx="100" cy="138" r="6" fill="white"/>
+  <!-- Logo mark (88×88 badge, M monogram scaled to ~64% of badge) -->
+  <rect x="72" y="72" width="88" height="88" rx="22" fill="url(#brand)"/>
+  <path d="M88.5 133.4 L88.5 86.4 L99.5 86.4 L116 113.9 L132.5 86.4 L143.5 86.4 L143.5 133.4 L135.25 133.4 L135.25 103 L118.75 126.5 L113.25 126.5 L96.75 103 L96.75 133.4 Z" fill="white"/>
+  <path d="M116 137.5 C112.97 140.94 112.97 145.06 116 147.13 C119.03 145.06 119.03 140.94 116 137.5 Z" fill="white"/>
 
   <text x="180" y="128" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="800" fill="#0f172a">Mr Painter</text>
   <text x="362" y="128" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="800" fill="#f97316">.</text>

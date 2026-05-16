@@ -7,11 +7,12 @@ const { variant = 'dark', size = 'md' } = Astro.props;
 const text = variant === 'light' ? 'text-white' : 'text-ink-900';
 const sub = variant === 'light' ? 'text-brand-300' : 'text-brand-600';
 const sizeMap = {
-  sm: { mark: 'h-8 w-8', icon: 'h-4 w-4', wordmark: 'text-base', sub: 'text-[10px]' },
-  md: { mark: 'h-9 w-9', icon: 'h-5 w-5', wordmark: 'text-lg', sub: 'text-[11px]' },
-  lg: { mark: 'h-11 w-11', icon: 'h-6 w-6', wordmark: 'text-xl', sub: 'text-xs' },
+  sm: { mark: 'h-8 w-8', icon: 28, wordmark: 'text-base', sub: 'text-[9px]' },
+  md: { mark: 'h-10 w-10', icon: 32, wordmark: 'text-lg', sub: 'text-[10px]' },
+  lg: { mark: 'h-12 w-12', icon: 40, wordmark: 'text-2xl', sub: 'text-xs' },
 } as const;
 const s = sizeMap[size];
+const uid = `lg${Math.random().toString(36).slice(2, 7)}`;
 ---
 
 <a
@@ -19,17 +20,48 @@ const s = sizeMap[size];
   class={`group inline-flex items-center gap-2.5 font-display font-extrabold ${text}`}
   aria-label="Mr Painter Dubai — Home"
 >
-  <span class={`relative grid ${s.mark} place-items-center overflow-hidden rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 shadow-md shadow-brand-500/30 transition-transform group-hover:scale-105`}>
-    <svg viewBox="0 0 24 24" class={`${s.icon} text-white`} fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M7 16V8a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2H9v6z" />
-      <circle cx="8" cy="18" r="2" />
+  <span
+    class={`relative grid ${s.mark} place-items-center overflow-hidden rounded-2xl shadow-md shadow-brand-500/30 transition-transform group-hover:scale-105 group-hover:rotate-[-3deg]`}
+  >
+    <svg viewBox="0 0 64 64" class="absolute inset-0 h-full w-full" aria-hidden="true">
+      <defs>
+        <linearGradient id={`${uid}-bg`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#fb923c" />
+          <stop offset="55%" stop-color="#f97316" />
+          <stop offset="100%" stop-color="#c2410c" />
+        </linearGradient>
+        <radialGradient id={`${uid}-shine`} cx="0.25" cy="0.15" r="0.75">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.32" />
+          <stop offset="55%" stop-color="#ffffff" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+      <!-- Badge -->
+      <rect width="64" height="64" rx="16" fill={`url(#${uid}-bg)`} />
+      <rect width="64" height="64" rx="16" fill={`url(#${uid}-shine)`} />
+      <!-- M monogram -->
+      <path
+        d="M12 49 L12 15 L20 15 L32 35 L44 15 L52 15 L52 49 L46 49 L46 27 L34 44 L30 44 L18 27 L18 49 Z"
+        fill="white"
+        stroke="white"
+        stroke-width="0.5"
+        stroke-linejoin="round"
+      />
+      <!-- Paint drop -->
+      <path
+        d="M32 52 C29.8 54.5 29.8 57.5 32 59 C34.2 57.5 34.2 54.5 32 52 Z"
+        fill="white"
+      />
+      <!-- Highlight on drop -->
+      <ellipse cx="31" cy="55" rx="0.9" ry="1.4" fill="#fed7aa" opacity="0.7" />
     </svg>
-    <span class="absolute inset-0 bg-white/20 mix-blend-overlay" aria-hidden="true"></span>
   </span>
+
   <span class="flex flex-col leading-tight">
     <span class={`${s.wordmark} tracking-tight`}>
       Mr Painter<span class="text-brand-500">.</span>
     </span>
-    <span class={`${sub} font-semibold uppercase tracking-[0.18em] opacity-80`}>Dubai</span>
+    <span class={`${sub} ${s.sub} font-semibold uppercase tracking-[0.22em] opacity-85`}>
+      Dubai
+    </span>
   </span>
 </a>
