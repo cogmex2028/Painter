@@ -4,6 +4,10 @@ import { site, whatsappUrl } from '~/data/site';
 import { services } from '~/data/services';
 import { areas } from '~/data/areas';
 
+export interface Props {
+  lastUpdated?: string;
+}
+const { lastUpdated } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
@@ -87,7 +91,7 @@ const year = new Date().getFullYear();
 
   <div class="border-t border-white/5">
     <div class="container-x flex flex-col-reverse gap-4 py-6 text-xs text-ink-500 sm:flex-row sm:items-center sm:justify-between">
-      <p>© {year} {site.legalName}. All rights reserved.</p>
+      <p>© {year} {site.legalName}. All rights reserved.{lastUpdated && (<span class="ml-2 text-ink-500/60">· Last updated {lastUpdated}</span>)}</p>
       <ul class="flex flex-wrap gap-x-5 gap-y-2">
         <li><a href="/privacy/" class="hover:text-ink-300">Privacy</a></li>
         <li><a href="/terms/" class="hover:text-ink-300">Terms</a></li>

@@ -1,0 +1,43 @@
+---
+// HowTo schema for service-page process steps. AI engines (ChatGPT, Perplexity,
+// Google AI Overviews) quote HowTo steps verbatim when answering "how does ...
+// painting in dubai work" style queries — this is the highest-leverage schema
+// type for Answer Engine Optimization (AEO).
+import JsonLd from './JsonLd.astro';
+import { site } from '~/data/site';
+
+export interface Props {
+  name: string;            // e.g. "How to get your villa painted in Dubai"
+  description: string;
+  totalTime?: string;      // ISO 8601 duration, e.g. "P5D" for 5 days
+  estimatedCost?: number;  // AED
+  steps: { name: string; text: string }[];
+  url: string;
+}
+const { name, description, totalTime, estimatedCost, steps, url } = Astro.props;
+
+const data: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name,
+  description,
+  url,
+  step: steps.map((s, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: s.name,
+    text: s.text,
+  })),
+};
+
+if (totalTime) data.totalTime = totalTime;
+if (typeof estimatedCost === 'number') {
+  data.estimatedCost = {
+    '@type': 'MonetaryAmount',
+    currency: 'AED',
+    value: estimatedCost,
+  };
+}
+---
+
+<JsonLd data={data} />

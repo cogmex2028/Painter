@@ -206,4 +206,68 @@ export const serviceExtended: Record<string, ServiceExtended> = {
     sustainability:
       'Decorative finishes are among the most sustainable paint options available. Marmorino is lime-based, breathes naturally, regulates humidity and contains zero VOCs. Stucco Veneziano is similarly mineral-based. Most decorative finishes are Greenguard Gold certified or equivalent. Materials are imported in glass and metal containers (recyclable) rather than plastic tubs. The finished surface itself is hypoallergenic and antimicrobial.',
   },
+
+  'move-in-painting': {
+    materialsIntro:
+      'Move-in painting prioritises low odour and fast cure. Premium water-based emulsions like Jotun Lady, Dulux Diamond and Caparol Premiumweiss are the standard choice — they smell almost nothing within hours, cure to handling-dry in 4 hours, and the unit is fully habitable the same evening. We rarely use oil-based finishes for move-in because the longer cure time creates a smell window that conflicts with your move-in date.',
+    paintBrands: [
+      { name: 'Jotun Lady',          bestFor: 'Premium move-in, bedrooms, lounges',  notes: 'Almost odourless. Cures fast. Top tier in the GCC.' },
+      { name: 'Dulux Diamond',       bestFor: 'High-traffic walls, hallways, kitchens', notes: 'Scrubbable. Wide colour range. Mid-premium.' },
+      { name: 'Jotun Fenomastic Hygiene', bestFor: 'Kitchens, bathrooms, kids rooms', notes: 'Anti-bacterial. Moisture-resistant. Family-safe.' },
+      { name: 'Caparol Premiumweiss', bestFor: 'Ceilings and large white walls',       notes: 'German. Ultra-matt finish. Premium tier.' },
+      { name: 'Asian Paints Royale',  bestFor: 'Budget move-in jobs',                  notes: 'Reliable mid-tier. Wider availability across Dubai.' },
+    ],
+    pitfalls: [
+      { title: 'Booking too late', detail: 'Calling 24 hours before the movers arrive leaves no margin for delays. Book 5-7 days ahead so the paint has time to cure and any touch-ups can be done.' },
+      { title: 'Skipping the move-in inspection list', detail: 'Many landlords give you a snag list at handover. Paint it BEFORE you start photographing for the inspection record so issues are addressed in one visit.' },
+      { title: 'Choosing colour at the last minute', detail: 'Custom-tinted paint takes 30-60 minutes at the supplier. If you decide colour on the day, the crew waits. Pick 48 hours ahead.' },
+      { title: 'Painting after the AC is off', detail: 'Hot humid air slows drying. Confirm with the building that AC is operational and have it set to 23-24°C during the work.' },
+      { title: 'Not protecting marble or wooden floors', detail: 'Cheap crews use newspaper. Insist on breathable sheets and adhesive floor coverings — paint drops on polished marble cause permanent staining.' },
+    ],
+    checklist: [
+      'Book the paint job 5-7 days before your move-in date',
+      'Confirm the building allows weekday painting (some restrict to weekends)',
+      'Pick your colour and approve 48 hours before start',
+      'Hand over keys to security if you cannot be present',
+      'Confirm AC is on at 23-24°C the day of painting',
+      'Plan furniture delivery for at least 24 hours after final coat',
+      'Save the painter\'s number — return for any touch-ups within 7 days at no cost',
+    ],
+    durability:
+      'A premium move-in repaint typically holds for 5-7 years in bedrooms and ceilings, 4-5 years in high-traffic hallways and kitchens. The 12-month workmanship warranty covers peeling, flaking or visible inconsistencies — we return at no cost. Most move-in customers do not need to repaint again until they sell the property or change tenancy.',
+    sustainability:
+      'Every brand we recommend for move-in jobs has a low-VOC or zero-VOC variant. Jotun Lady, Dulux Diamond and Caparol Premiumweiss are Greenguard Gold certified, meaning the unit is safe for kids and pregnant occupants from the same evening. Recommended for nurseries, asthmatic family members and pet-friendly homes.',
+  },
+
+  'move-out-painting': {
+    materialsIntro:
+      'Move-out painting prioritises exact colour matching and fast cure. We use the same major brands (Jotun, Dulux, Caparol) but in landlord-spec shades rather than designer colours. The supplier tints to the exact colour code your developer uses — Emaar, Dubai Properties, Nakheel and the major Damac codes are all on file. The result is a wall that matches perfectly at the handover inspection, with no "spot patch" visible.',
+    paintBrands: [
+      { name: 'Dulux Easycare',         bestFor: 'Standard move-out, landlord-spec',  notes: 'Affordable, washable, wide colour-match library.' },
+      { name: 'Jotun Lady',             bestFor: 'Premium tenant turnover',            notes: 'Used by Emaar Community Management as the default spec.' },
+      { name: 'Asian Paints Royale',    bestFor: 'Budget move-out, basic refresh',     notes: 'Reliable mid-tier. Common for older buildings.' },
+      { name: 'Dulux Weathershield',    bestFor: 'Boundary walls + outdoor gates',     notes: 'For villa move-out, exterior surfaces.' },
+      { name: 'Berger Silk',            bestFor: 'Very-budget single-coat refresh',    notes: 'Lowest cost option for older tenant turnover.' },
+    ],
+    pitfalls: [
+      { title: 'Wrong shade of white', detail: 'There are at least eight common "off-white" shades used in Dubai. Even a 1-shade mismatch is visible to a landlord inspector. Always confirm the developer code before tinting.' },
+      { title: 'Painting over water damage without repair', detail: 'Water stains bleed through fresh paint within weeks. Diagnose and fix the source before the topcoat goes on.' },
+      { title: 'Skipping mounting-bracket removal', detail: 'TV brackets, shelving anchors and curtain rods left in place look unprofessional and signal "I rushed". Remove all hardware before repainting.' },
+      { title: 'Painting only the damaged sections', detail: 'Spot-painting always shows. Repaint full walls (corner-to-corner) so the finish is uniform under all lighting conditions.' },
+      { title: 'Cheap budget paint on premium developer specs', detail: 'Some inspectors check brand. Emaar handover spec is Jotun Lady — using Asian Paints Apex saves AED 200 and costs the deposit.' },
+    ],
+    checklist: [
+      'Book 3-7 days before your key handover date',
+      'Confirm the developer-spec paint code (or send your building name to us)',
+      'Remove all wall hardware (TV brackets, shelves, hooks, curtain rods)',
+      'Take "before" photos for your records',
+      'Notify your leasing agent that handover-ready painting is scheduled',
+      'Arrange access for the crew if you have already moved out',
+      'Be present (or video call) for the final walk-through and sign-off',
+    ],
+    durability:
+      'Move-out repaints are designed to look pristine at handover inspection and for the following 30-60 days while the next tenant moves in. Long-term durability is the next tenant\'s concern. The 12-month workmanship warranty still applies — if peeling shows up during the handover window, we return at no cost.',
+    sustainability:
+      'Even move-out jobs use low-VOC paint by default. The next tenant moves in within days, often with children, so leaving a low-emission surface is non-negotiable for our network. Disposal of leftover paint and tins follows the same protocol as full repaints.',
+  },
 };

@@ -15,6 +15,11 @@ export interface Props {
 }
 
 const { title, description, image, noindex, type } = Astro.props;
+
+// Build-time timestamp surfaced to search engines and AI answer engines
+// as a recency signal. Updated every deploy.
+const lastModified = new Date().toISOString();
+const lastModifiedDisplay = new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long' });
 ---
 
 <!doctype html>
@@ -44,6 +49,10 @@ const { title, description, image, noindex, type } = Astro.props;
       noindex={noindex}
       type={type}
     />
+    <!-- Recency signals for search + AI answer engines (AEO/GEO) -->
+    <meta name="article:modified_time" content={lastModified} />
+    <meta property="og:updated_time" content={lastModified} />
+    <meta name="last-modified" content={lastModified} />
     <SiteSchema />
 
     <slot name="head" />
@@ -62,7 +71,7 @@ const { title, description, image, noindex, type } = Astro.props;
       <slot />
     </main>
 
-    <Footer />
+    <Footer lastUpdated={lastModifiedDisplay} />
 
     <WhatsAppFloat />
   </body>

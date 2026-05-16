@@ -9,6 +9,7 @@ import QuoteCTA from '~/components/page/QuoteCTA.astro';
 import ServiceSchema from '~/components/schema/ServiceSchema.astro';
 import FAQSchema from '~/components/schema/FAQSchema.astro';
 import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+import HowToSchema from '~/components/schema/HowToSchema.astro';
 
 import { services } from '~/data/services';
 import { vendors } from '~/data/vendors';
@@ -264,4 +265,12 @@ const breadcrumbs = [
   <ServiceSchema service={service} slot="head" />
   <FAQSchema faqs={service.faqs} slot="head" />
   <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+  <HowToSchema
+    slot="head"
+    name={`How ${service.name.toLowerCase()} works in Dubai`}
+    description={service.intro}
+    url={`${site.url}/services/${service.slug}/`}
+    estimatedCost={service.startingPrice}
+    steps={service.process.map((p) => ({ name: p.step, text: p.detail }))}
+  />
 </BaseLayout>

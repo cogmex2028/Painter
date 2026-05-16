@@ -448,4 +448,164 @@ export const services: Service[] = [
       },
     ],
   },
+
+  // ─────── Move-in painting ───────
+  {
+    slug: 'move-in-painting',
+    name: 'Move-In Painting',
+    short: 'Fresh walls before you unpack',
+    description:
+      'Pre-occupancy repaint while the home is still empty. 24-48 hour starts, premium emulsion, single-day finish on apartments.',
+    startingPrice: 999,
+    unit: 'AED / apartment',
+    icon: 'home',
+    popular: true,
+    seoTitle: 'Move-In Painting Dubai — Fresh Before You Unpack',
+    seoDescription:
+      'Move-in painting in Dubai. Fresh walls before furniture arrives. 24-48 hour starts, fixed quote, no deposit. Studios from AED 999, 1BR from AED 1,499.',
+    intro:
+      'Moving into a new home in Dubai is the single best moment to repaint. The rooms are empty, there is no furniture to protect, no schedule to work around, and the unit can be aired out completely before you bring a single box inside. Our move-in painting service handles full apartments in 24-48 hours from quote — typically same-day starts for studios and 1BR units, with the home painted, dust-free and ready for occupancy by the time your movers arrive. Most clients book us between key handover and their move-in date, which is usually 5-10 days.',
+    bestFor: [
+      'New build handover apartments and villas',
+      'Just-signed lease, before furniture arrives',
+      'Pre-occupancy refresh after the previous tenant moved out',
+      'Post-renovation final paint coat before move-in',
+      'Newly purchased properties needing colour customisation',
+    ],
+    inclusions: [
+      'Free in-home survey within 48 hours of enquiry',
+      'Premium emulsion: Jotun Lady or Dulux Diamond, two coats',
+      'Full wall + ceiling repaint, walls only on request',
+      'Crack and nail-hole repair on existing walls',
+      'Door, frame and skirting touch-up if needed',
+      'Final post-clean: floors mopped, surfaces dust-free',
+      'Same-day return for touch-ups within 7 days at no charge',
+    ],
+    process: [
+      { step: 'WhatsApp the unit details', detail: 'Send your area, property type and move-in date. We reply within an hour with a fixed quote.' },
+      { step: 'Site survey or video walk-through', detail: 'For most apartments, a 10-minute video tour over WhatsApp is enough to confirm the quote.' },
+      { step: 'Book the date', detail: 'We schedule the work for any day before your move-in. No deposit — pay on completion.' },
+      { step: 'Paint the empty home', detail: 'Crew arrives 8-9am, finishes by 5-6pm for most 1-2BR apartments. Photos sent throughout the day.' },
+      { step: 'Air out & sign off', detail: 'Crew leaves the unit aired, dust-free and habitable the same evening. You walk in to a fresh home on move-in day.' },
+    ],
+    priceTable: [
+      { tier: 'Studio (walls only)', scope: 'Premium emulsion, two coats', from: 999, unit: 'AED total' },
+      { tier: '1BR apartment', scope: 'Walls + ceiling, two coats', from: 1499, unit: 'AED total' },
+      { tier: '2BR apartment', scope: 'Walls + ceiling, full prep', from: 2499, unit: 'AED total' },
+      { tier: '3BR apartment', scope: 'Walls + ceiling, light trim', from: 3499, unit: 'AED total' },
+      { tier: '3-4BR villa', scope: 'Interior only, walls + ceilings', from: 5999, unit: 'AED total' },
+    ],
+    faqs: [
+      {
+        question: 'How far ahead of my move-in date should I book?',
+        answer:
+          'Five to seven days is ideal. Most apartments are finished in a single day, but booking a week ahead lets us schedule the right crew, lets the paint cure properly, and gives a 24-hour buffer for any unexpected touch-ups before your movers arrive.',
+      },
+      {
+        question: 'Will the paint smell on move-in day?',
+        answer:
+          'No. We use low-VOC premium emulsions (Jotun Lady, Dulux Diamond) that are almost odourless. After a single overnight air-out the unit smells neutral. We can leave windows open and air-conditioning on after the final coat to fully ventilate the space.',
+      },
+      {
+        question: 'Can I paint just the walls and not the ceiling?',
+        answer:
+          'Yes. Walls-only repaints are common for move-in if the ceiling is already in good condition. This typically saves 20-25% versus a full walls-plus-ceiling job.',
+      },
+      {
+        question: 'What if the unit has carpet or polished marble floors?',
+        answer:
+          'We use disposable adhesive floor coverings for carpet and breathable sheets for marble, both removed cleanly on completion. We have never damaged a floor in 540+ jobs, but we carry AED 2M insurance on every project just in case.',
+      },
+      {
+        question: 'Can the building handyman or building manager let you in?',
+        answer:
+          'Yes. Many move-in jobs are done remotely while the new tenant is overseas finishing the move. We coordinate access with building security or the leasing agent, send hourly photos, and sign off via video call when done.',
+      },
+      {
+        question: 'Do you handle new-build handover snagging?',
+        answer:
+          'Yes. Many new-build apartments need snag-list paint fixes (touch-ups around installed fixtures, fresh coats over developer paint defects). We can handle the snag fixes and the full move-in repaint in the same visit.',
+      },
+    ],
+  },
+
+  // ─────── Move-out painting ───────
+  {
+    slug: 'move-out-painting',
+    name: 'Move-Out Painting',
+    short: 'Get your full deposit back',
+    description:
+      'End-of-tenancy repaint to landlord-spec white. Quick turnaround, exact colour matching, focused on deposit recovery.',
+    startingPrice: 799,
+    unit: 'AED / apartment',
+    icon: 'apartment',
+    popular: true,
+    seoTitle: 'Move-Out Painting Dubai — Get Your Deposit Back',
+    seoDescription:
+      'Move-out painting in Dubai. Landlord-spec colour matching, deposit-recovery focused, 24-48 hour starts. Studios from AED 799, 1BR from AED 1,199.',
+    intro:
+      'Most Dubai tenancy contracts require you to return the apartment in its original condition — same walls, same paint, no damage. Our move-out painting service is purpose-built for that handover inspection. We match the original landlord-spec colour (typically a developer off-white or a community-specified shade), patch any nail holes or scuffs, and repaint walls and ceilings in 1-2 days. The job is priced to be a fraction of the security deposit you recover, so it almost always pays for itself.',
+    bestFor: [
+      'End-of-tenancy handover before key return',
+      'Tenants who have hung art, mounted TVs or modified wall colours',
+      'Pre-handover refresh after pet or child damage',
+      'Tenants relocating overseas who need a turnkey solution',
+      'Landlords doing tenant-turnover between leases',
+    ],
+    inclusions: [
+      'Free landlord-spec colour matching (we hold codes for major developers)',
+      'Nail-hole filling, scuff repair, water-stain patching',
+      'One or two coats of matching emulsion on walls and ceilings',
+      'Removal of small adhesive marks, tape residue, mounting brackets',
+      'Floor and fixture protection during the work',
+      'Post-clean: floors mopped, walls dust-free',
+      'Walk-through with you (or your leasing agent) before sign-off',
+    ],
+    process: [
+      { step: 'WhatsApp the unit details', detail: 'Send your community / building name. We hold paint codes for most major developers and can confirm the right colour immediately.' },
+      { step: 'Free site survey', detail: 'A 20-minute visit (or 10-minute video tour) to inspect damage, confirm scope and lock the quote in writing.' },
+      { step: 'Schedule for handover week', detail: 'Most move-out jobs are booked 3-7 days before key return, paid on completion. No deposit.' },
+      { step: 'Repair + repaint', detail: 'Patch repairs, one or two coats of matching paint. Studios and 1BR apartments finish in a single day.' },
+      { step: 'Photo walk-through', detail: 'Crew sends before/after photos for your records. Useful evidence if the landlord disputes anything at handover.' },
+    ],
+    priceTable: [
+      { tier: 'Studio (walls only, single coat)', scope: 'Landlord-spec white, basic refresh', from: 799, unit: 'AED total' },
+      { tier: '1BR apartment', scope: 'Walls + ceiling, one or two coats', from: 1199, unit: 'AED total' },
+      { tier: '2BR apartment', scope: 'Walls + ceiling, patch repair included', from: 1899, unit: 'AED total' },
+      { tier: '3BR apartment', scope: 'Full apartment, all walls + ceilings', from: 2799, unit: 'AED total' },
+      { tier: 'Heavy damage / patch repair add-on', scope: 'Per-room damage repair', from: 299, unit: 'AED' },
+    ],
+    faqs: [
+      {
+        question: 'How much can I expect to recover on my deposit by repainting?',
+        answer:
+          'Most Dubai landlords deduct AED 2,500-6,000 from deposits for paint-related restoration if the tenant does not handle it. A move-out repaint at AED 799-1,899 typically returns 3-5x its cost in recovered deposit. The math almost always works in your favour.',
+      },
+      {
+        question: 'Do you know the landlord-spec colours for major Dubai communities?',
+        answer:
+          'Yes. We hold paint codes for Emaar (Downtown, Marina, Ranches), Dubai Properties (Business Bay, JBR), Nakheel (Palm, JLT clusters), Damac Maison and most JVC developers. Send your building name and we confirm the exact spec immediately.',
+      },
+      {
+        question: 'What if I painted my walls a non-standard colour during my tenancy?',
+        answer:
+          'No problem. We repaint over the existing colour back to the landlord-spec white. This typically needs two coats instead of one and a slightly higher quote, but it is still much cheaper than the deduction your landlord would make.',
+      },
+      {
+        question: 'How fast can you do a move-out repaint?',
+        answer:
+          'For a studio, 24-48 hours from confirmed booking. For a 1-2BR apartment, 48-72 hours including the on-site work. We can handle urgent jobs (next day or same-day) for an additional small fee where vendor availability allows.',
+      },
+      {
+        question: 'Can I be away while you do the work?',
+        answer:
+          'Yes. About 60% of our move-out jobs are done while the tenant has already physically moved out and is overseas or in a new home. We coordinate access with building security or your leasing agent and send hourly photo updates.',
+      },
+      {
+        question: 'What about damage to bathrooms, kitchens or floors?',
+        answer:
+          'We focus on walls and ceilings. Bathroom regrouting, kitchen fittings or floor polishing are outside our scope but we can refer trusted handymen for those tasks. Combining the work into one handover window often saves time.',
+      },
+    ],
+  },
 ];

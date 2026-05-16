@@ -2,6 +2,10 @@
 import JsonLd from './JsonLd.astro';
 import { site } from '~/data/site';
 
+// ISO timestamp generated at build time → tells search engines and LLM
+// answer engines the site is actively maintained (recency signal).
+const lastModified = new Date().toISOString();
+
 const organization = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -39,6 +43,7 @@ const website = {
   name: site.name,
   description: site.description,
   inLanguage: site.locale,
+  dateModified: lastModified,
   publisher: { '@id': `${site.url}/#organization` },
   potentialAction: {
     '@type': 'SearchAction',
