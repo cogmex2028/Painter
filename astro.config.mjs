@@ -21,6 +21,30 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
+      // Per-URL priority tuning — search engines weight these.
+      // Homepage = 1.0, key money pages = 0.9, deep pages = 0.7, legal = 0.3.
+      serialize(item) {
+        const url = item.url;
+        if (url.endsWith('/')) {
+          if (url.match(/^https?:\/\/[^/]+\/?$/)) {
+            item.priority = 1.0;
+            item.changefreq = 'daily';
+          } else if (url.match(/\/(pricing|services|areas|about|contact)\/?$/)) {
+            item.priority = 0.9;
+            item.changefreq = 'weekly';
+          } else if (url.includes('/services/') || url.includes('/vendors/')) {
+            item.priority = 0.85;
+            item.changefreq = 'weekly';
+          } else if (url.includes('/areas/')) {
+            item.priority = 0.8;
+            item.changefreq = 'weekly';
+          } else if (url.match(/\/(privacy|terms)\/?$/)) {
+            item.priority = 0.3;
+            item.changefreq = 'yearly';
+          }
+        }
+        return item;
+      },
     }),
     robotsTxt({
       policy: [{ userAgent: '*', allow: '/', disallow: ['/api/', '/thank-you'] }],

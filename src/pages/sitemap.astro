@@ -1,0 +1,112 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+
+import { services } from '~/data/services';
+import { areas } from '~/data/areas';
+import { vendors } from '~/data/vendors';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Sitemap', href: '/sitemap/' },
+];
+
+const title = 'Sitemap — Mr Painter Dubai';
+const description =
+  'Browse every page on Mr Painter Dubai: services, communities, vendor profiles, pricing, FAQs and more. XML sitemap also available at /sitemap-index.xml.';
+
+const groups = [
+  {
+    name: 'Main pages',
+    links: [
+      { href: '/', label: 'Home' },
+      { href: '/pricing/', label: 'Pricing' },
+      { href: '/about/', label: 'About Mr Painter Dubai' },
+      { href: '/contact/', label: 'Contact' },
+      { href: '/faq/', label: 'Frequently asked questions' },
+    ],
+  },
+  {
+    name: 'Services',
+    links: [
+      { href: '/services/', label: 'All painting services' },
+      ...services.map((s) => ({ href: `/services/${s.slug}/`, label: s.name })),
+    ],
+  },
+  {
+    name: 'Communities we cover',
+    links: [
+      { href: '/areas/', label: 'All communities' },
+      ...areas.map((a) => ({ href: `/areas/${a.slug}/`, label: `Painters in ${a.name}` })),
+    ],
+  },
+  {
+    name: 'Featured painters',
+    links: vendors.map((v) => ({ href: `/vendors/${v.slug}/`, label: v.name })),
+  },
+  {
+    name: 'Legal & technical',
+    links: [
+      { href: '/privacy/', label: 'Privacy policy' },
+      { href: '/terms/', label: 'Terms of service' },
+      { href: '/sitemap-index.xml', label: 'XML sitemap (for search engines)' },
+      { href: '/robots.txt', label: 'robots.txt' },
+    ],
+  },
+];
+
+const totalCount = groups.reduce((n, g) => n + g.links.length, 0);
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    eyebrow="Site map"
+    title="Every page on Mr Painter Dubai"
+    subtitle={`A flat, browsable index of all ${totalCount} URLs on the site. Looking for the machine-readable XML version? It lives at /sitemap-index.xml.`}
+    breadcrumbs={breadcrumbs}
+  />
+
+  <Section bg="white">
+    <div class="grid gap-8 sm:gap-10 lg:grid-cols-2">
+      {groups.map((g) => (
+        <article>
+          <h2 class="text-lg font-bold text-ink-900 sm:text-xl">{g.name}</h2>
+          <p class="mt-1 text-xs uppercase tracking-[0.15em] text-ink-500">{g.links.length} pages</p>
+          <ul class="mt-4 grid gap-2">
+            {g.links.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  class="group flex items-center justify-between rounded-lg border border-ink-200/70 bg-white px-4 py-2.5 text-sm text-ink-800 transition-colors hover:border-brand-300 hover:bg-brand-50/40"
+                >
+                  <span>{l.label}</span>
+                  <svg class="h-3 w-3 text-ink-400 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section bg="ink-50">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">For search engines and developers</h2>
+      <p class="mt-4 text-ink-600">
+        The machine-readable XML sitemap is at <a href="/sitemap-index.xml" class="font-semibold text-brand-700 underline">/sitemap-index.xml</a>.
+        It is also referenced from <a href="/robots.txt" class="font-semibold text-brand-700 underline">/robots.txt</a> so all major crawlers discover it automatically.
+      </p>
+      <p class="mt-4 text-sm text-ink-500">
+        Sitemap rebuilds on every deploy with the current <code class="rounded bg-ink-100 px-1.5 py-0.5 font-mono text-xs">lastmod</code> timestamp.
+      </p>
+    </div>
+  </Section>
+
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+</BaseLayout>
