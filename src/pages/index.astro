@@ -2,6 +2,8 @@
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import Hero from '~/components/sections/Hero.astro';
 import TrustBar from '~/components/sections/TrustBar.astro';
+import TrustOffers from '~/components/sections/TrustOffers.astro';
+import PricingMatrix from '~/components/sections/PricingMatrix.astro';
 import HowItWorks from '~/components/sections/HowItWorks.astro';
 import Services from '~/components/sections/Services.astro';
 import Areas from '~/components/sections/Areas.astro';
@@ -26,8 +28,10 @@ const description =
 <BaseLayout title={title} description={description} type="website">
   <Hero />
   <TrustBar />
+  <TrustOffers />
   <HowItWorks />
   <Services />
+  <PricingMatrix />
   <Areas />
   <WhyUs />
   <FeaturedVendors />

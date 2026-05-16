@@ -1,0 +1,178 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+import PricingMatrix from '~/components/sections/PricingMatrix.astro';
+import TrustOffers from '~/components/sections/TrustOffers.astro';
+import QuoteCTA from '~/components/page/QuoteCTA.astro';
+import InlineFAQ from '~/components/page/InlineFAQ.astro';
+
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+import JsonLd from '~/components/schema/JsonLd.astro';
+
+import { services } from '~/data/services';
+import { site } from '~/data/site';
+import { pricingMatrix } from '~/data/pricing';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Pricing', href: '/pricing/' },
+];
+
+const title = 'Painting Prices in Dubai — Honest 2026 Rates';
+const description =
+  'Fixed painting prices in Dubai. Studios from AED 999, 1BR from AED 1,499, villas from AED 6,999. Quote in writing, no deposit, 12-month warranty.';
+
+// Pricing FAQs — high-intent, voice-search friendly
+const pricingFaqs = [
+  {
+    question: 'How much does it cost to paint a studio in Dubai?',
+    answer:
+      'A standard studio apartment in Dubai costs AED 999–1,500 for walls and ceiling with two coats of premium emulsion (Jotun Lady or Dulux Diamond). The job is usually finished in a single day. Older buildings or units with significant prep work sit at the upper end of the range.',
+  },
+  {
+    question: 'How much does a 1BR apartment painting cost?',
+    answer:
+      'A typical 1BR apartment in Dubai is AED 1,499–2,500 for walls and ceiling with two coats of premium emulsion. Furniture protection, prep work and post-clean are included. Penthouses and double-height units are quoted separately.',
+  },
+  {
+    question: 'What does a full villa repaint cost in Dubai?',
+    answer:
+      'A 3-bedroom full villa package (interior + exterior + boundary wall) starts at AED 6,999. A 4-5BR villa typically lands AED 11,000–22,000, and 6-7BR luxury villas AED 22,000–38,000. Exterior elastomeric upgrade adds 15-25% but comes with a 5-year manufacturer warranty.',
+  },
+  {
+    question: 'Do you charge a deposit?',
+    answer:
+      'No. You pay zero deposit. Most Dubai painters take 30% upfront; our network takes nothing. You pay only when the work is signed off. This is part of our standard vendor agreement.',
+  },
+  {
+    question: 'Is the price you quote final?',
+    answer:
+      'Yes. Every quote is fixed in writing before work starts. If the painter raises the price on the day, we cover the gap from our quality fund. This zero-surprise pricing is the single biggest reason customers return.',
+  },
+  {
+    question: 'Why is your studio price AED 999 when some sites show AED 599?',
+    answer:
+      'Sites showing AED 599 usually deliver a single coat of basic emulsion in a tiny floor plate, then upsell the customer to AED 1,500+ on arrival. We refuse to play that game. AED 999 is the genuine, deliverable price for two coats of premium emulsion in a real Dubai studio — fixed, no extras.',
+  },
+  {
+    question: 'What if my apartment is bigger or older than typical?',
+    answer:
+      'The ranges shown cover 90% of real Dubai apartments. Larger, older or compound-managed properties sit at the upper end and are quoted accordingly. The site survey takes 20 minutes and locks the price for 30 days.',
+  },
+  {
+    question: 'Do you offer payment plans?',
+    answer:
+      'For villa packages above AED 8,000 we can split into two payments — 50% midway, 50% on completion. There is no interest and no fee. Smaller jobs are paid in full on the completion day.',
+  },
+];
+
+const pricingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'PriceSpecification',
+  '@id': `${site.url}/pricing/#pricing`,
+  name: 'Mr Painter Dubai — pricing',
+  description,
+  priceCurrency: 'AED',
+  url: `${site.url}/pricing/`,
+};
+
+const offerCatalog = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'Painting price packages — Dubai',
+  itemListElement: pricingMatrix.map((row, i) => ({
+    '@type': 'Offer',
+    position: i + 1,
+    name: row.property,
+    description: row.note,
+    priceCurrency: 'AED',
+    price: row.from,
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      priceCurrency: 'AED',
+      minPrice: row.from,
+      maxPrice: row.to,
+    },
+    availability: 'https://schema.org/InStock',
+    eligibleRegion: { '@type': 'Place', name: 'Dubai, UAE' },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    eyebrow="Pricing"
+    title="Honest painting prices, fixed in writing."
+    subtitle="The price you see is the price you pay. No deposit. No surprises on the day. Every painter on our network signs the same fixed-quote contract — if they raise the price after arriving, we cover the gap."
+    breadcrumbs={breadcrumbs}
+    stats={[
+      { label: 'Studio from', value: 'AED 999' },
+      { label: '1BR from', value: 'AED 1,499' },
+      { label: 'Villa from', value: 'AED 6,999' },
+      { label: 'Deposit', value: 'AED 0' },
+    ]}
+  />
+
+  <TrustOffers />
+
+  <PricingMatrix showTitle={false} />
+
+  <Section eyebrow="Price by service" title="Per-service starting prices" bg="ink-50">
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((s) => (
+        <li>
+          <a href={`/services/${s.slug}/`} class="card group flex h-full flex-col p-6">
+            <h3 class="text-lg font-bold text-ink-900">{s.name}</h3>
+            <p class="mt-1 text-sm text-ink-500">{s.short}</p>
+            <p class="mt-4 text-base">
+              <span class="text-xs font-semibold uppercase tracking-wider text-ink-400">From</span>
+              <span class="ml-2 font-bold text-ink-900">AED {s.startingPrice.toLocaleString()}</span>
+              <span class="ml-1 text-xs text-ink-500">/ {s.unit.split('/')[1]?.trim() ?? 'unit'}</span>
+            </p>
+            <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 transition-transform group-hover:translate-x-1">
+              See full price guide
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section eyebrow="What you get for the price" title="Every quote includes" bg="white">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {[
+        { title: 'Premium paint', desc: 'Jotun Lady, Dulux Diamond, Caparol Premiumweiss — never budget brands.' },
+        { title: 'Two coats minimum', desc: 'Single-coat shortcuts banned across our network. Every job is two coats.' },
+        { title: 'Full prep', desc: 'Furniture moved and sheeted, walls cleaned, cracks filled, edges taped.' },
+        { title: 'Post-clean', desc: 'Crew leaves the unit dust-free, vacuumed and ready to re-occupy that evening.' },
+      ].map((item) => (
+        <article class="card p-6">
+          <span class="grid h-10 w-10 place-items-center rounded-xl bg-brand-50 text-brand-700">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12l5 5L20 7"/>
+            </svg>
+          </span>
+          <h3 class="mt-4 text-base font-bold text-ink-900">{item.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{item.desc}</p>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section eyebrow="Common questions" title="Pricing questions, answered" bg="ink-50">
+    <InlineFAQ faqs={pricingFaqs} />
+  </Section>
+
+  <QuoteCTA
+    title="Ready for your fixed quote?"
+    subtitle="WhatsApp us your area and property type — quote in writing within an hour."
+  />
+
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+  <JsonLd data={pricingSchema} slot="head" />
+  <JsonLd data={offerCatalog} slot="head" />
+</BaseLayout>
