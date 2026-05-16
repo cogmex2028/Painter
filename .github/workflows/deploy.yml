@@ -1,0 +1,57 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        env:
+          # Project Pages serve under https://<user>.github.io/<repo>/
+          # The post-build step prefixes hard-coded root-relative paths.
+          SITE_URL: https://cogmex2028.github.io
+          BASE_PATH: /Painter/
+        run: |
+          npx astro build --site "$SITE_URL"
+          BASE_PATH="$BASE_PATH" node scripts/prefix-base.mjs
+          # GitHub Pages serves Jekyll by default which hides files starting with _
+          # Disable Jekyll so Astro's _astro/ assets are served.
+          touch dist/.nojekyll
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

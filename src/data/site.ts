@@ -45,8 +45,10 @@ export function whatsappUrl(message?: string) {
 }
 
 export function canonical(path: string = '/') {
-  if (!path || path === '/' || path === '') return site.url;
-  const withSlash = path.startsWith('/') ? path : `/${path}`;
-  const noTrailing = withSlash.length > 1 ? withSlash.replace(/\/$/, '') : withSlash;
-  return `${site.url}${noTrailing}`;
+  // We use trailingSlash: 'always' so canonicals must end in '/' for consistency
+  // with build output and to avoid duplicate-URL signals.
+  if (!path || path === '/' || path === '') return `${site.url}/`;
+  const lead = path.startsWith('/') ? path : `/${path}`;
+  const trail = lead.endsWith('/') ? lead : `${lead}/`;
+  return `${site.url}${trail}`;
 }

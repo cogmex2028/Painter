@@ -9,7 +9,7 @@ export interface Props {
 }
 const { area } = Astro.props;
 
-const url = `${site.url}/areas/${area.slug}`;
+const url = `${site.url}/areas/${area.slug}/`;
 const heroImg = imageExistsForArea(area.slug)
   ? `${site.url}/images/${imageForArea(area.slug)}.jpg`
   : `${site.url}/og-default.jpg`;

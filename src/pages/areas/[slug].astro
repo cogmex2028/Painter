@@ -33,7 +33,7 @@ const extended = areaExtended[area.slug];
 
 const breadcrumbs = [
   { name: 'Home', href: '/' },
-  { name: 'Areas', href: '/areas' },
+  { name: 'Areas', href: '/areas/' },
   { name: area.name, href: `/areas/${area.slug}` },
 ];
 ---
@@ -199,7 +199,7 @@ const breadcrumbs = [
       <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {matchingServices.map((s) => (
           <li>
-            <a href={`/services/${s.slug}`} class="card group flex h-full flex-col p-6">
+            <a href={`/services/${s.slug}/`} class="card group flex h-full flex-col p-6">
               <h3 class="text-lg font-bold text-ink-900">{s.name}</h3>
               <p class="mt-2 text-sm text-ink-600">{s.short}</p>
               <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 transition-transform group-hover:translate-x-1">
@@ -226,7 +226,7 @@ const breadcrumbs = [
       <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {nearbyAreas.map((a) => (
           <li>
-            <a href={`/areas/${a.slug}`} class="card group flex items-center justify-between p-5">
+            <a href={`/areas/${a.slug}/`} class="card group flex items-center justify-between p-5">
               <div>
                 <p class="font-semibold text-ink-900">Painters in {a.name}</p>
                 <p class="mt-0.5 text-xs text-ink-500">{a.vendorCount} pros · From AED {a.startingFrom.toLocaleString()}</p>

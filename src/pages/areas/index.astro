@@ -16,7 +16,7 @@ const sectors = [...new Set(areas.map((a) => a.sector))];
 
 const breadcrumbs = [
   { name: 'Home', href: '/' },
-  { name: 'Areas', href: '/areas' },
+  { name: 'Areas', href: '/areas/' },
 ];
 
 const title = 'Painters by Area — 35+ Dubai Communities';
@@ -28,14 +28,14 @@ const itemListSchema = {
   '@type': 'CollectionPage',
   name: title,
   description,
-  url: `${site.url}/areas`,
+  url: `${site.url}/areas/`,
   mainEntity: {
     '@type': 'ItemList',
     numberOfItems: areas.length,
     itemListElement: areas.map((a, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      url: `${site.url}/areas/${a.slug}`,
+      url: `${site.url}/areas/${a.slug}/`,
       name: a.name,
     })),
   },
@@ -96,7 +96,7 @@ const itemListSchema = {
       <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {areas.filter((a) => a.sector === sector).map((a) => (
           <li>
-            <a href={`/areas/${a.slug}`} class="card group relative flex h-full flex-col overflow-hidden">
+            <a href={`/areas/${a.slug}/`} class="card group relative flex h-full flex-col overflow-hidden">
               {imageExistsForArea(a.slug) ? (
                 <div class="relative">
                   <Img slot={imageForArea(a.slug)} aspect="3/2" rounded={false} sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw" />

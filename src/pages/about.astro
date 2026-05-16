@@ -11,7 +11,7 @@ import { site } from '~/data/site';
 
 const breadcrumbs = [
   { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
+  { name: 'About', href: '/about/' },
 ];
 
 const title = 'About PaintHub Dubai — Trusted Painting Marketplace';
@@ -23,7 +23,7 @@ const aboutSchema = {
   '@type': 'AboutPage',
   name: title,
   description,
-  url: `${site.url}/about`,
+  url: `${site.url}/about/`,
   mainEntity: { '@id': `${site.url}/#organization` },
 };
 

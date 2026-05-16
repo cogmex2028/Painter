@@ -11,7 +11,7 @@ export interface Props {
 }
 const { vendor } = Astro.props;
 
-const url = `${site.url}/vendors/${vendor.slug}`;
+const url = `${site.url}/vendors/${vendor.slug}/`;
 const vendorAreas = areas.filter((a) => vendor.areas.includes(a.slug));
 const vendorServices = services.filter((s) => vendor.services.includes(s.slug));
 const vendorImg = `${site.url}/images/${imageForVendor(vendor.slug)}.jpg`;

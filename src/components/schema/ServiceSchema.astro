@@ -12,11 +12,11 @@ const { service } = Astro.props;
 const data = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  '@id': `${site.url}/services/${service.slug}#service`,
+  '@id': `${site.url}/services/${service.slug}/#service`,
   name: service.name,
   serviceType: service.name,
   description: service.intro,
-  url: `${site.url}/services/${service.slug}`,
+  url: `${site.url}/services/${service.slug}/`,
   image: `${site.url}/images/${imageForService(service.slug)}.jpg`,
   provider: { '@id': `${site.url}/#localbusiness` },
   areaServed: {
@@ -39,7 +39,7 @@ const data = {
       unitText: service.unit,
     },
     availability: 'https://schema.org/InStock',
-    url: `${site.url}/services/${service.slug}`,
+    url: `${site.url}/services/${service.slug}/`,
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',

@@ -32,7 +32,7 @@ const extended = serviceExtended[service.slug];
 
 const breadcrumbs = [
   { name: 'Home', href: '/' },
-  { name: 'Services', href: '/services' },
+  { name: 'Services', href: '/services/' },
   { name: service.name, href: `/services/${service.slug}` },
 ];
 ---
@@ -235,7 +235,7 @@ const breadcrumbs = [
       <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {popularAreasForService.map((a) => (
           <li>
-            <a href={`/areas/${a.slug}`} class="card group flex items-center justify-between p-5">
+            <a href={`/areas/${a.slug}/`} class="card group flex items-center justify-between p-5">
               <div>
                 <p class="font-semibold text-ink-900">{a.name}</p>
                 <p class="mt-0.5 text-xs text-ink-500">{a.vendorCount} painters available</p>

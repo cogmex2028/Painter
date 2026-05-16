@@ -18,7 +18,7 @@ const description = 'The page you were looking for has moved or doesn\'t exist. 
       </p>
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
         <a href="/" class="btn-primary text-base">Back to homepage</a>
-        <a href="/areas" class="btn-ghost text-base">Browse all areas</a>
+        <a href="/areas/" class="btn-ghost text-base">Browse all areas</a>
       </div>
     </div>
   </section>
@@ -29,7 +29,7 @@ const description = 'The page you were looking for has moved or doesn\'t exist. 
       <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {areas.slice(0, 6).map((a) => (
           <li>
-            <a href={`/areas/${a.slug}`} class="card flex items-center justify-between p-5">
+            <a href={`/areas/${a.slug}/`} class="card flex items-center justify-between p-5">
               <span class="font-semibold text-ink-900">Painters in {a.name}</span>
               <svg class="h-5 w-5 text-ink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -43,7 +43,7 @@ const description = 'The page you were looking for has moved or doesn\'t exist. 
       <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((s) => (
           <li>
-            <a href={`/services/${s.slug}`} class="card flex items-center justify-between p-5">
+            <a href={`/services/${s.slug}/`} class="card flex items-center justify-between p-5">
               <span class="font-semibold text-ink-900">{s.name}</span>
               <svg class="h-5 w-5 text-ink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14M12 5l7 7-7 7"/>

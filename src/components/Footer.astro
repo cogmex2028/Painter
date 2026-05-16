@@ -48,7 +48,7 @@ const year = new Date().getFullYear();
       <ul class="mt-4 space-y-2.5 text-sm">
         {services.map((s) => (
           <li>
-            <a href={`/services/${s.slug}`} class="hover:text-brand-400 transition-colors">{s.name}</a>
+            <a href={`/services/${s.slug}/`} class="hover:text-brand-400 transition-colors">{s.name}</a>
           </li>
         ))}
       </ul>
@@ -59,7 +59,7 @@ const year = new Date().getFullYear();
       <ul class="mt-4 grid grid-cols-2 gap-y-2.5 gap-x-4 text-sm">
         {areas.slice(0, 8).map((a) => (
           <li>
-            <a href={`/areas/${a.slug}`} class="hover:text-brand-400 transition-colors">{a.name}</a>
+            <a href={`/areas/${a.slug}/`} class="hover:text-brand-400 transition-colors">{a.name}</a>
           </li>
         ))}
       </ul>
@@ -86,8 +86,8 @@ const year = new Date().getFullYear();
     <div class="container-x flex flex-col-reverse gap-4 py-6 text-xs text-ink-500 sm:flex-row sm:items-center sm:justify-between">
       <p>© {year} {site.legalName}. All rights reserved.</p>
       <ul class="flex flex-wrap gap-x-5 gap-y-2">
-        <li><a href="/privacy" class="hover:text-ink-300">Privacy</a></li>
-        <li><a href="/terms" class="hover:text-ink-300">Terms</a></li>
+        <li><a href="/privacy/" class="hover:text-ink-300">Privacy</a></li>
+        <li><a href="/terms/" class="hover:text-ink-300">Terms</a></li>
         <li><a href="/sitemap-index.xml" class="hover:text-ink-300">Sitemap</a></li>
         <li><a href="/vendor-signup" class="hover:text-ink-300">List your business</a></li>
       </ul>

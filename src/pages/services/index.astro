@@ -14,7 +14,7 @@ import Img from '~/components/Img.astro';
 
 const breadcrumbs = [
   { name: 'Home', href: '/' },
-  { name: 'Services', href: '/services' },
+  { name: 'Services', href: '/services/' },
 ];
 
 const title = 'Painting Services in Dubai — Interior & Exterior';
@@ -27,14 +27,14 @@ const itemListSchema = {
   '@id': `${site.url}/services#collection`,
   name: title,
   description,
-  url: `${site.url}/services`,
+  url: `${site.url}/services/`,
   mainEntity: {
     '@type': 'ItemList',
     numberOfItems: services.length,
     itemListElement: services.map((s, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      url: `${site.url}/services/${s.slug}`,
+      url: `${site.url}/services/${s.slug}/`,
       name: s.name,
     })),
   },
@@ -106,7 +106,7 @@ const itemListSchema = {
     <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {services.map((s) => (
         <li>
-          <a href={`/services/${s.slug}`} class="card group relative flex h-full flex-col overflow-hidden">
+          <a href={`/services/${s.slug}/`} class="card group relative flex h-full flex-col overflow-hidden">
             <div class="relative">
               <Img slot={imageForService(s.slug)} aspect="3/2" rounded={false} sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw" />
               <div class="absolute inset-0 bg-gradient-to-t from-ink-950/40 via-transparent to-transparent" aria-hidden="true"></div>

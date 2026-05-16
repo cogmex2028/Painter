@@ -25,7 +25,7 @@ import Img from '~/components/Img.astro';
       {areas.map((a) => (
         <li>
           <a
-            href={`/areas/${a.slug}`}
+            href={`/areas/${a.slug}/`}
             class="card group relative flex h-full flex-col overflow-hidden"
           >
             {imageExistsForArea(a.slug) ? (

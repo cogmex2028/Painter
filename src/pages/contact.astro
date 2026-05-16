@@ -10,7 +10,7 @@ import { site, whatsappUrl } from '~/data/site';
 
 const breadcrumbs = [
   { name: 'Home', href: '/' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Contact', href: '/contact/' },
 ];
 
 const title = 'Contact PaintHub Dubai — WhatsApp, Phone & Email';
@@ -22,7 +22,7 @@ const contactSchema = {
   '@type': 'ContactPage',
   name: title,
   description,
-  url: `${site.url}/contact`,
+  url: `${site.url}/contact/`,
   mainEntity: { '@id': `${site.url}/#organization` },
 };
 ---

@@ -270,7 +270,7 @@ const breadcrumbs = [
     <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {vendorServices.map((s) => (
         <li>
-          <a href={`/services/${s.slug}`} class="card group flex h-full flex-col p-6">
+          <a href={`/services/${s.slug}/`} class="card group flex h-full flex-col p-6">
             <h3 class="text-lg font-bold text-ink-900">{s.name}</h3>
             <p class="mt-2 text-sm text-ink-600">{s.short}</p>
             <p class="mt-3 text-sm font-semibold text-ink-900">From AED {s.startingPrice.toLocaleString()} <span class="font-medium text-ink-500">/ {s.unit.split('/')[1]?.trim() ?? 'unit'}</span></p>
@@ -291,7 +291,7 @@ const breadcrumbs = [
     <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {vendorAreas.map((a) => (
         <li>
-          <a href={`/areas/${a.slug}`} class="card group flex items-center justify-between p-5">
+          <a href={`/areas/${a.slug}/`} class="card group flex items-center justify-between p-5">
             <div>
               <p class="font-semibold text-ink-900">Painters in {a.name}</p>
               <p class="mt-0.5 text-xs text-ink-500">{a.sector}</p>
