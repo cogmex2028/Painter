@@ -1,5 +1,5 @@
 ---
-import { pricingMatrix } from '~/data/pricing';
+import { pricingMatrix, smallJobs } from '~/data/pricing';
 import { whatsappUrl } from '~/data/site';
 
 export interface Props {
@@ -8,6 +8,25 @@ export interface Props {
 }
 const { bg = 'white', showTitle = true } = Astro.props;
 const bgClass = bg === 'white' ? 'bg-white' : 'bg-ink-50/60';
+
+type Row = (typeof pricingMatrix)[number];
+
+const tableSections = [
+  {
+    eyebrow: 'Small jobs & touch-ups',
+    title: 'Got a small job? We do those too — from AED 299',
+    note: 'No minimum spend, no "we only do full apartments" excuses. If it needs a brush, we will quote it.',
+    rows: smallJobs,
+    accent: 'emerald',
+  },
+  {
+    eyebrow: 'Full repaints',
+    title: 'Full apartment & villa repaints',
+    note: 'Two coats, premium paint, prep + protection + post-clean. Fixed price in writing.',
+    rows: pricingMatrix,
+    accent: 'brand',
+  },
+];
 ---
 
 <section id="pricing" class={`${bgClass} py-20 sm:py-24`}>
@@ -16,56 +35,68 @@ const bgClass = bg === 'white' ? 'bg-white' : 'bg-ink-50/60';
       <div class="mx-auto max-w-2xl text-center">
         <span class="eyebrow">Honest pricing</span>
         <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">
-          From <span class="text-brand-600">AED 999</span> — and that's the price you pay
+          Touch-ups from <span class="text-brand-600">AED 299</span>. Studios from <span class="text-brand-600">AED 999</span>.
         </h2>
         <p class="mt-4 text-base text-ink-600 sm:text-lg">
           Every quote is fixed in writing before work starts. No "extras" on the day. No deposit.
-          Just real prices from our verified vendor network.
+          Whatever your budget — touch-up to full villa — there's an honest price below.
         </p>
       </div>
     )}
 
-    <div class="mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl bg-white ring-1 ring-ink-200/70 shadow-sm">
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="bg-ink-900 text-white">
-              <th class="px-5 py-4 text-left font-semibold">Property type</th>
-              <th class="px-5 py-4 text-right font-semibold whitespace-nowrap">From — to (AED)</th>
-              <th class="hidden sm:table-cell px-5 py-4 text-right font-semibold whitespace-nowrap">Duration</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-ink-200/60">
-            {pricingMatrix.map((row) => (
-              <tr class={`transition-colors hover:bg-brand-50/30 ${row.popular ? 'bg-brand-50/20' : ''}`}>
-                <td class="px-5 py-4">
-                  <div class="flex items-center gap-2">
-                    <span class="font-semibold text-ink-900">{row.property}</span>
-                    {row.popular && (
-                      <span class="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-800 ring-1 ring-amber-200">Most booked</span>
-                    )}
-                  </div>
-                  {row.note && <p class="mt-0.5 text-xs text-ink-500">{row.note}</p>}
-                </td>
-                <td class="px-5 py-4 text-right font-bold text-ink-900 whitespace-nowrap">
-                  {row.from.toLocaleString()} – {row.to.toLocaleString()}
-                </td>
-                <td class="hidden sm:table-cell px-5 py-4 text-right text-xs text-ink-600 whitespace-nowrap">
-                  {row.duration}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    {tableSections.map((section, sIdx) => (
+      <div class={sIdx === 0 ? 'mt-12' : 'mt-12'}>
+        <div class="mx-auto max-w-4xl">
+          <p class={`text-[11px] font-semibold uppercase tracking-[0.2em] ${section.accent === 'emerald' ? 'text-emerald-700' : 'text-brand-700'}`}>
+            {section.eyebrow}
+          </p>
+          <h3 class="mt-2 text-xl font-bold text-ink-900 sm:text-2xl">{section.title}</h3>
+          <p class="mt-1 text-sm text-ink-500">{section.note}</p>
+        </div>
 
-    <div class="mx-auto mt-6 max-w-4xl flex flex-col gap-3 text-xs text-ink-500 sm:flex-row sm:items-center sm:justify-between">
+        <div class="mx-auto mt-5 max-w-4xl overflow-hidden rounded-2xl bg-white ring-1 ring-ink-200/70 shadow-sm">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class={`${section.accent === 'emerald' ? 'bg-emerald-900' : 'bg-ink-900'} text-white`}>
+                  <th class="px-5 py-4 text-left font-semibold">Job type</th>
+                  <th class="px-5 py-4 text-right font-semibold whitespace-nowrap">From — to (AED)</th>
+                  <th class="hidden sm:table-cell px-5 py-4 text-right font-semibold whitespace-nowrap">Duration</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-ink-200/60">
+                {section.rows.map((row: Row) => (
+                  <tr class={`transition-colors hover:bg-brand-50/30 ${row.popular ? (section.accent === 'emerald' ? 'bg-emerald-50/30' : 'bg-brand-50/20') : ''}`}>
+                    <td class="px-5 py-4">
+                      <div class="flex items-center gap-2 flex-wrap">
+                        <span class="font-semibold text-ink-900">{row.property}</span>
+                        {row.popular && (
+                          <span class={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ${section.accent === 'emerald' ? 'bg-emerald-100 text-emerald-800 ring-emerald-200' : 'bg-amber-100 text-amber-800 ring-amber-200'}`}>Most booked</span>
+                        )}
+                      </div>
+                      {row.note && <p class="mt-0.5 text-xs text-ink-500">{row.note}</p>}
+                    </td>
+                    <td class="px-5 py-4 text-right font-bold text-ink-900 whitespace-nowrap">
+                      {row.from.toLocaleString()} – {row.to.toLocaleString()}
+                    </td>
+                    <td class="hidden sm:table-cell px-5 py-4 text-right text-xs text-ink-600 whitespace-nowrap">
+                      {row.duration}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    ))}
+
+    <div class="mx-auto mt-8 max-w-4xl flex flex-col gap-3 text-xs text-ink-500 sm:flex-row sm:items-center sm:justify-between">
       <p class="flex items-center gap-2">
         <svg class="h-4 w-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M5 12l5 5L20 7"/>
         </svg>
-        Premium emulsions (Jotun, Dulux, Caparol) · Two coats · Full prep & post-clean
+        Premium emulsions · Two coats · Full prep & post-clean
       </p>
       <a href={whatsappUrl('Hi Mr Painter, I would like a fixed quote for my home.')} target="_blank" rel="noopener" class="font-semibold text-brand-700 hover:underline">
         Get my fixed quote on WhatsApp →

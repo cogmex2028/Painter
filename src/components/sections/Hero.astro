@@ -45,13 +45,14 @@ const formConfig = { whatsapp: site.whatsapp };
       </h1>
 
       <p class="mt-6 max-w-xl text-lg text-ink-600">
-        Studios from <strong class="text-ink-900">AED 999</strong>. 1BR from
+        Touch-ups from <strong class="text-ink-900">AED 299</strong>. Studios from
+        <strong class="text-ink-900">AED 999</strong>. 1BR from
         <strong class="text-ink-900">AED 1,499</strong>. Full villas from
         <strong class="text-ink-900">AED 6,999</strong>. <strong class="text-emerald-700">Fixed in writing.</strong>
-        No deposit, no surprises on the day. Tell us what you need and get up to
-        <strong class="text-ink-900">5 free quotes</strong> from verified, insured painters in your area —
-        every one re-verified every 90 days, every quote backed by a 12-month workmanship warranty. Compare,
-        chat on WhatsApp, and book the painter that fits you.
+        Whatever your budget — touch-up to full villa — you get up to
+        <strong class="text-ink-900">5 free quotes</strong> from verified, insured painters in your area,
+        every one re-verified every 90 days, every quote backed by a 12-month workmanship warranty. No deposit.
+        No surprises on the day. No minimum spend.
       </p>
 
       <!-- Inline CTAs -->
@@ -205,6 +206,7 @@ const formConfig = { whatsapp: site.whatsapp };
                   class="w-full rounded-xl border-0 bg-ink-50 px-3.5 py-2.5 text-sm text-ink-900 ring-1 ring-inset ring-ink-200 focus:bg-white focus:ring-2 focus:ring-brand-500"
                 >
                   <option value="">Choose service</option>
+                  <option value="touch-up">🪣 Touch-up / small job (from AED 299)</option>
                   {services.map((s) => <option value={s.slug}>{s.name}</option>)}
                 </select>
               </label>

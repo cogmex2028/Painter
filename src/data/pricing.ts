@@ -15,6 +15,18 @@ export type PriceRow = {
   note?: string;          // small print under the row
 };
 
+// Small jobs — for budget-conscious customers, partial work, and touch-ups.
+// Genuinely deliverable starting prices, NOT bait. The cheapest entry (AED 80
+// per door) is a real number for door-repaint-only visits.
+export const smallJobs: PriceRow[] = [
+  { property: 'Doors & trim (per door)',       from: 80,  to: 200, duration: 'Same-day', note: 'Repaint or refresh one door + frame' },
+  { property: 'Wall touch-ups / patch repair', from: 299, to: 600, duration: '2–3 hours', popular: true, note: 'Nail holes, scuffs, small damage — landlord-friendly' },
+  { property: 'Single feature wall',           from: 399, to: 800, duration: 'Half day', note: 'One accent wall, any colour or finish' },
+  { property: 'Single room (bedroom / study)', from: 499, to: 900, duration: 'Half day', popular: true, note: 'Walls + ceiling, premium emulsion, two coats' },
+  { property: 'Outdoor gate / boundary patch', from: 350, to: 700, duration: 'Half day', note: 'Touch-up of damaged sections, not full repaint' },
+];
+
+// Full apartment / villa packages
 export const pricingMatrix: PriceRow[] = [
   { property: 'Studio apartment', from: 999, to: 1500, duration: '1 day', note: 'Walls + ceiling, two coats premium emulsion' },
   { property: '1BR apartment',    from: 1499, to: 2500, duration: '1 day', popular: true, note: 'Walls + ceiling, full prep, post-clean' },
@@ -56,8 +68,9 @@ export const trustOffers = [
   },
 ] as const;
 
-// Hero pricing anchor — used on home + pricing page hero
+// Hero pricing anchors — surfaced as stat tiles + headline copy
 export const pricingHeadline = {
+  touchUp: 299,
   studio: 999,
   oneBR: 1499,
   villa: 6999,

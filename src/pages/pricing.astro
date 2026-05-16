@@ -12,7 +12,7 @@ import JsonLd from '~/components/schema/JsonLd.astro';
 
 import { services } from '~/data/services';
 import { site } from '~/data/site';
-import { pricingMatrix } from '~/data/pricing';
+import { pricingMatrix, smallJobs } from '~/data/pricing';
 
 const breadcrumbs = [
   { name: 'Home', href: '/' },
@@ -25,6 +25,16 @@ const description =
 
 // Pricing FAQs — high-intent, voice-search friendly
 const pricingFaqs = [
+  {
+    question: 'Do you do small jobs like touch-ups or just one wall?',
+    answer:
+      'Yes, absolutely. We have no minimum spend. Wall touch-ups start at AED 299, a single feature wall from AED 399, and a single room from AED 499. If it needs a brush, we will quote it. Many of our regular customers started with a small touch-up and now book us for their full apartments.',
+  },
+  {
+    question: 'How much for a single bedroom or feature wall?',
+    answer:
+      'A single bedroom (walls + ceiling, two coats premium emulsion) starts at AED 499, half a day on site. A single feature wall — including colour or finish of your choice — starts at AED 399. Both prices include furniture protection and post-clean.',
+  },
   {
     question: 'How much does it cost to paint a studio in Dubai?',
     answer:
@@ -81,7 +91,7 @@ const offerCatalog = {
   '@context': 'https://schema.org',
   '@type': 'OfferCatalog',
   name: 'Painting price packages — Dubai',
-  itemListElement: pricingMatrix.map((row, i) => ({
+  itemListElement: [...smallJobs, ...pricingMatrix].map((row, i) => ({
     '@type': 'Offer',
     position: i + 1,
     name: row.property,
@@ -104,11 +114,11 @@ const offerCatalog = {
   <PageHero
     eyebrow="Pricing"
     title="Honest painting prices, fixed in writing."
-    subtitle="The price you see is the price you pay. No deposit. No surprises on the day. Every painter on our network signs the same fixed-quote contract — if they raise the price after arriving, we cover the gap."
+    subtitle="From a single wall touch-up to a full Frond villa repaint — every quote is fixed in writing before work starts. No deposit. No surprises on the day. No minimum spend. If a painter raises the price after arriving, we cover the gap from our quality fund."
     breadcrumbs={breadcrumbs}
     stats={[
+      { label: 'Touch-up from', value: 'AED 299' },
       { label: 'Studio from', value: 'AED 999' },
-      { label: '1BR from', value: 'AED 1,499' },
       { label: 'Villa from', value: 'AED 6,999' },
       { label: 'Deposit', value: 'AED 0' },
     ]}
