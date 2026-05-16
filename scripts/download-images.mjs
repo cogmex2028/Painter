@@ -34,7 +34,7 @@ const images = [
   { slot: 'vendor-elite',          id: 'photo-1616137466211-f939a420be84', alt: 'Premium interior with decorative wall finish' },
   { slot: 'vendor-royal',          id: 'photo-1521587760476-6c12a4b040da', alt: 'Bright modern apartment after repaint' },
   { slot: 'vendor-sahara',         id: 'photo-1600585154340-be6161a56a0c', alt: 'Modern villa exterior freshly repainted' },
-  { slot: 'vendor-crown',          id: 'photo-1610422218546-42b7f1f84dbd', alt: 'Decorative Marmorino feature wall' },
+  { slot: 'vendor-crown',          id: 'photo-1557379488-c611c67dab77', alt: 'Decorative Marmorino feature wall' },
 ];
 
 async function downloadOriginal(photoId, width = 1600) {
@@ -47,21 +47,24 @@ async function downloadOriginal(photoId, width = 1600) {
 async function processOne({ slot, id, alt }) {
   try {
     const buf = await downloadOriginal(id, 1600);
-    // Generate three responsive sizes as WebP + a JPEG fallback at the largest size
+    // Generate three responsive sizes as WebP + a JPEG fallback at the largest size.
+    // Quality kept aggressive to stay under 200 KB at the largest size for
+    // strong Lighthouse / Core Web Vitals scores. `effort: 6` slows encoding
+    // but yields ~20-30% better compression than the default.
     const sizes = [
-      { suffix: '',     w: 1600, h: 900 },
-      { suffix: '-md',  w: 1024, h: 576 },
-      { suffix: '-sm',  w: 640,  h: 360 },
+      { suffix: '',     w: 1280, h: 720, q: 70 },
+      { suffix: '-md',  w: 1024, h: 576, q: 72 },
+      { suffix: '-sm',  w: 640,  h: 360, q: 75 },
     ];
     for (const s of sizes) {
       await sharp(buf)
         .resize({ width: s.w, height: s.h, fit: 'cover', position: 'attention' })
-        .webp({ quality: 78 })
+        .webp({ quality: s.q, effort: 6 })
         .toFile(out(`${slot}${s.suffix}.webp`));
     }
     await sharp(buf)
-      .resize({ width: 1600, height: 900, fit: 'cover', position: 'attention' })
-      .jpeg({ quality: 80, mozjpeg: true })
+      .resize({ width: 1280, height: 720, fit: 'cover', position: 'attention' })
+      .jpeg({ quality: 72, mozjpeg: true, progressive: true })
       .toFile(out(`${slot}.jpg`));
     return { slot, alt, status: 'ok' };
   } catch (e) {

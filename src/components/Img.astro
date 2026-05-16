@@ -23,8 +23,8 @@ const {
   priority = false,
   sizes = '(min-width: 1024px) 800px, 100vw',
   rounded = true,
-  width = 1600,
-  height = 900,
+  width = 1280,
+  height = 720,
 } = Astro.props;
 
 const loading = loadingProp ?? (priority ? 'eager' : 'lazy');
@@ -46,7 +46,7 @@ const altText = altProp ?? altFor(slot) ?? 'Mr Painter Dubai';
 <picture class={`block overflow-hidden ${rounded ? 'rounded-2xl' : ''} ${cls}`}>
   <source
     type="image/webp"
-    srcset={`${base}-sm.webp 640w, ${base}-md.webp 1024w, ${base}.webp 1600w`}
+    srcset={`${base}-sm.webp 640w, ${base}-md.webp 1024w, ${base}.webp 1280w`}
     sizes={sizes}
   />
   <img
