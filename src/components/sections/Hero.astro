@@ -134,14 +134,10 @@ const formConfig = { whatsapp: site.whatsapp };
         <form
           id="quote-form"
           method="POST"
-          action="https://api.web3forms.com/submit"
+          action="#"
           data-whatsapp={formConfig.whatsapp}
           class="relative overflow-hidden rounded-3xl bg-white p-6 shadow-2xl shadow-ink-900/10 ring-1 ring-ink-200/80 sm:p-7"
         >
-          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY" />
-          <input type="hidden" name="subject" value="New painting quote request" />
-          <input type="hidden" name="from_name" value="Mr Painter Dubai Lead Form" />
-          <input type="hidden" name="redirect" value="/?submitted=1" />
 
           <div class="flex items-center justify-between">
             <h2 class="text-xl font-bold text-ink-900">Get 5 free quotes</h2>
@@ -240,7 +236,7 @@ const formConfig = { whatsapp: site.whatsapp };
             </button>
 
             <p class="text-center text-[11px] text-ink-500">
-              Your details go straight to our WhatsApp <strong>+971 54 485 6912</strong>. By submitting, you agree to our <a href="/terms/" class="underline hover:text-ink-700">Terms</a> &
+              Your details go directly to our WhatsApp <strong>+971 54 485 6912</strong> — no email, no spam list. By submitting you agree to our <a href="/terms/" class="underline hover:text-ink-700">Terms</a> &
               <a href="/privacy/" class="underline hover:text-ink-700">Privacy</a>.
             </p>
           </div>
@@ -323,16 +319,7 @@ const formConfig = { whatsapp: site.whatsapp };
       const link = whatsappLink();
       const popup = window.open(link, '_blank', 'noopener');
 
-      // 3) POST to Web3Forms in the background as an email backup
-      //    (will silently no-op if access_key is still the placeholder)
-      const fd = new FormData(form);
-      fetch(form.action, {
-        method: 'POST',
-        body: fd,
-        headers: { 'Accept': 'application/json' },
-      }).catch(function () {});
-
-      // 4) Reveal inline success + provide a fallback link in case the popup
+      // 3) Reveal inline success + provide a fallback link in case the popup
       //    was blocked or the user dismissed it
       if (success && fallbackLink) {
         fallbackLink.setAttribute('href', link);
