@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // Override these via env vars at build time when deploying to a subpath
 // (e.g. GitHub Project Pages: SITE_URL=https://cogmex2028.github.io BASE_PATH=/Painter/)
-const PROD_SITE = process.env.SITE_URL || 'https://painthubdubai.ae';
+const PROD_SITE = process.env.SITE_URL || 'https://mrpainterdubai.com';
 
 export default defineConfig({
   site: PROD_SITE,

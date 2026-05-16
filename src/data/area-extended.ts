@@ -154,7 +154,7 @@ export const areaExtended: Record<string, AreaExtended> = {
     bestSeason:
       'Exterior work in Arabian Ranches is best from October through April. The community sits on the desert edge so summer surface temperatures on west-facing facades exceed 60°C between 11am and 4pm — beyond what most exterior systems can cure cleanly. Sandstorm season (March-April) requires 24-48 hour pauses between coats to let airborne dust settle. Interior work runs year-round inside air-conditioned spaces.',
     communityAccess:
-      'Arabian Ranches is fully managed by Emaar Community Management. Every PaintHub vendor in the community holds an active Emaar contractor NOC renewed every 90 days. Saheel, Mirador, Alvorada, Hattan and Polo Homes all share the same NOC umbrella but each sub-community has slightly different security drop-off zones. The Ranches gatehouse logs every contractor vehicle in and out. Our vendors notify Emaar Community Management 48 hours before project start so the gate has the schedule.',
+      'Arabian Ranches is fully managed by Emaar Community Management. Every Mr Painter Dubai vendor in the community holds an active Emaar contractor NOC renewed every 90 days. Saheel, Mirador, Alvorada, Hattan and Polo Homes all share the same NOC umbrella but each sub-community has slightly different security drop-off zones. The Ranches gatehouse logs every contractor vehicle in and out. Our vendors notify Emaar Community Management 48 hours before project start so the gate has the schedule.',
     costFactors: [
       'Villa size — Saheel 3BR vs Polo Homes 7BR can quadruple the project value.',
       'Exterior crack repair — older units (Phase 1, 2003-2008 build) often need 2-3 days of dedicated repair.',

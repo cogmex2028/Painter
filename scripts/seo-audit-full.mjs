@@ -3,7 +3,7 @@ import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = 'dist';
-const SITE = 'https://painthubdubai.ae';
+const SITE = 'https://mrpainterdubai.com';
 
 function walk(dir) {
   const out = [];
@@ -76,7 +76,7 @@ for (const file of files) {
     text: m[2].replace(/<[^>]+>/g, '').trim(),
   }));
   const internalLinks = links.filter((l) => l.href.startsWith('/') && !l.href.startsWith('//'));
-  const externalLinks = links.filter((l) => l.href.startsWith('http') && !l.href.includes('painthubdubai.ae'));
+  const externalLinks = links.filter((l) => l.href.startsWith('http') && !l.href.includes('mrpainterdubai.com'));
   const opaqueAnchors = links.filter((l) => /^(click here|read more|here|learn more)$/i.test(l.text));
   const emptyAnchors = links.filter((l) => !l.text);
   const externalNoRel = externalLinks.filter((l) => {

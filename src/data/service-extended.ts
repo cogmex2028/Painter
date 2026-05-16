@@ -38,7 +38,7 @@ export const serviceExtended: Record<string, ServiceExtended> = {
       'Have one set of keys with security if you cannot be home for sign-off.',
     ],
     durability:
-      'A premium interior paint job in Dubai typically holds for 5-7 years before needing a refresh in heavy-use rooms and 8-10 years in bedrooms and ceilings. Workmanship warranty from PaintHub vendors is 12 months covering peeling, flaking and visible inconsistencies. The paint manufacturer also offers warranty on the product itself, claimable through us. Common Dubai-specific stressors that shorten paint life: persistent AC condensation, hookah smoke, and high-traffic hallway scuffing — all of which can be mitigated with the right paint grade.',
+      'A premium interior paint job in Dubai typically holds for 5-7 years before needing a refresh in heavy-use rooms and 8-10 years in bedrooms and ceilings. Workmanship warranty from Mr Painter Dubai vendors is 12 months covering peeling, flaking and visible inconsistencies. The paint manufacturer also offers warranty on the product itself, claimable through us. Common Dubai-specific stressors that shorten paint life: persistent AC condensation, hookah smoke, and high-traffic hallway scuffing — all of which can be mitigated with the right paint grade.',
     sustainability:
       'Every paint brand we work with offers a low-VOC line. Jotun Lady, Dulux Diamond and Caparol Premiumweiss are all Greenguard Gold certified, meaning emissions are safe for occupied homes immediately after painting. We recommend the low-VOC tier for nurseries, asthmatic family members and pet-friendly homes — the premium typically runs 10-15% over standard product. Disposal is handled responsibly: empty tins are recycled, leftover paint is donated to Dubai community projects or stored for touch-ups.',
   },
@@ -71,7 +71,7 @@ export const serviceExtended: Record<string, ServiceExtended> = {
       'Photograph the facade before work starts as a baseline record.',
     ],
     durability:
-      'A premium elastomeric exterior system applied to a properly prepared Dubai facade lasts 6-8 years before noticeable degradation. The first sign of wear is usually colour fade on the south and west elevations, which receive the most sun. Premium silicone-based systems (Jotun Jotashield Extreme, Caparol AmphiSilan) come with manufacturer-backed warranties of 5-7 years jointly issued with PaintHub. Maintenance during the warranty period is light: a power-wash every 2-3 years removes accumulated dust and salt residue.',
+      'A premium elastomeric exterior system applied to a properly prepared Dubai facade lasts 6-8 years before noticeable degradation. The first sign of wear is usually colour fade on the south and west elevations, which receive the most sun. Premium silicone-based systems (Jotun Jotashield Extreme, Caparol AmphiSilan) come with manufacturer-backed warranties of 5-7 years jointly issued with Mr Painter Dubai. Maintenance during the warranty period is light: a power-wash every 2-3 years removes accumulated dust and salt residue.',
     sustainability:
       'Modern exterior paints are formulated to be lower in VOCs than their interior counterparts because emissions disperse outdoors. The market standard now is around 30-50 g/L of VOC for premium elastomeric coats. Sto-Color Silco and Caparol\'s silicate-mineral line approach near-zero VOC. We can specify ultra-low-VOC systems for clients with chemical sensitivities or properties near schools. Used paint tins are returned to the manufacturer for recycling through Dubai Municipality\'s commercial waste programme.',
   },
@@ -103,7 +103,7 @@ export const serviceExtended: Record<string, ServiceExtended> = {
       'Plan family logistics — bedrooms first usually means sleeping is uninterrupted.',
     ],
     durability:
-      'A premium full villa package — interior emulsion plus elastomeric exterior with proper prep — should hold 5-7 years before any significant retouch. The first refresh tends to be the south or west exterior facade after 6-7 years of UV exposure. Interior bedrooms and ceilings can last 8-10 years before showing wear. PaintHub vendors offer a 12-month workmanship warranty on the whole villa and up to 5-year manufacturer-backed warranty on the exterior coating system. Boundary walls typically need an interim touch-up at year 3-4.',
+      'A premium full villa package — interior emulsion plus elastomeric exterior with proper prep — should hold 5-7 years before any significant retouch. The first refresh tends to be the south or west exterior facade after 6-7 years of UV exposure. Interior bedrooms and ceilings can last 8-10 years before showing wear. Mr Painter Dubai vendors offer a 12-month workmanship warranty on the whole villa and up to 5-year manufacturer-backed warranty on the exterior coating system. Boundary walls typically need an interim touch-up at year 3-4.',
     sustainability:
       'Full villa packages let you specify low-VOC interior and water-based exterior options across all surfaces. Jotun Lady (interior) and Jotun Jotashield (exterior) are both Greenguard certified for indoor air quality. Mineral-based silicate exterior systems (Caparol AmphiSilan) are among the lowest-impact options available. We recycle empty tins through Dubai Municipality\'s commercial waste programme and donate usable surplus paint to community refurbishment projects.',
   },
@@ -136,7 +136,7 @@ export const serviceExtended: Record<string, ServiceExtended> = {
       'Plan to be out for a single day or in one finished room.',
     ],
     durability:
-      'A premium apartment repaint typically lasts 5-7 years in high-traffic areas (living room, hallway) and 8-10 years in bedrooms and ceilings. Bathrooms and kitchens with hygiene-grade paint hold 4-6 years before showing yellowing from steam and cooking residue. PaintHub vendors offer a 12-month workmanship warranty covering peeling, flaking and visible inconsistencies — touch-ups during the warranty period are free.',
+      'A premium apartment repaint typically lasts 5-7 years in high-traffic areas (living room, hallway) and 8-10 years in bedrooms and ceilings. Bathrooms and kitchens with hygiene-grade paint hold 4-6 years before showing yellowing from steam and cooking residue. Mr Painter Dubai vendors offer a 12-month workmanship warranty covering peeling, flaking and visible inconsistencies — touch-ups during the warranty period are free.',
     sustainability:
       'Every apartment-grade paint we recommend has a low-VOC version. Jotun Lady, Jotun Fenomastic Hygiene and Caparol Premiumweiss are all Greenguard Gold certified, meaning they\'re safe for occupied use the same day. We recommend low-VOC paint for nurseries, asthmatic family members and homes with sensitive pets. The premium typically runs 10-15% over standard. Empty tins are returned to the manufacturer for recycling.',
   },
@@ -169,7 +169,7 @@ export const serviceExtended: Record<string, ServiceExtended> = {
       'Allow contingency for fire-detector testing post-paint.',
     ],
     durability:
-      'Commercial-grade paint systems on properly prepared interior walls hold 6-8 years before needing a refresh. High-traffic areas — reception, corridors, lift lobbies — show wear sooner, typically 4-5 years. Exterior commercial facades with the right elastomeric system last 7-10 years before fade or chalking becomes visible. PaintHub commercial vendors offer 24-month workmanship warranty and up to 7-year manufacturer-backed warranty on exterior systems. Annual touch-up contracts are available for high-traffic facilities.',
+      'Commercial-grade paint systems on properly prepared interior walls hold 6-8 years before needing a refresh. High-traffic areas — reception, corridors, lift lobbies — show wear sooner, typically 4-5 years. Exterior commercial facades with the right elastomeric system last 7-10 years before fade or chalking becomes visible. Mr Painter Dubai commercial vendors offer 24-month workmanship warranty and up to 7-year manufacturer-backed warranty on exterior systems. Annual touch-up contracts are available for high-traffic facilities.',
     sustainability:
       'Commercial low-VOC and zero-VOC systems are widely available and increasingly demanded by HSE-conscious tenants. Sto-Color Silco, Caparol Sylitol and Jotun\'s water-based commercial line are among the lowest-emission options. For clinics, schools and food-service environments we recommend zero-VOC throughout. Used paint tins are managed through Dubai Municipality\'s registered commercial waste contractor — disposal documentation is provided with the project handover pack.',
   },
@@ -202,7 +202,7 @@ export const serviceExtended: Record<string, ServiceExtended> = {
       'Receive the care instructions and cleaning kit at project handover.',
     ],
     durability:
-      'Properly applied decorative paint is essentially permanent — Marmorino and Stucco Veneziano on prepared walls last 20-30 years with no maintenance beyond gentle dusting. Gold and silver leaf finishes last similarly long if sealed. The 24-month workmanship warranty from PaintHub decorative vendors covers application defects; the materials themselves are not subject to fade or peel under normal indoor conditions. Touch-ups, when needed, are typically a single artisan-day.',
+      'Properly applied decorative paint is essentially permanent — Marmorino and Stucco Veneziano on prepared walls last 20-30 years with no maintenance beyond gentle dusting. Gold and silver leaf finishes last similarly long if sealed. The 24-month workmanship warranty from Mr Painter Dubai decorative vendors covers application defects; the materials themselves are not subject to fade or peel under normal indoor conditions. Touch-ups, when needed, are typically a single artisan-day.',
     sustainability:
       'Decorative finishes are among the most sustainable paint options available. Marmorino is lime-based, breathes naturally, regulates humidity and contains zero VOCs. Stucco Veneziano is similarly mineral-based. Most decorative finishes are Greenguard Gold certified or equivalent. Materials are imported in glass and metal containers (recyclable) rather than plastic tubs. The finished surface itself is hypoallergenic and antimicrobial.',
   },

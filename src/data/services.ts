@@ -33,7 +33,7 @@ export const services: Service[] = [
     seoDescription:
       'Interior painting in Dubai from AED 12/sqft. Low-VOC paints, dust-sheet protection, single-day finish on most apartments. Free quotes from 5 verified pros.',
     intro:
-      'Interior painting is the fastest, highest-impact way to refresh a Dubai apartment or villa. Our verified painters use low-VOC, JotaShield, Jotun Lady or Dulux Diamond paints, protect every floor and furniture piece with dust-sheets, and most 1-2 bedroom apartments are finished within a single day. Every PaintHub interior job is backed by a 12-month workmanship warranty.',
+      'Interior painting is the fastest, highest-impact way to refresh a Dubai apartment or villa. Our verified painters use low-VOC, JotaShield, Jotun Lady or Dulux Diamond paints, protect every floor and furniture piece with dust-sheets, and most 1-2 bedroom apartments are finished within a single day. Every Mr Painter Dubai interior job is backed by a 12-month workmanship warranty.',
     bestFor: [
       'Move-in and move-out repaints',
       'Tenant handover restoration',
@@ -104,7 +104,7 @@ export const services: Service[] = [
     seoDescription:
       'Exterior painting for Dubai villas and buildings from AED 18/sqft. UV-resistant elastomeric coatings, scaffolding included, up to 5-year warranty.',
     intro:
-      'Dubai\'s sun, sand and salt strip exterior paint faster than almost anywhere else in the world. PaintHub vendors apply elastomeric, UV-resistant coatings (Jotun Jotashield, Dulux Weathershield, Caparol Mura) over a sealed primer to give your facade 5+ years of protection. Scaffolding, access permits and post-clean are always included in the quote.',
+      'Dubai\'s sun, sand and salt strip exterior paint faster than almost anywhere else in the world. Mr Painter Dubai vendors apply elastomeric, UV-resistant coatings (Jotun Jotashield, Dulux Weathershield, Caparol Mura) over a sealed primer to give your facade 5+ years of protection. Scaffolding, access permits and post-clean are always included in the quote.',
     bestFor: [
       'Full villa repaints',
       'Building facades and compounds',
@@ -148,7 +148,7 @@ export const services: Service[] = [
       {
         question: 'Do I need a Dubai Municipality permit?',
         answer:
-          'For villas inside a community, usually no — your community manager simply needs to be notified. For multi-storey buildings, a painting permit is mandatory. PaintHub vendors handle the permit application for you.',
+          'For villas inside a community, usually no — your community manager simply needs to be notified. For multi-storey buildings, a painting permit is mandatory. Mr Painter Dubai vendors handle the permit application for you.',
       },
       {
         question: 'Does the warranty cover sun damage?',
@@ -176,7 +176,7 @@ export const services: Service[] = [
     seoDescription:
       'Complete villa painting in Dubai — interior, exterior, ceilings, woodwork. Fixed-price packages from AED 6,500 for a 3BR. 12-month workmanship warranty.',
     intro:
-      'A full villa repaint is a project that demands planning. PaintHub villa packages bundle interior walls, ceilings, doors, exterior facade and boundary walls into one fixed-price quote. A typical 4-bedroom villa is completed in 5-8 working days with a 3-4 person crew, and you receive a single warranty certificate covering both interior workmanship and exterior coating performance.',
+      'A full villa repaint is a project that demands planning. Mr Painter Dubai villa packages bundle interior walls, ceilings, doors, exterior facade and boundary walls into one fixed-price quote. A typical 4-bedroom villa is completed in 5-8 working days with a 3-4 person crew, and you receive a single warranty certificate covering both interior workmanship and exterior coating performance.',
     bestFor: [
       'Pre-handover and post-handover repaints',
       'Pre-sale or pre-rental refresh',
@@ -248,7 +248,7 @@ export const services: Service[] = [
     seoDescription:
       'Apartment painting in Dubai from AED 1,200 for a studio. Single-day finish on most units, low-odour paints, move-in/move-out friendly. Free quotes in 60 seconds.',
     intro:
-      'Apartment painting in Dubai is usually a fast, contained job — most studios and 1BR units are done in a single day with two coats. PaintHub vendors specialise in apartment turnaround for tenants, landlords and new owners. We coordinate with building management on lift bookings, access timings and waste disposal so the building stays happy and your job stays on schedule.',
+      'Apartment painting in Dubai is usually a fast, contained job — most studios and 1BR units are done in a single day with two coats. Mr Painter Dubai vendors specialise in apartment turnaround for tenants, landlords and new owners. We coordinate with building management on lift bookings, access timings and waste disposal so the building stays happy and your job stays on schedule.',
     bestFor: [
       'Tenant move-out restoration',
       'Pre-rental landlord refresh',
@@ -319,7 +319,7 @@ export const services: Service[] = [
     seoDescription:
       'Commercial painting in Dubai — after-hours and weekend work, full insurance, MSDS docs. Offices, retail, warehouses, schools. Free quotes from vetted contractors.',
     intro:
-      'Commercial painting in Dubai has different rules from residential — fire-rated materials, MSDS sheets, third-party liability insurance and after-hours scheduling are all standard requirements. PaintHub commercial vendors carry AED 1M+ liability cover, can work nights and weekends to avoid business disruption, and provide a full document pack for your facility manager.',
+      'Commercial painting in Dubai has different rules from residential — fire-rated materials, MSDS sheets, third-party liability insurance and after-hours scheduling are all standard requirements. Mr Painter Dubai commercial vendors carry AED 1M+ liability cover, can work nights and weekends to avoid business disruption, and provide a full document pack for your facility manager.',
     bestFor: [
       'Office fit-outs and refreshes',
       'Retail store rebrands',
@@ -390,7 +390,7 @@ export const services: Service[] = [
     seoDescription:
       'Italian-finish decorative painting in Dubai. Marmorino, stucco, Venetian plaster, metallic accents. By specialist artisans, from AED 35/sqft. Free design consult.',
     intro:
-      'Decorative paint is where painting becomes craft. PaintHub partners with a small group of specialist artisans trained in Italian and European techniques — Marmorino, Stucco Veneziano, Travertino, Sabbiato and metallic leaf application. Each project starts with a design consult, sample boards prepared in your home, and an experienced foreman who has trained in Italy or with master applicators.',
+      'Decorative paint is where painting becomes craft. Mr Painter Dubai partners with a small group of specialist artisans trained in Italian and European techniques — Marmorino, Stucco Veneziano, Travertino, Sabbiato and metallic leaf application. Each project starts with a design consult, sample boards prepared in your home, and an experienced foreman who has trained in Italy or with master applicators.',
     bestFor: [
       'Feature walls and TV walls',
       'Master bedroom accent walls',

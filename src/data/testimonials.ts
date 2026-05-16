@@ -29,7 +29,7 @@ export const testimonials: Testimonial[] = [
     rating: 5,
     date: '2026-03-28',
     quote:
-      'PaintHub saved us thousands compared to the first quote we got directly. Vendor was insured, on-time, and the exterior still looks brand new after a sandstorm.',
+      'Mr Painter Dubai saved us thousands compared to the first quote we got directly. Vendor was insured, on-time, and the exterior still looks brand new after a sandstorm.',
     accent: 'from-amber-400 to-orange-600',
   },
   {

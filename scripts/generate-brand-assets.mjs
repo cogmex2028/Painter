@@ -51,8 +51,9 @@ const ogSvg = `<?xml version="1.0" encoding="UTF-8"?>
   <path d="M96 132 L96 102 Q96 92 106 92 L132 92 Q142 92 142 102 L142 108 L110 108 L110 132 Z" fill="white"/>
   <circle cx="100" cy="138" r="6" fill="white"/>
 
-  <text x="180" y="135" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="800" fill="#0f172a">PaintHub</text>
-  <text x="328" y="135" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="800" fill="#f97316">.</text>
+  <text x="180" y="128" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="800" fill="#0f172a">Mr Painter</text>
+  <text x="362" y="128" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="800" fill="#f97316">.</text>
+  <text x="180" y="152" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" letter-spacing="3" fill="#9c7e4f">DUBAI</text>
 
   <!-- Headline -->
   <text x="72" y="290" font-family="system-ui, -apple-system, sans-serif" font-size="70" font-weight="800" fill="#0f172a">Dubai's top-rated</text>
@@ -89,8 +90,8 @@ await sharp(Buffer.from(ogSvg)).resize(1200, 630).jpeg({ quality: 85, mozjpeg: t
 console.log('✓ public/og-default.jpg (1200×630)');
 
 const manifest = {
-  name: 'PaintHub Dubai',
-  short_name: 'PaintHub',
+  name: 'Mr Painter Dubai',
+  short_name: 'Mr Painter',
   description: 'Compare Dubai\'s top-rated painters in 60 seconds.',
   start_url: '/',
   display: 'standalone',

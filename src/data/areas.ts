@@ -53,7 +53,7 @@ export const areas: Area[] = [
       {
         question: 'Do painters have access to my Marina building?',
         answer:
-          'PaintHub vendors carry security passes and NOCs for all major Marina buildings. We coordinate the service lift booking and parking permits with building management before the painters arrive — you don\'t have to lift a finger.',
+          'Mr Painter Dubai vendors carry security passes and NOCs for all major Marina buildings. We coordinate the service lift booking and parking permits with building management before the painters arrive — you don\'t have to lift a finger.',
       },
       {
         question: 'Can painting be done over a weekend in Marina?',
@@ -81,7 +81,7 @@ export const areas: Area[] = [
     intro:
       'Downtown Dubai apartments — Burj Views, The Address Residences, Boulevard Heights, Burj Vista — usually demand higher-spec finishes than the city average. Owners here often request decorative work (Marmorino, Stucco Veneziano) alongside standard repainting. Our Downtown vendors include specialist artisans for Italian finishes and full-package painters who can coordinate with the Emaar building managers.',
     localContext:
-      'Downtown buildings are managed by Emaar Community Management which requires NOC paperwork from contractors — every PaintHub vendor in Downtown is pre-cleared. The most common ask is a high-end colour refresh with optional feature walls, often timed around a move-in or after handover from a new build.',
+      'Downtown buildings are managed by Emaar Community Management which requires NOC paperwork from contractors — every Mr Painter Dubai vendor in Downtown is pre-cleared. The most common ask is a high-end colour refresh with optional feature walls, often timed around a move-in or after handover from a new build.',
     popularServices: ['interior-painting', 'apartment-painting', 'texture-decorative'],
     popularPropertyTypes: ['Luxury apartment', 'Penthouse', 'Burj-view residence', 'Branded residence'],
     priceGuide: [
@@ -96,7 +96,7 @@ export const areas: Area[] = [
       {
         question: 'Do you have Emaar-approved painters for Downtown?',
         answer:
-          'Yes. All PaintHub vendors operating in Downtown hold an active No Objection Certificate (NOC) from Emaar Community Management. The NOC paperwork between contractor and building is handled before your job starts.',
+          'Yes. All Mr Painter Dubai vendors operating in Downtown hold an active No Objection Certificate (NOC) from Emaar Community Management. The NOC paperwork between contractor and building is handled before your job starts.',
       },
       {
         question: 'Can you do Italian decorative finishes (Marmorino, Stucco)?',
@@ -144,7 +144,7 @@ export const areas: Area[] = [
       {
         question: 'Can offices in Business Bay be painted at night?',
         answer:
-          'Yes — most commercial jobs in Business Bay are done in 6pm-2am or weekend blocks. There\'s no after-hours premium with PaintHub vendors. We coordinate with your building security for evening access.',
+          'Yes — most commercial jobs in Business Bay are done in 6pm-2am or weekend blocks. There\'s no after-hours premium with Mr Painter Dubai vendors. We coordinate with your building security for evening access.',
       },
       {
         question: 'How fast can you start an office repaint?',
@@ -243,7 +243,7 @@ export const areas: Area[] = [
           'Silicone-based or elastomeric exterior systems (Jotun Jotashield Extreme, Caparol AmphiSilan, Sto-Color Silco) are designed for marine exposure. With proper surface prep these last 6-8 years on Palm villas.',
       },
       {
-        question: 'Are PaintHub vendors approved by Nakheel Community Management?',
+        question: 'Are Mr Painter Dubai vendors approved by Nakheel Community Management?',
         answer:
           'Yes. All our Palm vendors hold active access permits and contractor NOCs from Nakheel. Frond, Trunk and Crescent are all covered. Atlantis Royal residents have specific concierge coordination.',
       },
@@ -336,7 +336,7 @@ export const areas: Area[] = [
       {
         question: 'Do you have Emaar approval for Arabian Ranches?',
         answer:
-          'Yes — every PaintHub vendor working in Arabian Ranches holds an active Emaar Community Management NOC. The contractor-to-community paperwork is handled before your job starts.',
+          'Yes — every Mr Painter Dubai vendor working in Arabian Ranches holds an active Emaar Community Management NOC. The contractor-to-community paperwork is handled before your job starts.',
       },
       {
         question: 'How long does a full villa take in The Ranches?',
@@ -367,7 +367,7 @@ export const areas: Area[] = [
     seoDescription:
       'Trusted painters in Mirdif for villas and townhouses. 9 verified pros, from AED 4,500 for a full 3BR villa. Same-day quotes, 12-month warranty.',
     intro:
-      'Mirdif is a high-density family suburb of mostly older villas and newer compound townhouses. PaintHub Mirdif vendors are known for being the most cost-effective in the network without compromising on prep quality — most quotes come in 15-25% below Marina or Downtown rates because of lower crew transport costs and a more competitive local market.',
+      'Mirdif is a high-density family suburb of mostly older villas and newer compound townhouses. Mr Painter Dubai Mirdif vendors are known for being the most cost-effective in the network without compromising on prep quality — most quotes come in 15-25% below Marina or Downtown rates because of lower crew transport costs and a more competitive local market.',
     localContext:
       'Mirdif villas are typically standalone or in small compounds (Uptown, Mirdif Hills). Many owners do a partial repaint focused on the most weather-affected facade rather than the whole villa to control budget. Boundary walls and gates are frequently refreshed before Eid or back-to-school season.',
     popularServices: ['villa-painting', 'exterior-painting', 'apartment-painting'],

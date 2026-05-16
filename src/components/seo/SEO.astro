@@ -21,8 +21,8 @@ const {
 
 const canonicalUrl = canonicalFor(path);
 const imageUrl = image.startsWith('http') ? image : `${site.url}${image}`;
-const hasBrand = /painthub/i.test(title);
-const fullTitle = hasBrand ? title : `${title} · PaintHub`;
+const hasBrand = /mr\s?painter/i.test(title);
+const fullTitle = hasBrand ? title : `${title} · Mr Painter`;
 ---
 
 <!-- Primary meta -->

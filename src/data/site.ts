@@ -1,18 +1,19 @@
 export const site = {
-  name: 'PaintHub Dubai',
-  legalName: 'PaintHub Dubai LLC',
+  name: 'Mr Painter Dubai',
+  shortName: 'Mr Painter',
+  legalName: 'Mr Painter Dubai LLC',
   tagline: 'Compare Dubai\'s top-rated painters in 60 seconds',
   description:
     'Get free quotes from 5+ verified painters in your area. Interior, exterior, villa & apartment painting across Dubai. Trusted by 10,000+ homeowners.',
-  url: 'https://painthubdubai.ae',
+  url: 'https://mrpainterdubai.com',
   locale: 'en-AE',
-  twitterHandle: '@painthubdubai',
-  email: 'hello@painthubdubai.ae',
+  twitterHandle: '@mrpainterdubai',
+  email: 'hello@mrpainterdubai.com',
   phone: '+971 54 485 6912',
   phoneE164: '+971544856912',
   whatsapp: '971544856912',
   whatsappDefaultMessage:
-    'Hi PaintHub, I would like a free painting quote.',
+    'Hi Mr Painter Dubai, I would like a free painting quote.',
   address: {
     streetAddress: 'Office 1204, Boulevard Plaza Tower 1',
     addressLocality: 'Downtown Dubai',
@@ -25,10 +26,10 @@ export const site = {
   priceRange: 'AED 12 - 35 / sqft',
   founded: '2024',
   social: {
-    instagram: 'https://instagram.com/painthubdubai',
-    facebook: 'https://facebook.com/painthubdubai',
-    tiktok: 'https://tiktok.com/@painthubdubai',
-    linkedin: 'https://linkedin.com/company/painthubdubai',
+    instagram: 'https://instagram.com/mrpainterdubai',
+    facebook: 'https://facebook.com/mrpainterdubai',
+    tiktok: 'https://tiktok.com/@mrpainterdubai',
+    linkedin: 'https://linkedin.com/company/mrpainterdubai',
   },
   stats: {
     vendors: 120,
