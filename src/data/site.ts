@@ -8,9 +8,9 @@ export const site = {
   locale: 'en-AE',
   twitterHandle: '@painthubdubai',
   email: 'hello@painthubdubai.ae',
-  phone: '+971 50 000 0000',
-  phoneE164: '+971500000000',
-  whatsapp: '971500000000',
+  phone: '+971 54 485 6912',
+  phoneE164: '+971544856912',
+  whatsapp: '971544856912',
   whatsappDefaultMessage:
     'Hi PaintHub, I would like a free painting quote.',
   address: {
