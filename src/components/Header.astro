@@ -12,7 +12,7 @@ const nav = [
 ---
 
 <header class="sticky top-0 z-40 border-b border-ink-200/60 bg-white/85 backdrop-blur-md supports-[backdrop-filter]:bg-white/70">
-  <div class="container-x flex h-16 items-center justify-between gap-6">
+  <div class="container-x flex h-16 items-center justify-between gap-3">
     <Logo />
 
     <nav aria-label="Primary" class="hidden lg:flex items-center gap-1">
@@ -39,9 +39,99 @@ const nav = [
         </svg>
         WhatsApp
       </a>
-      <a href="/#quote" class="btn-primary text-sm px-4 py-2.5">
+      <a href="/#quote" class="hidden sm:inline-flex btn-primary text-sm px-4 py-2.5">
         Get free quote
       </a>
+
+      <!-- Mobile menu toggle -->
+      <button
+        type="button"
+        id="mobile-menu-button"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        aria-label="Open menu"
+        class="lg:hidden grid h-10 w-10 place-items-center rounded-lg text-ink-700 ring-1 ring-ink-200 hover:bg-ink-100 transition-colors"
+      >
+        <svg class="h-5 w-5 menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg class="h-5 w-5 close-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
     </div>
   </div>
+
+  <!-- Mobile menu panel -->
+  <div
+    id="mobile-menu"
+    hidden
+    class="lg:hidden border-t border-ink-200/60 bg-white"
+  >
+    <nav aria-label="Mobile" class="container-x py-4">
+      <ul class="flex flex-col">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="block rounded-lg px-3 py-3 text-base font-medium text-ink-800 hover:bg-ink-100 hover:text-ink-900"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-4 grid gap-2 sm:hidden">
+        <a href="/#quote" class="btn-primary w-full text-sm">Get free quote</a>
+        <a
+          href={whatsappUrl()}
+          target="_blank"
+          rel="noopener"
+          class="btn-whatsapp w-full text-sm"
+        >
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true">
+            <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.157 5.335 5.493 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24z"/>
+          </svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </nav>
+  </div>
 </header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-button');
+  const panel = document.getElementById('mobile-menu');
+  const menuIcon = btn?.querySelector('.menu-icon');
+  const closeIcon = btn?.querySelector('.close-icon');
+
+  function toggleMenu(open?: boolean) {
+    if (!btn || !panel || !menuIcon || !closeIcon) return;
+    const willOpen = typeof open === 'boolean' ? open : panel.hasAttribute('hidden');
+    if (willOpen) {
+      panel.removeAttribute('hidden');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Close menu');
+      menuIcon.classList.add('hidden');
+      closeIcon.classList.remove('hidden');
+    } else {
+      panel.setAttribute('hidden', '');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+      menuIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+    }
+  }
+
+  btn?.addEventListener('click', () => toggleMenu());
+
+  // Close menu when clicking a link inside it
+  panel?.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => toggleMenu(false));
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && panel && !panel.hasAttribute('hidden')) toggleMenu(false);
+  });
+</script>
