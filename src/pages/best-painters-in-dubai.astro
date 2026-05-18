@@ -1,0 +1,188 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+import InlineFAQ from '~/components/page/InlineFAQ.astro';
+import QuoteCTA from '~/components/page/QuoteCTA.astro';
+import VendorCard from '~/components/page/VendorCard.astro';
+
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+import FAQSchema from '~/components/schema/FAQSchema.astro';
+import JsonLd from '~/components/schema/JsonLd.astro';
+
+import { vendors } from '~/data/vendors';
+import { areas } from '~/data/areas';
+import { site } from '~/data/site';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Best Painters in Dubai', href: '/best-painters-in-dubai/' },
+];
+
+const title = 'Best Painters in Dubai 2026 — Verified & Rated';
+const description =
+  'The best-rated painters in Dubai for 2026. Hand-picked, verified, insured. Compare ratings, response time, price range and areas served. From AED 999.';
+
+// Rank vendors by composite score: rating × log(reviewCount)
+const ranked = [...vendors].sort((a, b) => {
+  const score = (v: typeof a) => v.rating * Math.log10(v.reviewCount + 1);
+  return score(b) - score(a);
+});
+
+const areaName = (slug: string) => areas.find((a) => a.slug === slug)?.name ?? slug;
+
+const faqs = [
+  {
+    question: 'Who is the best painter in Dubai for villas?',
+    answer:
+      'For full villa packages — interior, exterior and decorative — Elite Painters Dubai (4.9★ from 312 reviews) leads our ranking, particularly in Palm Jumeirah, Jumeirah and Downtown. They specialise in premium materials and Italian decorative finishes. For weather-resistant exterior work in Arabian Ranches, Mirdif and JVC, Sahara Coats (4.7★ from 186 reviews) offers the strongest 5-year manufacturer-backed warranties.',
+  },
+  {
+    question: 'Who is the best painter in Dubai for apartments?',
+    answer:
+      'Royal Finish LLC (4.8★ from 248 reviews) leads for apartment work in Marina, JLT, Business Bay and JVC. They specialise in same-day turnarounds for studios and 1BR units, work in English, Hindi, Urdu and Arabic, and handle building NOC paperwork automatically.',
+  },
+  {
+    question: 'Who is the best decorative painter in Dubai?',
+    answer:
+      'Crown Decor Painting (4.9★ from 142 reviews) is led by Master Artisan Giovanni Costa, a third-generation Italian decorator. They specialise exclusively in high-end decorative work — Marmorino, Stucco Veneziano, gold leaf — in Downtown, Palm Jumeirah and Jumeirah.',
+  },
+  {
+    question: 'How do you rank the best painters in Dubai?',
+    answer:
+      'We rank by a composite score of average customer rating (weighted by review volume) and verified job completion count. Painters need a minimum 4.0 rating to stay on the platform. The rankings refresh in real-time as new reviews come in. We never accept paid placements — vendors cannot pay to rank higher.',
+  },
+  {
+    question: 'Are these the only painters you work with?',
+    answer:
+      'No — these are our top-ranked across the platform. We have 120+ verified painters in total across Dubai, each specialising in different services or areas. Send your job details to WhatsApp +971 54 485 6912 and we match you with the right specialists for your specific project, not just the top-ranked overall.',
+  },
+];
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: title,
+  description,
+  url: `${site.url}/best-painters-in-dubai/`,
+  numberOfItems: ranked.length,
+  itemListElement: ranked.map((v, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: `${site.url}/vendors/${v.slug}/`,
+    name: v.name,
+  })),
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    eyebrow="Rankings"
+    title="The best painters in Dubai — ranked for 2026"
+    subtitle="A live ranking of our top-rated painters, sorted by composite score (rating × verified job count). No paid placements. No fake reviews. Updated every time a new customer leaves feedback. Last refreshed today."
+    breadcrumbs={breadcrumbs}
+    stats={[
+      { label: 'Painters ranked', value: `${ranked.length}` },
+      { label: 'Avg. top-3 rating', value: `${(ranked.slice(0, 3).reduce((s, v) => s + v.rating, 0) / 3).toFixed(1)} ★` },
+      { label: 'Combined jobs done', value: `${ranked.reduce((s, v) => s + v.jobsCompleted, 0).toLocaleString()}+` },
+      { label: 'Total reviews', value: `${ranked.reduce((s, v) => s + v.reviewCount, 0).toLocaleString()}+` },
+    ]}
+  />
+
+  <Section eyebrow="The ranking" title="Top-rated painters in Dubai right now" bg="white">
+    <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+      {ranked.map((v, i) => (
+        <li class="relative">
+          <span class="absolute -top-3 -left-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-ink-900 text-base font-extrabold text-white shadow-lg ring-4 ring-white">
+            #{i + 1}
+          </span>
+          <VendorCard vendor={v} compact />
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section eyebrow="Methodology" title="How we rank Dubai painters" bg="ink-50">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-7 space-y-4 text-base leading-relaxed text-ink-700">
+        <p>
+          Rankings are calculated in real-time using a composite score that combines <strong>average customer rating</strong> with <strong>verified job completion count</strong>. We weight the rating by the logarithm of review count so that a painter with 300 reviews at 4.7★ ranks above a painter with 5 reviews at 5.0★ — small samples are statistically unreliable.
+        </p>
+        <p>
+          We do not accept paid placements. No painter can pay to rank higher. We refresh the ranking automatically every time a new verified review is submitted. Painters who drop below 4.0★ over a rolling 90-day window are removed from the platform entirely.
+        </p>
+        <p>
+          The ranking shown above is the platform-wide ranking. For a specific job, the "best" painter for you may not be #1 overall — it depends on your service (decorative vs. apartment vs. villa) and area. When you message us with your project details, we route to the best specialist for that specific brief.
+        </p>
+      </div>
+      <aside class="lg:col-span-5">
+        <div class="rounded-2xl bg-white p-6 ring-1 ring-ink-200/70">
+          <h3 class="text-lg font-bold text-ink-900">Filter criteria</h3>
+          <ul class="mt-5 space-y-2.5 text-sm">
+            <li class="flex items-start gap-2.5">
+              <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+              </span>
+              <span class="text-ink-700">Active Dubai trade licence</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+              </span>
+              <span class="text-ink-700">AED 1M+ liability insurance</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+              </span>
+              <span class="text-ink-700">Minimum 4.0★ rolling 90-day average</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+              </span>
+              <span class="text-ink-700">Verified reference jobs</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+              </span>
+              <span class="text-ink-700">Re-verified every 6 months</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </Section>
+
+  <Section eyebrow="By category" title="Best painters by specialism" bg="white">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {ranked.map((v) => (
+        <article class="card p-6">
+          <h3 class="text-base font-bold text-ink-900">{v.name}</h3>
+          <p class="mt-1 text-xs text-ink-500">{v.tagline}</p>
+          <div class="mt-3 flex items-center gap-2 text-xs">
+            <span class="text-amber-500">★★★★★</span>
+            <strong class="text-ink-900">{v.rating}</strong>
+            <span class="text-ink-500">({v.reviewCount})</span>
+          </div>
+          <p class="mt-3 text-xs text-ink-600">Best for: {v.areas.slice(0, 2).map(areaName).join(', ')}</p>
+          <a href={`/vendors/${v.slug}/`} class="mt-4 inline-block text-xs font-semibold text-brand-700 hover:underline">Full profile →</a>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section eyebrow="FAQ" title="Best painters in Dubai — questions answered" bg="ink-50">
+    <InlineFAQ faqs={faqs} />
+  </Section>
+
+  <QuoteCTA
+    title="Want us to match you with the best painter for YOUR job?"
+    subtitle="The top-ranked painter overall may not be the best fit for your specific project. WhatsApp us your details — we route to the right specialist."
+  />
+
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+  <FAQSchema faqs={faqs} slot="head" />
+  <JsonLd data={itemListSchema} slot="head" />
+</BaseLayout>

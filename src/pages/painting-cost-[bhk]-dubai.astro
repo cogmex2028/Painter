@@ -1,0 +1,163 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+import InlineFAQ from '~/components/page/InlineFAQ.astro';
+import QuoteCTA from '~/components/page/QuoteCTA.astro';
+import TrustOffers from '~/components/sections/TrustOffers.astro';
+
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+import FAQSchema from '~/components/schema/FAQSchema.astro';
+import JsonLd from '~/components/schema/JsonLd.astro';
+
+import { bhkPages } from '~/data/bhk-cost';
+import { site } from '~/data/site';
+
+export async function getStaticPaths() {
+  return bhkPages.map((p) => ({ params: { bhk: p.slug }, props: { page: p } }));
+}
+
+const { page } = Astro.props;
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Pricing', href: '/pricing/' },
+  { name: `${page.bhk} painting cost`, href: `/painting-cost-${page.slug}-dubai/` },
+];
+
+// PriceSpecification schema — Google rich-results eligible for cost queries
+const priceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'PriceSpecification',
+  '@id': `${site.url}/painting-cost-${page.slug}-dubai/#price`,
+  name: `${page.bhk} painting cost in Dubai`,
+  description: page.intro,
+  priceCurrency: 'AED',
+  minPrice: page.fromAED,
+  maxPrice: page.toAED,
+  valueAddedTaxIncluded: false,
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: `${page.bhk} apartment painting in Dubai`,
+  description: page.intro,
+  serviceType: 'Apartment painting',
+  provider: { '@id': `${site.url}/#organization` },
+  areaServed: { '@type': 'City', name: 'Dubai' },
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: 'AED',
+    lowPrice: page.fromAED,
+    highPrice: page.toAED,
+    offerCount: 4,
+  },
+};
+---
+
+<BaseLayout title={page.seoTitle} description={page.seoDescription}>
+  <PageHero
+    eyebrow={`${page.bhk} painting cost`}
+    title={`${page.bhk} painting cost in Dubai: AED ${page.fromAED.toLocaleString()}–${page.toAED.toLocaleString()}`}
+    subtitle={page.intro}
+    breadcrumbs={breadcrumbs}
+    stats={[
+      { label: 'From (fixed)', value: `AED ${page.fromAED.toLocaleString()}` },
+      { label: 'Up to', value: `AED ${page.toAED.toLocaleString()}` },
+      { label: 'Duration', value: page.duration },
+      { label: 'Crew size', value: page.crewSize },
+    ]}
+  />
+
+  <TrustOffers />
+
+  <Section eyebrow="Cost breakdown" title={`Where the AED ${page.fromAED.toLocaleString()}–${page.toAED.toLocaleString()} actually goes`} subtitle="Painting in Dubai is not opaque. Here is exactly what your fixed-quote covers, line by line." bg="white">
+    <div class="overflow-hidden rounded-2xl ring-1 ring-ink-200/70 bg-white">
+      <table class="w-full text-sm">
+        <thead class="bg-ink-100">
+          <tr class="text-left">
+            <th class="px-5 py-4 font-semibold text-ink-700">Item</th>
+            <th class="px-5 py-4 font-semibold text-ink-700 text-right">Cost (AED)</th>
+            <th class="hidden sm:table-cell px-5 py-4 font-semibold text-ink-700">Notes</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-ink-200/60">
+          {page.breakdown.map((row) => (
+            <tr class="hover:bg-brand-50/30 transition-colors">
+              <td class="px-5 py-4 font-medium text-ink-900">{row.item}</td>
+              <td class="px-5 py-4 text-right font-bold text-ink-900 whitespace-nowrap">{row.cost}</td>
+              <td class="hidden sm:table-cell px-5 py-4 text-xs text-ink-600">{row.note}</td>
+            </tr>
+          ))}
+        </tbody>
+        <tfoot class="bg-brand-50/40">
+          <tr>
+            <td class="px-5 py-4 font-bold text-ink-900">Total fixed quote</td>
+            <td class="px-5 py-4 text-right font-extrabold text-ink-900 whitespace-nowrap">AED {page.fromAED.toLocaleString()} – {page.toAED.toLocaleString()}</td>
+            <td class="hidden sm:table-cell px-5 py-4 text-xs text-ink-600">Locked in writing before work begins</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <p class="mt-4 text-xs text-ink-500">All figures are fixed-quote ranges from our verified vendor network. {page.paintLitres} of paint typical. VAT not included.</p>
+  </Section>
+
+  <Section eyebrow="Real examples" title={`What customers actually paid for their ${page.bhk}`} bg="ink-50">
+    <ul class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      {page.examples.map((ex) => (
+        <li class="card p-6">
+          <p class="text-[10px] font-semibold uppercase tracking-wider text-brand-700">{ex.tier.split(' — ')[0]}</p>
+          <h3 class="mt-2 text-sm font-bold text-ink-900">{ex.tier.split(' — ')[1]}</h3>
+          <p class="mt-2 text-xs text-ink-600">{ex.spec}</p>
+          <p class="mt-4 text-lg font-extrabold tracking-tight text-ink-900">{ex.price}</p>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section eyebrow="What's included" title={`What your ${page.bhk} paint quote covers`} bg="white">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <article>
+        <h3 class="text-lg font-bold text-emerald-700">✓ Included as standard</h3>
+        <ul class="mt-5 space-y-2.5">
+          {page.whatsIncluded.map((item) => (
+            <li class="flex items-start gap-2.5">
+              <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+              </span>
+              <span class="text-sm text-ink-700">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+      <article>
+        <h3 class="text-lg font-bold text-ink-500">✗ Not included (quoted separately)</h3>
+        <ul class="mt-5 space-y-2.5">
+          {page.whatsNotIncluded.map((item) => (
+            <li class="flex items-start gap-2.5">
+              <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-ink-100 text-ink-500">
+                <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+              </span>
+              <span class="text-sm text-ink-600">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+    </div>
+  </Section>
+
+  <Section eyebrow="FAQ" title={`${page.bhk} painting cost — questions answered`} bg="ink-50">
+    <InlineFAQ faqs={page.faqs} />
+  </Section>
+
+  <QuoteCTA
+    title={`Get a fixed quote for your ${page.bhk} today`}
+    subtitle={`WhatsApp +971 54 485 6912 — written quote in your inbox within an hour. No deposit. No surprises.`}
+  />
+
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+  <FAQSchema faqs={page.faqs} slot="head" />
+  <JsonLd data={priceSchema} slot="head" />
+  <JsonLd data={serviceSchema} slot="head" />
+</BaseLayout>

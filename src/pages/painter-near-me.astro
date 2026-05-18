@@ -1,0 +1,112 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+import InlineFAQ from '~/components/page/InlineFAQ.astro';
+import QuoteCTA from '~/components/page/QuoteCTA.astro';
+import TrustOffers from '~/components/sections/TrustOffers.astro';
+
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+import FAQSchema from '~/components/schema/FAQSchema.astro';
+import LocalBusiness from '~/components/schema/LocalBusiness.astro';
+
+import { areas } from '~/data/areas';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Painter near me', href: '/painter-near-me/' },
+];
+
+const title = 'Painter Near Me in Dubai — Pick Your Community';
+const description =
+  'Looking for a painter near you in Dubai? We cover 35+ communities. Pick yours below — verified pros within 5km. WhatsApp +971 54 485 6912 for a fixed quote.';
+
+const faqs = [
+  {
+    question: 'How do I find a painter near me in Dubai?',
+    answer:
+      'Pick your community from the list below or message us your address on WhatsApp +971 54 485 6912. We match you with up to 5 verified painters who already serve your specific building or villa community — meaning they hold the access NOC, know the security team and can typically start within 24-48 hours.',
+  },
+  {
+    question: 'Which areas have the most painters near me?',
+    answer:
+      'Dubai Marina (18 verified painters), Downtown Dubai (16), JLT (15), Business Bay (14) and JVC (13) have the largest vendor networks. Less-dense areas like Mirdif (9) and Palm Jumeirah (10) still have multiple options. Wherever you are in Dubai, we have someone within a 30-minute drive.',
+  },
+  {
+    question: 'Can a painter near me come today?',
+    answer:
+      'For studios and 1BR apartments in Marina, JLT and Business Bay — often yes if you message before 9am. For 2-3BR units, typically next-day. For villas, 24-48 hours including the on-site visit and community NOC paperwork.',
+  },
+  {
+    question: 'Do you cover painters near me outside the main communities?',
+    answer:
+      'Yes. We cover 35+ Dubai communities including most outlying areas (Al Khawaneej, The Lakes, Meadows, Springs, Dubai Hills, Damac Hills, Town Square, Reem, Tilal Al Ghaf). If your community is not listed below, just message us your address — we will check vendor coverage and confirm within an hour.',
+  },
+  {
+    question: 'Why does "painter near me" matter?',
+    answer:
+      'Three reasons: speed (a local painter can start same-day rather than waiting for someone to drive across Dubai), building access (local painters already hold the community NOC and know security), and cost (local painters transport less far so quote less).',
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    eyebrow="Painter near me"
+    title="A painter near you, in every Dubai community"
+    subtitle="Pick your area below and we will show you the verified painters who already serve it — typically within a 5-10km radius. Or just WhatsApp your address to +971 54 485 6912 and we will match you in under an hour."
+    breadcrumbs={breadcrumbs}
+    stats={[
+      { label: 'Communities', value: '35+' },
+      { label: 'Verified painters', value: '120+' },
+      { label: 'Avg. response', value: '< 1 hr' },
+      { label: 'Avg. distance to job', value: '< 5 km' },
+    ]}
+  />
+
+  <TrustOffers />
+
+  <Section eyebrow="Pick your community" title="Painters near you — by neighbourhood" subtitle="Each link below shows the verified painters who actively serve that community, with pricing, ratings and the local building NOCs they hold." bg="white">
+    <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {areas.map((a) => (
+        <li>
+          <a href={`/areas/${a.slug}/`} class="card group flex items-center justify-between p-5">
+            <div>
+              <p class="font-semibold text-ink-900">Painters near {a.name}</p>
+              <p class="mt-0.5 text-xs text-ink-500">
+                <span class="text-emerald-700 font-semibold">{a.vendorCount}</span> painters · From AED {a.startingFrom.toLocaleString()} · {a.sector}
+              </p>
+            </div>
+            <svg class="h-5 w-5 text-ink-400 transition-transform group-hover:translate-x-1 group-hover:text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section eyebrow="Don't see your area?" title="We probably still cover it" bg="ink-50">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-base leading-relaxed text-ink-700 sm:text-lg">
+        We list the 9 most-booked Dubai communities above, but our verified network extends across 35+ neighbourhoods including The Lakes, The Meadows, The Springs, Dubai Hills, Damac Hills, Town Square, Reem, Tilal Al Ghaf, Al Khawaneej, MBR City, City Walk, Bluewaters and Dubai Investments Park.
+      </p>
+      <p class="mt-4 text-base leading-relaxed text-ink-700 sm:text-lg">
+        Send your community or building name to <strong>WhatsApp +971 54 485 6912</strong> and we will confirm which painters serve you, with quotes typically back within an hour.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="FAQ" title="Painter near me — questions answered" bg="white">
+    <InlineFAQ faqs={faqs} />
+  </Section>
+
+  <QuoteCTA
+    title="Find a painter near you in 60 seconds"
+    subtitle="Pick your community above, or WhatsApp +971 54 485 6912 and we will match you with the right local specialist."
+  />
+
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+  <FAQSchema faqs={faqs} slot="head" />
+  <LocalBusiness slot="head" />
+</BaseLayout>

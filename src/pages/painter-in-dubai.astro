@@ -1,0 +1,183 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+import InlineFAQ from '~/components/page/InlineFAQ.astro';
+import QuoteCTA from '~/components/page/QuoteCTA.astro';
+import TrustOffers from '~/components/sections/TrustOffers.astro';
+import PricingMatrix from '~/components/sections/PricingMatrix.astro';
+
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+import FAQSchema from '~/components/schema/FAQSchema.astro';
+import LocalBusiness from '~/components/schema/LocalBusiness.astro';
+
+import { services } from '~/data/services';
+import { areas } from '~/data/areas';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Painter in Dubai', href: '/painter-in-dubai/' },
+];
+
+const title = 'Painter in Dubai — Verified Pros, Fixed Quotes';
+const description =
+  'Looking for a painter in Dubai? Compare 120+ verified painters across 35+ communities. Studios from AED 999, fixed quotes in writing, no deposit. WhatsApp +971 54 485 6912.';
+
+const faqs = [
+  {
+    question: 'How do I find a reliable painter in Dubai?',
+    answer:
+      'Use a marketplace that verifies trade licence, insurance and reference jobs before listing the painter. Mr Painter Dubai checks every painter every 90 days. Each quote is fixed in writing — the painter cannot raise the price after arriving. Compare 5+ painters in 60 seconds via WhatsApp.',
+  },
+  {
+    question: 'How much does a painter in Dubai cost?',
+    answer:
+      'Studios cost AED 999–1,500, 1BR apartments AED 1,499–2,500, 2BR apartments AED 2,499–3,800, and full 3-bedroom villas AED 6,999–12,000. These prices include premium emulsion, two coats, prep, furniture protection and post-clean. Small jobs (single wall, touch-ups) start at AED 299.',
+  },
+  {
+    question: 'Which is the best painter in Dubai?',
+    answer:
+      'There is no single "best" painter — different specialists are best for different jobs. Elite Painters Dubai is best for premium villa and decorative work in Palm and Downtown. Royal Finish LLC is best for fast apartment turnarounds in Marina, JLT and Business Bay. Sahara Coats is best for villa exteriors with long warranty in Arabian Ranches and Mirdif. Crown Decor Painting is best for Italian decorative finishes.',
+  },
+  {
+    question: 'Do painters in Dubai need a licence?',
+    answer:
+      'Yes — every painter operating in Dubai must hold a valid trade licence from the Dubai Economic Department (DED) plus AED 1M+ third-party liability insurance. Mr Painter Dubai verifies both before listing any painter and re-checks every 6 months.',
+  },
+  {
+    question: 'How quickly can a painter start work in Dubai?',
+    answer:
+      'For studios and 1BR apartments, often same-day or next-day. 2-3BR apartments typically 24-48 hours. Villas with community NOC required: 5-7 days. Italian decorative work needs 4-6 weeks lead time for imported materials.',
+  },
+  {
+    question: 'Do you cover all areas of Dubai?',
+    answer:
+      'Yes — we have verified painters across all 35+ major Dubai communities including Marina, Downtown, Business Bay, JLT, Jumeirah, Palm Jumeirah, Arabian Ranches, Mirdif, JVC and many more. Send your address on WhatsApp and we will match you with up to 5 painters who actively serve your building.',
+  },
+];
+
+const topAreas = areas.slice(0, 6);
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    eyebrow="Painter in Dubai"
+    title="Looking for a painter in Dubai? Compare 120+ verified pros in 60 seconds."
+    subtitle="Tell us your community, your property, and what you need painted — we match you with up to 5 hand-picked, insured, licensed painters. Every quote is fixed in writing. No deposit. Studios from AED 999, 1BR from AED 1,499, full villas from AED 6,999."
+    breadcrumbs={breadcrumbs}
+    stats={[
+      { label: 'Verified painters', value: '120+' },
+      { label: 'Communities covered', value: '35+' },
+      { label: 'Avg. quote time', value: '< 1 hr' },
+      { label: 'Avg. rating', value: '4.8 ★' },
+    ]}
+  />
+
+  <TrustOffers />
+
+  <Section eyebrow="Why us" title="What makes us different from a typical painter in Dubai" bg="white">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-7 space-y-4 text-base leading-relaxed text-ink-700 sm:text-lg">
+        <p>
+          Hiring a painter in Dubai used to mean calling five numbers off Dubizzle, getting three different prices that all changed on arrival, and crossing your fingers that the work would actually get done. We built Mr Painter Dubai to fix that.
+        </p>
+        <p>
+          Every painter on our network is checked for an active Dubai trade licence, AED 1M+ third-party liability insurance, and at least one verifiable reference job before we list them. We re-check the paperwork every 90 days. Painters who fall below a 4.0 customer rating are removed — no exceptions, no protection for under-performers.
+        </p>
+        <p>
+          The single biggest thing that separates us from the average painter in Dubai is what we contractually require: <strong>fixed quotes in writing</strong>. The painter cannot raise the price after arriving on site. If they try, we cover the gap from our quality fund. This is why customers come back and refer their friends — they know exactly what they will pay before any work starts.
+        </p>
+        <p>
+          We are a marketplace, not an agency. We do not employ painters. We curate them. The painters that thrive on our platform are the ones who already operate at a premium standard — they win by consistency, not by undercutting.
+        </p>
+      </div>
+      <aside class="lg:col-span-5">
+        <div class="rounded-2xl bg-gradient-to-br from-brand-50 to-amber-50 p-6 ring-1 ring-brand-100">
+          <h3 class="text-lg font-bold text-ink-900">What you get when you book</h3>
+          <ul class="mt-5 space-y-3 text-sm">
+            <li class="flex items-start gap-2.5">
+              <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+              </span>
+              <span class="text-ink-700">Fixed quote in writing, never higher on the day</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+              </span>
+              <span class="text-ink-700">Zero deposit — pay only on completion</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+              </span>
+              <span class="text-ink-700">Premium paint brands: Jotun Lady, Dulux Diamond, Caparol</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+              </span>
+              <span class="text-ink-700">12-month workmanship warranty in writing</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+              </span>
+              <span class="text-ink-700">Up to 5 verified painters compared in one chat</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </Section>
+
+  <PricingMatrix bg="ink-50" />
+
+  <Section eyebrow="By community" title="Find a painter in your area of Dubai" bg="white">
+    <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {topAreas.map((a) => (
+        <li>
+          <a href={`/areas/${a.slug}/`} class="card group flex items-center justify-between p-5">
+            <div>
+              <p class="font-semibold text-ink-900">Painters in {a.name}</p>
+              <p class="mt-0.5 text-xs text-ink-500">{a.vendorCount} verified · From AED {a.startingFrom.toLocaleString()}</p>
+            </div>
+            <svg class="h-5 w-5 text-ink-400 transition-transform group-hover:translate-x-1 group-hover:text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="mt-6 text-center text-sm text-ink-600">
+      <a href="/areas/" class="font-semibold text-brand-700 hover:underline">See all 35+ Dubai communities →</a>
+    </p>
+  </Section>
+
+  <Section eyebrow="By service" title="Every type of painting service in Dubai" bg="ink-50">
+    <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((s) => (
+        <li>
+          <a href={`/services/${s.slug}/`} class="card group flex h-full flex-col p-5">
+            <h3 class="font-semibold text-ink-900">{s.name}</h3>
+            <p class="mt-1 text-xs text-ink-500">{s.short}</p>
+            <p class="mt-2 text-xs font-semibold text-brand-700">From AED {s.startingPrice.toLocaleString()}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section eyebrow="FAQ" title="Painter in Dubai — questions answered" bg="white">
+    <InlineFAQ faqs={faqs} />
+  </Section>
+
+  <QuoteCTA
+    title="Need a painter in Dubai today?"
+    subtitle="WhatsApp +971 54 485 6912 — fixed quote in writing, no deposit, painter on site within 24-48 hours."
+  />
+
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+  <FAQSchema faqs={faqs} slot="head" />
+  <LocalBusiness slot="head" />
+</BaseLayout>
