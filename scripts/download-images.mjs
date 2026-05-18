@@ -20,6 +20,8 @@ const images = [
   { slot: 'service-apartment',     id: 'photo-1560448204-e02f11c3d0e2', alt: 'Modern apartment living room interior' },
   { slot: 'service-commercial',    id: 'photo-1497366216548-37526070297c', alt: 'Modern office workspace interior' },
   { slot: 'service-decorative',    id: 'photo-1555181937-efe4e074a301', alt: 'Decorative textured wall finish close-up' },
+  { slot: 'service-move-in',       id: 'photo-1494512163437-5d01c88c0e5a', alt: 'Bright empty apartment ready for move-in painting' },
+  { slot: 'service-move-out',      id: 'photo-1600877326636-c434f8f3e872', alt: 'Stacked moving boxes in an apartment during move-out' },
   // Areas
   { slot: 'area-dubai-marina',     id: 'photo-1518684079-3c830dcef090', alt: 'Dubai Marina skyline with yacht harbour' },
   { slot: 'area-downtown-dubai',   id: 'photo-1544092683-c0c9ebb368e5', alt: 'Downtown Dubai skyline with Burj Khalifa' },

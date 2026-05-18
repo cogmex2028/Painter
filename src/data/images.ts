@@ -31,6 +31,14 @@ export const imageSlots = [
     "alt": "Decorative textured wall finish close-up"
   },
   {
+    "slot": "service-move-in",
+    "alt": "Bright empty apartment ready for move-in painting"
+  },
+  {
+    "slot": "service-move-out",
+    "alt": "Stacked moving boxes in an apartment during move-out"
+  },
+  {
     "slot": "area-dubai-marina",
     "alt": "Dubai Marina skyline with yacht harbour"
   },
@@ -94,6 +102,8 @@ const serviceSlotMap: Record<string, string> = {
   'apartment-painting': 'service-apartment',
   'commercial-painting': 'service-commercial',
   'texture-decorative': 'service-decorative',
+  'move-in-painting': 'service-move-in',
+  'move-out-painting': 'service-move-out',
 };
 
 const vendorSlotMap: Record<string, string> = {
