@@ -5,6 +5,7 @@ import { whatsappUrl } from '~/data/site';
 const nav = [
   { label: 'Services', href: '/services/' },
   { label: 'Pricing', href: '/pricing/' },
+  { label: 'Calculator', href: '/calculator/', highlight: true },
   { label: 'Areas', href: '/areas/' },
   { label: 'About', href: '/about/' },
   { label: 'FAQ', href: '/faq/' },
@@ -20,8 +21,16 @@ const nav = [
       {nav.map((item) => (
         <a
           href={item.href}
-          class="rounded-lg px-3 py-2 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100 hover:text-ink-900"
+          class={item.highlight
+            ? "inline-flex items-center gap-1.5 rounded-lg bg-brand-50 px-3 py-2 text-sm font-semibold text-brand-700 ring-1 ring-brand-200 transition-colors hover:bg-brand-100 hover:text-brand-800"
+            : "rounded-lg px-3 py-2 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100 hover:text-ink-900"}
         >
+          {item.highlight && (
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="4" y="3" width="16" height="18" rx="2"/>
+              <path d="M8 7h8M8 11h8M8 15h5"/>
+            </svg>
+          )}
           {item.label}
         </a>
       ))}
@@ -75,8 +84,16 @@ const nav = [
           <li>
             <a
               href={item.href}
-              class="block rounded-lg px-3 py-3 text-base font-medium text-ink-800 hover:bg-ink-100 hover:text-ink-900"
+              class={item.highlight
+                ? "flex items-center gap-2 rounded-lg bg-brand-50 px-3 py-3 text-base font-semibold text-brand-700 ring-1 ring-brand-200 hover:bg-brand-100"
+                : "block rounded-lg px-3 py-3 text-base font-medium text-ink-800 hover:bg-ink-100 hover:text-ink-900"}
             >
+              {item.highlight && (
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="4" y="3" width="16" height="18" rx="2"/>
+                  <path d="M8 7h8M8 11h8M8 15h5"/>
+                </svg>
+              )}
               {item.label}
             </a>
           </li>

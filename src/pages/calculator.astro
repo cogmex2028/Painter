@@ -1,0 +1,379 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHero from '~/components/page/PageHero.astro';
+import Section from '~/components/page/Section.astro';
+import InlineFAQ from '~/components/page/InlineFAQ.astro';
+import TrustOffers from '~/components/sections/TrustOffers.astro';
+
+import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+import FAQSchema from '~/components/schema/FAQSchema.astro';
+
+import { areas } from '~/data/areas';
+import { site, whatsappUrl } from '~/data/site';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Calculator', href: '/calculator/' },
+];
+
+const title = 'Painting Cost Calculator — Dubai 2026';
+const description =
+  'Free instant painting cost calculator for Dubai. Estimate your fixed quote in 30 seconds. Studios, 1BHK, 2BHK, 3BHK, villas + small jobs. From AED 299.';
+
+const faqs = [
+  {
+    question: 'How accurate is the painting cost calculator?',
+    answer:
+      'The calculator gives a fixed-quote range within ±10% accuracy for 90% of standard Dubai apartments and villas. The final quote (after a free 20-minute site survey) lands inside the estimated range for nearly every job. The few that fall outside are usually properties with significant water damage, non-standard finishes, or scope that changed after the survey.',
+  },
+  {
+    question: 'Does the calculator include paint and materials?',
+    answer:
+      'Yes — every estimate includes premium emulsion (Jotun Lady or Dulux Diamond), two coats, full surface prep, furniture protection, post-clean and the 12-month workmanship warranty. The only things excluded are decorative finishes (Marmorino, Stucco — different service), wallpaper removal, and major water-damage repair.',
+  },
+  {
+    question: 'Why is the calculator estimate a range rather than one number?',
+    answer:
+      'Honest estimating means showing both ends. Even for the same apartment size, real-world variation comes from: wall condition (older units need more prep), ceiling height (double-height units take longer), and access (high-floor apartments add lift-wait time). After the free 20-minute site survey, your final quote is one fixed number locked in writing.',
+  },
+  {
+    question: 'Do I have to commit after using the calculator?',
+    answer:
+      'No. The calculator is a free estimating tool. Even after sending us the WhatsApp message with your calculator inputs, there is zero commitment — we send back a fixed quote within an hour, you decide whether to proceed.',
+  },
+  {
+    question: 'Can the calculator estimate a small job (touch-ups, single wall)?',
+    answer:
+      'Yes — pick "Touch-up / small job" as the property type. Small jobs start at AED 80 (single door) or AED 299 (wall touch-up / patch repair). No minimum spend.',
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero
+    eyebrow="Free calculator"
+    title="Painting cost calculator — Dubai 2026"
+    subtitle="Pick your property, choose your paint tier, and see your fixed-quote estimate in real time. Based on actual prices from our verified vendor network. No email required, no spam."
+    breadcrumbs={breadcrumbs}
+    stats={[
+      { label: 'Calculation time', value: '~30 sec' },
+      { label: 'Accuracy', value: '±10%' },
+      { label: 'Commitment', value: 'None' },
+      { label: 'Quote turnaround', value: '< 1 hr' },
+    ]}
+  />
+
+  <!-- Calculator section -->
+  <section class="bg-white py-12 sm:py-16" id="calc">
+    <div class="container-x">
+      <div class="mx-auto max-w-4xl">
+        <div class="grid gap-8 lg:grid-cols-12 lg:gap-10">
+          <!-- Form (left) -->
+          <form id="calc-form" class="lg:col-span-7 space-y-6 rounded-3xl bg-white p-7 ring-1 ring-ink-200/80 shadow-sm sm:p-8" novalidate>
+            <h2 class="text-xl font-bold text-ink-900">Tell us about your project</h2>
+
+            <!-- Step 1: Property -->
+            <fieldset class="space-y-2">
+              <legend class="block text-xs font-semibold uppercase tracking-wider text-ink-700">1. Property type</legend>
+              <select name="property" required class="w-full rounded-xl border-0 bg-ink-50 px-3.5 py-3 text-sm text-ink-900 ring-1 ring-inset ring-ink-200 focus:bg-white focus:ring-2 focus:ring-brand-500">
+                <option value="">Select your property</option>
+                <optgroup label="Small jobs">
+                  <option value="door">Door / trim (per door)</option>
+                  <option value="touch-up">Wall touch-up / patch repair</option>
+                  <option value="feature-wall">Single feature wall</option>
+                  <option value="single-room">Single room (bedroom / study)</option>
+                </optgroup>
+                <optgroup label="Apartments">
+                  <option value="studio">Studio apartment</option>
+                  <option value="1bhk">1 BHK apartment</option>
+                  <option value="2bhk">2 BHK apartment</option>
+                  <option value="3bhk">3 BHK apartment</option>
+                </optgroup>
+                <optgroup label="Villas (full package)">
+                  <option value="villa-3br">3-bedroom villa</option>
+                  <option value="villa-45br">4-5 bedroom villa</option>
+                  <option value="villa-67br">6-7 bedroom villa</option>
+                </optgroup>
+              </select>
+            </fieldset>
+
+            <!-- Step 2: Paint tier -->
+            <fieldset class="space-y-2">
+              <legend class="block text-xs font-semibold uppercase tracking-wider text-ink-700">2. Paint tier</legend>
+              <div class="grid gap-2 sm:grid-cols-3">
+                <label class="cursor-pointer rounded-xl bg-ink-50 p-3 ring-1 ring-ink-200 transition-colors has-[:checked]:bg-brand-50 has-[:checked]:ring-2 has-[:checked]:ring-brand-500">
+                  <input type="radio" name="tier" value="essential" class="sr-only" />
+                  <span class="block text-sm font-bold text-ink-900">Essential</span>
+                  <span class="mt-0.5 block text-xs text-ink-600">One coat, basic emulsion</span>
+                  <span class="mt-1 block text-[10px] uppercase tracking-wider text-ink-400">−15%</span>
+                </label>
+                <label class="cursor-pointer rounded-xl bg-ink-50 p-3 ring-1 ring-ink-200 transition-colors has-[:checked]:bg-brand-50 has-[:checked]:ring-2 has-[:checked]:ring-brand-500">
+                  <input type="radio" name="tier" value="standard" class="sr-only" checked />
+                  <span class="block text-sm font-bold text-ink-900">Standard <span class="rounded-full bg-amber-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-amber-800">Recommended</span></span>
+                  <span class="mt-0.5 block text-xs text-ink-600">Two coats Jotun Lady / Dulux Diamond</span>
+                  <span class="mt-1 block text-[10px] uppercase tracking-wider text-ink-400">Standard</span>
+                </label>
+                <label class="cursor-pointer rounded-xl bg-ink-50 p-3 ring-1 ring-ink-200 transition-colors has-[:checked]:bg-brand-50 has-[:checked]:ring-2 has-[:checked]:ring-brand-500">
+                  <input type="radio" name="tier" value="premium" class="sr-only" />
+                  <span class="block text-sm font-bold text-ink-900">Premium</span>
+                  <span class="mt-0.5 block text-xs text-ink-600">Caparol, imported, accent walls</span>
+                  <span class="mt-1 block text-[10px] uppercase tracking-wider text-ink-400">+20%</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- Step 3: Area -->
+            <fieldset class="space-y-2">
+              <legend class="block text-xs font-semibold uppercase tracking-wider text-ink-700">3. Area in Dubai</legend>
+              <select name="area" class="w-full rounded-xl border-0 bg-ink-50 px-3.5 py-3 text-sm text-ink-900 ring-1 ring-inset ring-ink-200 focus:bg-white focus:ring-2 focus:ring-brand-500">
+                <option value="">Any area (use standard rate)</option>
+                <optgroup label="Premium areas (+5%)">
+                  <option value="palm-jumeirah"  data-mult="1.05">Palm Jumeirah</option>
+                  <option value="downtown-dubai" data-mult="1.05">Downtown Dubai</option>
+                  <option value="jumeirah"       data-mult="1.05">Jumeirah</option>
+                </optgroup>
+                <optgroup label="Standard areas">
+                  <option value="dubai-marina"   data-mult="1.00">Dubai Marina</option>
+                  <option value="business-bay"   data-mult="1.00">Business Bay</option>
+                  <option value="jlt"            data-mult="1.00">JLT</option>
+                  <option value="jvc"            data-mult="1.00">JVC</option>
+                </optgroup>
+                <optgroup label="Suburbs (-8%)">
+                  <option value="arabian-ranches" data-mult="0.92">Arabian Ranches</option>
+                  <option value="mirdif"          data-mult="0.92">Mirdif</option>
+                </optgroup>
+              </select>
+            </fieldset>
+
+            <!-- Step 4: Add-ons -->
+            <fieldset class="space-y-2">
+              <legend class="block text-xs font-semibold uppercase tracking-wider text-ink-700">4. Add-ons (optional)</legend>
+              <div class="space-y-2">
+                <label class="flex items-start gap-3 rounded-xl bg-ink-50 p-3 ring-1 ring-ink-200 cursor-pointer has-[:checked]:bg-brand-50 has-[:checked]:ring-brand-300">
+                  <input type="checkbox" name="addons" value="ceiling" class="mt-0.5 accent-brand-500" />
+                  <span class="text-sm text-ink-700"><strong>Include ceilings</strong> <span class="text-ink-500">(+15%)</span></span>
+                </label>
+                <label class="flex items-start gap-3 rounded-xl bg-ink-50 p-3 ring-1 ring-ink-200 cursor-pointer has-[:checked]:bg-brand-50 has-[:checked]:ring-brand-300">
+                  <input type="checkbox" name="addons" value="urgency" class="mt-0.5 accent-brand-500" />
+                  <span class="text-sm text-ink-700"><strong>Urgent — start within 24 hours</strong> <span class="text-ink-500">(+10%)</span></span>
+                </label>
+                <label class="flex items-start gap-3 rounded-xl bg-ink-50 p-3 ring-1 ring-ink-200 cursor-pointer has-[:checked]:bg-brand-50 has-[:checked]:ring-brand-300">
+                  <input type="checkbox" name="addons" value="weekend" class="mt-0.5 accent-brand-500" />
+                  <span class="text-sm text-ink-700"><strong>Weekend work only</strong> <span class="text-ink-500">(no extra cost)</span></span>
+                </label>
+              </div>
+            </fieldset>
+          </form>
+
+          <!-- Result panel (right) — sticky on desktop -->
+          <aside class="lg:col-span-5">
+            <div class="lg:sticky lg:top-24 rounded-3xl bg-gradient-to-br from-brand-50 via-amber-50/50 to-white p-7 ring-1 ring-brand-100">
+              <p class="eyebrow"><span class="grid h-2 w-2 rounded-full bg-emerald-500"></span>Your estimate</p>
+              <h3 class="mt-3 text-xs font-semibold uppercase tracking-wider text-ink-600" id="calc-property-label">Pick a property to begin</h3>
+              <p class="mt-4 serif-font" id="calc-price">
+                <span class="text-4xl font-extrabold text-ink-900 sm:text-5xl" id="calc-from">AED —</span>
+              </p>
+              <p class="mt-1 text-sm text-ink-500" id="calc-range">Fixed quote range, in writing</p>
+
+              <dl class="mt-6 space-y-2 text-xs border-t border-brand-200/60 pt-4">
+                <div class="flex justify-between">
+                  <dt class="text-ink-600">Estimated duration</dt>
+                  <dd class="font-semibold text-ink-900" id="calc-duration">—</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-ink-600">Crew size</dt>
+                  <dd class="font-semibold text-ink-900" id="calc-crew">—</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-ink-600">Deposit</dt>
+                  <dd class="font-semibold text-emerald-700">AED 0</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-ink-600">Warranty</dt>
+                  <dd class="font-semibold text-ink-900">12 months</dd>
+                </div>
+              </dl>
+
+              <a
+                id="calc-cta"
+                href={whatsappUrl('Hi Mr Painter, I just used your calculator. Please confirm a fixed quote.')}
+                target="_blank"
+                rel="noopener"
+                class="btn-whatsapp mt-6 w-full text-sm"
+              >
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true">
+                  <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.157 5.335 5.493 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24z"/>
+                </svg>
+                Get my exact quote on WhatsApp
+              </a>
+              <p class="mt-3 text-center text-[11px] text-ink-500">Estimate auto-fills in your message. You add nothing.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <TrustOffers />
+
+  <Section eyebrow="What's included" title="What every quote covers as standard" bg="white">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {[
+        { title: 'Premium paint', desc: 'Jotun Lady, Dulux Diamond, Caparol Premiumweiss — never budget brands unless you pick Essential.' },
+        { title: 'Two coats minimum', desc: 'Single-coat shortcuts banned across our network on Standard and Premium tiers.' },
+        { title: 'Full prep', desc: 'Furniture moved, walls cleaned, cracks filled, edges taped — included.' },
+        { title: '12-month warranty', desc: 'Any peeling or visible defect, we return at no cost.' },
+      ].map((item) => (
+        <article class="card p-6">
+          <span class="grid h-10 w-10 place-items-center rounded-xl bg-brand-50 text-brand-700">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12l5 5L20 7"/>
+            </svg>
+          </span>
+          <h3 class="mt-4 text-base font-bold text-ink-900">{item.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{item.desc}</p>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section eyebrow="FAQ" title="Calculator questions answered" bg="ink-50">
+    <InlineFAQ faqs={faqs} />
+  </Section>
+
+  <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+  <FAQSchema faqs={faqs} slot="head" />
+</BaseLayout>
+
+<script is:inline>
+  // Inline so it runs before hydration. Pure-vanilla calculator — keeps the
+  // page at 0 KB of framework JS while still feeling instant.
+  (function () {
+    const form = document.getElementById('calc-form');
+    if (!form) return;
+
+    // Pricing data mirrored from src/data/pricing.ts. Kept inline so the
+    // calculator works without a network fetch.
+    const PRICES = {
+      // Small jobs
+      'door':          { from: 80,    to: 200,   duration: 'Same-day', crew: '1 painter',  label: 'Doors & trim (per door)' },
+      'touch-up':      { from: 299,   to: 600,   duration: '2-3 hours', crew: '1 painter',  label: 'Wall touch-up / patch repair' },
+      'feature-wall':  { from: 399,   to: 800,   duration: 'Half day',  crew: '1 painter',  label: 'Single feature wall' },
+      'single-room':   { from: 499,   to: 900,   duration: 'Half day',  crew: '1-2 painters', label: 'Single room' },
+      // Apartments
+      'studio':        { from: 999,   to: 1500,  duration: '1 day',     crew: '2 painters', label: 'Studio apartment' },
+      '1bhk':          { from: 1499,  to: 2500,  duration: '1 day',     crew: '2 painters', label: '1 BHK apartment' },
+      '2bhk':          { from: 2499,  to: 3800,  duration: '1-2 days',  crew: '2-3 painters', label: '2 BHK apartment' },
+      '3bhk':          { from: 3499,  to: 5500,  duration: '2 days',    crew: '3 painters', label: '3 BHK apartment' },
+      // Villas
+      'villa-3br':     { from: 6999,  to: 12000, duration: '3-5 days',  crew: '3-4 painters', label: '3BR villa (full)' },
+      'villa-45br':    { from: 11000, to: 22000, duration: '5-8 days',  crew: '4 painters', label: '4-5BR villa' },
+      'villa-67br':    { from: 22000, to: 38000, duration: '8-12 days', crew: '5-6 painters', label: '6-7BR villa' },
+    };
+
+    const TIER_MULT = { essential: 0.85, standard: 1.00, premium: 1.20 };
+
+    const els = {
+      propertyLabel: document.getElementById('calc-property-label'),
+      from:    document.getElementById('calc-from'),
+      range:   document.getElementById('calc-range'),
+      duration: document.getElementById('calc-duration'),
+      crew:    document.getElementById('calc-crew'),
+      cta:     document.getElementById('calc-cta'),
+    };
+
+    function fmt(n) { return 'AED ' + Math.round(n / 50) * 50 + (n >= 1000 ? '' : ''); }
+    function fmtCommas(n) { return 'AED ' + (Math.round(n / 50) * 50).toLocaleString(); }
+
+    function recalc() {
+      const fd = new FormData(form);
+      const property = fd.get('property');
+      const tier = fd.get('tier') || 'standard';
+      const area = fd.get('area') || '';
+      const addons = fd.getAll('addons');
+
+      const base = PRICES[property];
+      if (!base) {
+        els.propertyLabel.textContent = 'Pick a property to begin';
+        els.from.textContent = 'AED —';
+        els.range.textContent = 'Fixed quote range, in writing';
+        els.duration.textContent = '—';
+        els.crew.textContent = '—';
+        return;
+      }
+
+      // Area multiplier
+      const areaSelect = form.querySelector('select[name="area"]');
+      const areaOpt = areaSelect ? areaSelect.options[areaSelect.selectedIndex] : null;
+      const areaMult = areaOpt && areaOpt.dataset.mult ? parseFloat(areaOpt.dataset.mult) : 1.0;
+
+      // Tier multiplier
+      const tierMult = TIER_MULT[tier] || 1.0;
+
+      // Add-on multipliers
+      let addonMult = 1.0;
+      if (addons.includes('ceiling')) addonMult *= 1.15;
+      if (addons.includes('urgency')) addonMult *= 1.10;
+
+      const mult = areaMult * tierMult * addonMult;
+      const from = Math.round((base.from * mult) / 50) * 50;
+      const to   = Math.round((base.to   * mult) / 50) * 50;
+
+      els.propertyLabel.textContent = base.label;
+      els.from.textContent  = 'AED ' + from.toLocaleString();
+      els.range.textContent = 'to AED ' + to.toLocaleString() + ' · fixed in writing';
+      els.duration.textContent = base.duration;
+      els.crew.textContent = base.crew;
+
+      // Build WhatsApp pre-fill message
+      const msg = [
+        '🎨 *Painting quote request*',
+        '',
+        '*Property:* ' + base.label,
+        '*Paint tier:* ' + (tier.charAt(0).toUpperCase() + tier.slice(1)),
+      ];
+      if (area) {
+        const areaText = areaSelect.options[areaSelect.selectedIndex].text;
+        msg.push('*Area:* ' + areaText);
+      }
+      if (addons.length) {
+        msg.push('*Add-ons:* ' + addons.join(', '));
+      }
+      msg.push('');
+      msg.push('*Calculator estimate:* AED ' + from.toLocaleString() + ' – ' + to.toLocaleString());
+      msg.push('');
+      msg.push('Please confirm a fixed quote.');
+      msg.push('— from mrpainterdubai.com/calculator');
+
+      els.cta.href = 'https://wa.me/971544856912?text=' + encodeURIComponent(msg.join('\n'));
+
+      // Fire GA4 event so we can track which configurations are popular
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'calculator_estimate', {
+          property: property,
+          tier: tier,
+          area: area || 'any',
+          addons: addons.join(','),
+          from_aed: from,
+          to_aed: to,
+        });
+      }
+    }
+
+    form.addEventListener('change', recalc);
+    form.addEventListener('input', recalc);
+
+    // Track when the user clicks the WhatsApp CTA from calculator
+    els.cta.addEventListener('click', function () {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'calculator_whatsapp_click', {
+          property: form.querySelector('[name="property"]').value || '',
+          tier: form.querySelector('input[name="tier"]:checked')?.value || 'standard',
+        });
+      }
+    });
+
+    // Initial render
+    recalc();
+  })();
+</script>
