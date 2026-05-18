@@ -5,6 +5,17 @@ import SiteSchema from '~/components/schema/SiteSchema.astro';
 import Header from '~/components/Header.astro';
 import Footer from '~/components/Footer.astro';
 import WhatsAppFloat from '~/components/WhatsAppFloat.astro';
+import GoogleAnalytics from '~/components/analytics/GoogleAnalytics.astro';
+import { site } from '~/data/site';
+
+// Verification codes for Google Search Console + Bing Webmaster Tools.
+// Env vars take precedence so production deploys can override without commits.
+const gscCode =
+  (import.meta.env.PUBLIC_GSC_VERIFICATION as string | undefined)?.trim() ||
+  site.analytics.searchConsoleVerification.trim();
+const bingCode =
+  (import.meta.env.PUBLIC_BING_VERIFICATION as string | undefined)?.trim() ||
+  site.analytics.bingVerification.trim();
 
 export interface Props {
   title: string;
@@ -53,6 +64,14 @@ const lastModifiedDisplay = new Date().toLocaleDateString('en-GB', { year: 'nume
     <meta name="article:modified_time" content={lastModified} />
     <meta property="og:updated_time" content={lastModified} />
     <meta name="last-modified" content={lastModified} />
+
+    <!-- Search Console + Bing Webmaster verification (skipped if blank) -->
+    {gscCode && <meta name="google-site-verification" content={gscCode} />}
+    {bingCode && <meta name="msvalidate.01" content={bingCode} />}
+
+    <!-- Analytics (loads only if a measurement ID is configured) -->
+    <GoogleAnalytics />
+
     <SiteSchema />
 
     <slot name="head" />

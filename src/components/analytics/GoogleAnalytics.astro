@@ -1,0 +1,29 @@
+---
+// Google Analytics 4 loader. Renders nothing if no measurement ID is configured,
+// so local builds and previews stay clean. Set PUBLIC_GA4_ID at deploy time, or
+// hard-code in src/data/site.ts under analytics.ga4MeasurementId.
+import { site } from '~/data/site';
+
+const envId = import.meta.env.PUBLIC_GA4_ID as string | undefined;
+const id = (envId && envId.trim()) || site.analytics.ga4MeasurementId.trim();
+
+// Light validation — GA4 IDs always start with G- and are short
+const isValid = /^G-[A-Z0-9]{6,}$/i.test(id);
+---
+
+{isValid && (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${id}`}></script>
+    <script is:inline define:vars={{ id }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      // anonymize_ip + no ad-personalization features = privacy-friendly default
+      gtag('config', id, {
+        anonymize_ip: true,
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false,
+      });
+    </script>
+  </>
+)}

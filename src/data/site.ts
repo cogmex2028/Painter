@@ -38,6 +38,18 @@ export const site = {
     averageRating: 4.8,
     reviewCount: 2340,
   },
+  // Tracking / search-console codes. Each can be overridden via the matching
+  // env var at build time (PUBLIC_GA4_ID, PUBLIC_GSC_VERIFICATION) so secrets
+  // can stay out of the repo. Leave empty strings here as the safe default.
+  analytics: {
+    // Paste your GA4 measurement ID — looks like "G-XXXXXXXXXX"
+    ga4MeasurementId: '',
+    // Paste the value Google Search Console gives you for the "HTML tag"
+    // verification method — only the content="..." string, not the full tag.
+    searchConsoleVerification: '',
+    // Bing Webmaster Tools verification (optional) — same format.
+    bingVerification: '',
+  },
 };
 
 export function whatsappUrl(message?: string) {
