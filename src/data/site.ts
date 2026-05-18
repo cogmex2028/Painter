@@ -43,7 +43,7 @@ export const site = {
   // can stay out of the repo. Leave empty strings here as the safe default.
   analytics: {
     // Paste your GA4 measurement ID — looks like "G-XXXXXXXXXX"
-    ga4MeasurementId: '',
+    ga4MeasurementId: 'G-CWXGYSJBK7',
     // Paste the value Google Search Console gives you for the "HTML tag"
     // verification method — only the content="..." string, not the full tag.
     searchConsoleVerification: '',
