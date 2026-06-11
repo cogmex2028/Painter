@@ -2,8 +2,44 @@
   command = "npm run build"
   publish = "dist"
 
-# Astro's directory format already serves /path/index.html for /path/
-# so no additional redirects are needed.
+# Doorway-page cleanup — these URLs were de-indexed by Google as low-quality
+# duplicates of the canonical pages they target. 301 the signals so any
+# remaining link equity / index history flows to the right destination.
+[[redirects]]
+  from = "/painter-in-dubai/*"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/painting-company-in-dubai/*"
+  to = "/about/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/best-painters-in-dubai/*"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/painting-cost-1bhk-dubai/*"
+  to = "/pricing/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/painting-cost-2bhk-dubai/*"
+  to = "/pricing/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/painting-cost-3bhk-dubai/*"
+  to = "/pricing/"
+  status = 301
+  force = true
 
 [[headers]]
   for = "/_astro/*"

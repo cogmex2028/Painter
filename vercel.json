@@ -5,6 +5,20 @@
   "framework": "astro",
   "cleanUrls": true,
   "trailingSlash": true,
+  "redirects": [
+    { "source": "/painter-in-dubai", "destination": "/", "permanent": true },
+    { "source": "/painter-in-dubai/", "destination": "/", "permanent": true },
+    { "source": "/painting-company-in-dubai", "destination": "/about/", "permanent": true },
+    { "source": "/painting-company-in-dubai/", "destination": "/about/", "permanent": true },
+    { "source": "/best-painters-in-dubai", "destination": "/", "permanent": true },
+    { "source": "/best-painters-in-dubai/", "destination": "/", "permanent": true },
+    { "source": "/painting-cost-1bhk-dubai", "destination": "/pricing/", "permanent": true },
+    { "source": "/painting-cost-1bhk-dubai/", "destination": "/pricing/", "permanent": true },
+    { "source": "/painting-cost-2bhk-dubai", "destination": "/pricing/", "permanent": true },
+    { "source": "/painting-cost-2bhk-dubai/", "destination": "/pricing/", "permanent": true },
+    { "source": "/painting-cost-3bhk-dubai", "destination": "/pricing/", "permanent": true },
+    { "source": "/painting-cost-3bhk-dubai/", "destination": "/pricing/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)\\.(jpg|jpeg|png|webp|svg|ico)",

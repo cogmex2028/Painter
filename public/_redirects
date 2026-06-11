@@ -1,0 +1,17 @@
+# Doorway-page cleanup — these were de-indexed by Google as low-quality
+# duplicates of the canonical pages they target. 301 the signals so any
+# remaining link equity / index history flows to the right destination.
+# Honoured by Netlify, Cloudflare Pages, Render, Fly.io static, and others.
+
+/painter-in-dubai            /              301
+/painter-in-dubai/           /              301
+/painting-company-in-dubai   /about/        301
+/painting-company-in-dubai/  /about/        301
+/best-painters-in-dubai      /              301
+/best-painters-in-dubai/     /              301
+/painting-cost-1bhk-dubai    /pricing/      301
+/painting-cost-1bhk-dubai/   /pricing/      301
+/painting-cost-2bhk-dubai    /pricing/      301
+/painting-cost-2bhk-dubai/   /pricing/      301
+/painting-cost-3bhk-dubai    /pricing/      301
+/painting-cost-3bhk-dubai/   /pricing/      301
