@@ -4,7 +4,7 @@ export const site = {
   legalName: 'Mr Painter Dubai LLC',
   tagline: 'Compare Dubai\'s top-rated painters in 60 seconds',
   description:
-    'Get free quotes from 5+ verified painters in your area. Interior, exterior, villa & apartment painting across Dubai. Trusted by 10,000+ homeowners.',
+    'Dubai painting company marketplace — free quotes from 5+ verified painters. Interior, exterior, villa & apartment work across 35+ communities. Trusted by 10,000+ homeowners.',
   url: 'https://mrpainterdubai.com',
   locale: 'en-AE',
   twitterHandle: '@mrpainterdubai',

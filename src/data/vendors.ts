@@ -39,7 +39,7 @@ export type Vendor = {
 export const vendors: Vendor[] = [
   {
     slug: 'elite-painters-dubai',
-    updatedAt: '2026-05-15T18:43:46.000Z',
+    updatedAt: '2026-06-06T14:00:00.000Z',
     name: 'Elite Painters Dubai',
     tagline: 'Premium villa & high-rise specialists',
     rating: 4.9,
@@ -118,7 +118,7 @@ export const vendors: Vendor[] = [
   },
   {
     slug: 'royal-finish-llc',
-    updatedAt: '2026-05-15T18:53:46.000Z',
+    updatedAt: '2026-06-07T15:00:00.000Z',
     name: 'Royal Finish LLC',
     tagline: 'Fast apartment turnarounds, 24/7',
     rating: 4.8,
@@ -197,7 +197,7 @@ export const vendors: Vendor[] = [
   },
   {
     slug: 'sahara-coats',
-    updatedAt: '2026-05-15T19:03:46.000Z',
+    updatedAt: '2026-06-08T16:00:00.000Z',
     name: 'Sahara Coats',
     tagline: 'Weatherproof exteriors with 5-year warranty',
     rating: 4.7,
@@ -276,7 +276,7 @@ export const vendors: Vendor[] = [
   },
   {
     slug: 'crown-decor-painting',
-    updatedAt: '2026-05-15T19:13:46.000Z',
+    updatedAt: '2026-06-09T17:00:00.000Z',
     name: 'Crown Decor Painting',
     tagline: 'Italian textures & feature walls',
     rating: 4.9,

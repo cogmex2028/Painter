@@ -41,4 +41,9 @@ export const homeFaqs: FAQ[] = [
     answer:
       'Mr Painter Dubai covers every major Dubai community including Marina, Downtown, Business Bay, JLT, Jumeirah, Palm Jumeirah, Arabian Ranches, Mirdif, JVC and many more — 35+ neighbourhoods in total.',
   },
+  {
+    question: 'What is the best painting company in Dubai?',
+    answer:
+      'The best painting company depends on your property, community and budget — there is no single winner for every job. Mr Painter Dubai lets you compare 5+ verified painting companies side-by-side with real ratings, prices and warranties, so you choose the best fit for your project rather than calling one contractor blind.',
+  },
 ];

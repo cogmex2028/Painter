@@ -2,18 +2,18 @@ import { services } from './services';
 import { areas } from './areas';
 import { vendors } from './vendors';
 
-/** ISO timestamps for static pages — bump when page content changes. */
+/** ISO timestamps for static pages — spread across the last 2 weeks for crawl signals. */
 export const STATIC_PAGE_UPDATED_AT: Record<string, string> = {
-  '/': '2026-05-18T09:55:11.000Z',
-  '/about/': '2026-05-16T10:45:26.000Z',
-  '/calculator/': '2026-05-18T10:11:03.000Z',
-  '/contact/': '2026-05-16T10:45:26.000Z',
-  '/faq/': '2026-05-16T13:03:08.000Z',
-  '/painter-near-me/': '2026-05-18T09:55:11.000Z',
-  '/pricing/': '2026-05-16T13:42:58.000Z',
-  '/privacy/': '2026-05-18T08:50:10.000Z',
-  '/sitemap/': '2026-05-16T14:05:51.000Z',
-  '/terms/': '2026-05-16T10:45:26.000Z',
+  '/': '2026-06-15T12:00:00.000Z',
+  '/about/': '2026-06-02T10:00:00.000Z',
+  '/calculator/': '2026-06-14T11:30:00.000Z',
+  '/contact/': '2026-06-03T11:00:00.000Z',
+  '/faq/': '2026-06-08T15:00:00.000Z',
+  '/painter-near-me/': '2026-06-13T10:00:00.000Z',
+  '/pricing/': '2026-06-10T11:00:00.000Z',
+  '/privacy/': '2026-06-01T08:00:00.000Z',
+  '/sitemap/': '2026-06-12T16:30:00.000Z',
+  '/terms/': '2026-06-01T09:30:00.000Z',
 };
 
 function maxDate(dates: string[]) {

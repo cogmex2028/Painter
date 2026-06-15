@@ -22,7 +22,7 @@ export type Area = {
 export const areas: Area[] = [
   {
     slug: 'dubai-marina',
-    updatedAt: '2026-05-15T15:43:46.000Z',
+    updatedAt: '2026-06-05T08:00:00.000Z',
     name: 'Dubai Marina',
     sector: 'Marina & JBR',
     vendorCount: 18,
@@ -71,7 +71,7 @@ export const areas: Area[] = [
   },
   {
     slug: 'downtown-dubai',
-    updatedAt: '2026-05-15T15:53:46.000Z',
+    updatedAt: '2026-06-06T09:00:00.000Z',
     name: 'Downtown Dubai',
     sector: 'Downtown & Business Bay',
     vendorCount: 16,
@@ -120,7 +120,7 @@ export const areas: Area[] = [
   },
   {
     slug: 'business-bay',
-    updatedAt: '2026-05-15T16:03:46.000Z',
+    updatedAt: '2026-06-07T10:00:00.000Z',
     name: 'Business Bay',
     sector: 'Downtown & Business Bay',
     vendorCount: 14,
@@ -169,7 +169,7 @@ export const areas: Area[] = [
   },
   {
     slug: 'jumeirah',
-    updatedAt: '2026-05-15T16:13:46.000Z',
+    updatedAt: '2026-06-08T11:00:00.000Z',
     name: 'Jumeirah',
     sector: 'Jumeirah',
     vendorCount: 12,
@@ -218,7 +218,7 @@ export const areas: Area[] = [
   },
   {
     slug: 'palm-jumeirah',
-    updatedAt: '2026-05-15T16:23:46.000Z',
+    updatedAt: '2026-06-09T12:00:00.000Z',
     name: 'Palm Jumeirah',
     sector: 'Marina & JBR',
     vendorCount: 10,
@@ -267,7 +267,7 @@ export const areas: Area[] = [
   },
   {
     slug: 'jlt',
-    updatedAt: '2026-05-15T16:33:46.000Z',
+    updatedAt: '2026-06-10T13:00:00.000Z',
     name: 'JLT',
     sector: 'TECOM & JLT',
     vendorCount: 15,
@@ -316,7 +316,7 @@ export const areas: Area[] = [
   },
   {
     slug: 'arabian-ranches',
-    updatedAt: '2026-05-15T16:43:46.000Z',
+    updatedAt: '2026-06-11T08:00:00.000Z',
     name: 'Arabian Ranches',
     sector: 'Suburbs',
     vendorCount: 11,
@@ -365,7 +365,7 @@ export const areas: Area[] = [
   },
   {
     slug: 'mirdif',
-    updatedAt: '2026-05-15T16:53:46.000Z',
+    updatedAt: '2026-06-12T09:00:00.000Z',
     name: 'Mirdif',
     sector: 'Mirdif & Warqa',
     vendorCount: 9,
@@ -414,7 +414,7 @@ export const areas: Area[] = [
   },
   {
     slug: 'jvc',
-    updatedAt: '2026-05-15T17:03:46.000Z',
+    updatedAt: '2026-06-14T10:00:00.000Z',
     name: 'JVC',
     sector: 'JVC & Motor City',
     vendorCount: 13,
