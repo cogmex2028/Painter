@@ -1,5 +1,6 @@
 export type Service = {
   slug: string;
+  updatedAt: string;
   name: string;
   short: string;
   description: string;
@@ -21,6 +22,7 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: 'interior-painting',
+    updatedAt: '2026-05-15T13:43:46.000Z',
     name: 'Interior Painting',
     short: 'Walls, ceilings & rooms',
     description:
@@ -93,6 +95,7 @@ export const services: Service[] = [
   },
   {
     slug: 'exterior-painting',
+    updatedAt: '2026-05-15T13:53:46.000Z',
     name: 'Exterior Painting',
     short: 'Facades, walls & boundaries',
     description:
@@ -164,6 +167,7 @@ export const services: Service[] = [
   },
   {
     slug: 'villa-painting',
+    updatedAt: '2026-05-15T14:03:46.000Z',
     name: 'Villa Painting',
     short: 'Full villa, inside & out',
     description:
@@ -237,6 +241,7 @@ export const services: Service[] = [
   },
   {
     slug: 'apartment-painting',
+    updatedAt: '2026-05-15T14:13:46.000Z',
     name: 'Apartment Painting',
     short: 'Studios to 4-bedrooms',
     description:
@@ -308,6 +313,7 @@ export const services: Service[] = [
   },
   {
     slug: 'commercial-painting',
+    updatedAt: '2026-05-15T14:23:46.000Z',
     name: 'Commercial Painting',
     short: 'Offices, retail & warehouses',
     description:
@@ -379,6 +385,7 @@ export const services: Service[] = [
   },
   {
     slug: 'texture-decorative',
+    updatedAt: '2026-05-15T14:33:46.000Z',
     name: 'Texture & Decorative',
     short: 'Stucco, marmorino & accents',
     description:
@@ -452,6 +459,7 @@ export const services: Service[] = [
   // ─────── Move-in painting ───────
   {
     slug: 'move-in-painting',
+    updatedAt: '2026-05-16T14:29:08.000Z',
     name: 'Move-In Painting',
     short: 'Fresh walls before you unpack',
     description:
@@ -460,7 +468,7 @@ export const services: Service[] = [
     unit: 'AED / apartment',
     icon: 'home',
     popular: true,
-    seoTitle: 'Move-In Painting Dubai — Fresh Before You Unpack',
+    seoTitle: 'Move-In Painting Dubai — Ready Before Unpack',
     seoDescription:
       'Move-in painting in Dubai. Fresh walls before furniture arrives. 24-48 hour starts, fixed quote, no deposit. Studios from AED 999, 1BR from AED 1,499.',
     intro:
@@ -532,6 +540,7 @@ export const services: Service[] = [
   // ─────── Move-out painting ───────
   {
     slug: 'move-out-painting',
+    updatedAt: '2026-05-16T14:39:08.000Z',
     name: 'Move-Out Painting',
     short: 'Get your full deposit back',
     description:

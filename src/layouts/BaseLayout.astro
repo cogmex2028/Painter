@@ -7,6 +7,7 @@ import Footer from '~/components/Footer.astro';
 import WhatsAppFloat from '~/components/WhatsAppFloat.astro';
 import GoogleAnalytics from '~/components/analytics/GoogleAnalytics.astro';
 import { site } from '~/data/site';
+import { lastmodForPath } from '~/data/content-dates';
 
 // Verification codes for Google Search Console + Bing Webmaster Tools.
 // Env vars take precedence so production deploys can override without commits.
@@ -27,10 +28,11 @@ export interface Props {
 
 const { title, description, image, noindex, type } = Astro.props;
 
-// Build-time timestamp surfaced to search engines and AI answer engines
-// as a recency signal. Updated every deploy.
-const lastModified = new Date().toISOString();
-const lastModifiedDisplay = new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long' });
+const lastModified = lastmodForPath(Astro.url.pathname);
+const lastModifiedDisplay = new Date(lastModified).toLocaleDateString('en-GB', {
+  year: 'numeric',
+  month: 'long',
+});
 ---
 
 <!doctype html>

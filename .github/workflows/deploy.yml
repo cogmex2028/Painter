@@ -34,6 +34,11 @@ jobs:
           # The post-build step prefixes hard-coded root-relative paths.
           SITE_URL: https://cogmex2028.github.io
           BASE_PATH: /Painter/
+          # Add these as GitHub repo secrets (Settings → Secrets → Actions):
+          # PUBLIC_GSC_VERIFICATION — Google Search Console HTML tag content value
+          # PUBLIC_BING_VERIFICATION — Bing Webmaster Tools verification code
+          PUBLIC_GSC_VERIFICATION: ${{ secrets.PUBLIC_GSC_VERIFICATION }}
+          PUBLIC_BING_VERIFICATION: ${{ secrets.PUBLIC_BING_VERIFICATION }}
         run: |
           npx astro build --site "$SITE_URL"
           BASE_PATH="$BASE_PATH" node scripts/prefix-base.mjs

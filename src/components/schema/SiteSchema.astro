@@ -1,10 +1,9 @@
 ---
 import JsonLd from './JsonLd.astro';
 import { site } from '~/data/site';
+import { lastmodForPath } from '~/data/content-dates';
 
-// ISO timestamp generated at build time → tells search engines and LLM
-// answer engines the site is actively maintained (recency signal).
-const lastModified = new Date().toISOString();
+const lastModified = lastmodForPath('/');
 
 const organization = {
   '@context': 'https://schema.org',
@@ -45,14 +44,6 @@ const website = {
   inLanguage: site.locale,
   dateModified: lastModified,
   publisher: { '@id': `${site.url}/#organization` },
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: `${site.url}/search?q={search_term_string}`,
-    },
-    'query-input': 'required name=search_term_string',
-  },
 };
 ---
 

@@ -46,8 +46,10 @@ export const site = {
     ga4MeasurementId: 'G-CWXGYSJBK7',
     // Paste the value Google Search Console gives you for the "HTML tag"
     // verification method — only the content="..." string, not the full tag.
+    // Prefer PUBLIC_GSC_VERIFICATION in .env or CI secrets (see .env.example).
     searchConsoleVerification: '',
     // Bing Webmaster Tools verification (optional) — same format.
+    // Prefer PUBLIC_BING_VERIFICATION in .env or CI secrets.
     bingVerification: '',
   },
 };

@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 import tailwindcss from '@tailwindcss/vite';
+import { lastmodForPath } from './src/data/content-dates.ts';
 
 // Override these via env vars at build time when deploying to a subpath
 // (e.g. GitHub Project Pages: SITE_URL=https://cogmex2028.github.io BASE_PATH=/Painter/)
@@ -20,11 +21,11 @@ export default defineConfig({
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
-      lastmod: new Date(),
       // Per-URL priority tuning — search engines weight these.
       // Homepage = 1.0, key money pages = 0.9, deep pages = 0.7, legal = 0.3.
       serialize(item) {
         const url = item.url;
+        item.lastmod = new Date(lastmodForPath(new URL(url).pathname));
         if (url.endsWith('/')) {
           if (url.match(/^https?:\/\/[^/]+\/?$/)) {
             item.priority = 1.0;
