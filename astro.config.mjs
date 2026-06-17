@@ -21,9 +21,6 @@ export default defineConfig({
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
-      // /sitemap/ is a human-friendly index that we noindex (thin content);
-      // the XML sitemap is the authoritative crawl source.
-      filter: (page) => !page.endsWith('/sitemap/'),
       // Per-URL priority tuning — search engines weight these.
       // Homepage = 1.0, key money pages = 0.9, deep pages = 0.7, legal = 0.3.
       serialize(item) {

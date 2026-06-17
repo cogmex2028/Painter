@@ -14,98 +14,291 @@ const breadcrumbs = [
   { name: 'Sitemap', href: '/sitemap/' },
 ];
 
-const title = 'Sitemap — Mr Painter Dubai';
+const title = 'Sitemap — Every Page on Mr Painter Dubai';
 const description =
-  'Browse every page on Mr Painter Dubai: services, communities, vendor profiles, pricing, FAQs and more. XML sitemap also available at /sitemap-index.xml.';
+  'A complete, human-readable index of every page on Mr Painter Dubai: 8 painting services, 9 Dubai communities, 4 verified vendor profiles, pricing tools, FAQ and legal pages.';
 
-const groups = [
-  {
-    name: 'Main pages',
-    links: [
-      { href: '/', label: 'Home' },
-      { href: '/pricing/', label: 'Pricing' },
-      { href: '/about/', label: 'About Mr Painter Dubai' },
-      { href: '/contact/', label: 'Contact' },
-      { href: '/faq/', label: 'Frequently asked questions' },
-    ],
-  },
-  {
-    name: 'Services',
-    links: [
-      { href: '/services/', label: 'All painting services' },
-      ...services.map((s) => ({ href: `/services/${s.slug}/`, label: s.name })),
-    ],
-  },
-  {
-    name: 'Communities we cover',
-    links: [
-      { href: '/areas/', label: 'All communities' },
-      ...areas.map((a) => ({ href: `/areas/${a.slug}/`, label: `Painters in ${a.name}` })),
-    ],
-  },
-  {
-    name: 'Featured painters',
-    links: vendors.map((v) => ({ href: `/vendors/${v.slug}/`, label: v.name })),
-  },
-  {
-    name: 'Legal & technical',
-    links: [
-      { href: '/privacy/', label: 'Privacy policy' },
-      { href: '/terms/', label: 'Terms of service' },
-      { href: '/sitemap-index.xml', label: 'XML sitemap (for search engines)' },
-      { href: '/robots.txt', label: 'robots.txt' },
-    ],
-  },
+// Short, link-worthy summaries we render alongside each URL. These are
+// hand-written rather than reused from intros so the sitemap itself adds
+// value rather than duplicating the destination page's first paragraph.
+const serviceBlurbs: Record<string, string> = {
+  'interior-painting': 'Apartment, villa and bedroom repaints with low-VOC paints and single-day finish. From AED 12/sqft.',
+  'exterior-painting': 'Weatherproof villa and tower exteriors with 5-year warranty coats and salt-resistant systems.',
+  'villa-painting': 'Full villa repaints — interior, exterior and feature walls. Fixed quotes from AED 6,500.',
+  'apartment-painting': 'Studio to 3-BR apartment painting, dust-sheet protection, single-day turnaround. From AED 1,200.',
+  'commercial-painting': 'Offices, retail fit-outs and warehouse coatings — weekend and overnight shifts.',
+  'texture-decorative': 'Marmorino, Stucco Veneziano, sand-finish and feature-wall work by Italian-trained crews.',
+  'move-in-painting': 'Fresh paint before the moving truck arrives — coordinated with your handover date.',
+  'move-out-painting': 'Restore the unit to handover condition so you keep the security deposit.',
+};
+
+const areaBlurbs: Record<string, string> = {
+  'dubai-marina': 'Tower apartments and marina-front penthouses — coordinated with building security and lifts.',
+  'downtown-dubai': 'Luxury towers around Burj Khalifa, Boulevard and Old Town — premium finishes by appointment.',
+  'business-bay': 'Office fit-outs and 1-2 BR apartments in mid-rise towers around the canal.',
+  'jumeirah': 'Beachside villas and standalone homes — exterior systems built for salt and humidity.',
+  'palm-jumeirah': 'Frond villas and Shoreline / Tiara apartments — sea-facing exterior specialists.',
+  'jlt': 'Cluster towers and lake-front apartments — fast booking around DMCC business hours.',
+  'arabian-ranches': 'Suburban villa repaints across Saheel, Mirador and the Lakes — exterior weatherproofing.',
+  'mirdif': 'Affordable family villa painting — interior, exterior and garden walls.',
+  'jvc': 'Townhouse and apartment painting in Jumeirah Village Circle — popular for new-tenant repaints.',
+};
+
+const vendorBlurbs: Record<string, string> = {
+  'elite-painters-dubai': 'Premium villa and penthouse specialist — 12 years, Italian decorative finishes.',
+  'royal-finish-llc': 'Same-day apartment turnarounds across Marina, JLT, Business Bay — 24/7 booking.',
+  'sahara-coats': 'Exterior villa specialist — 5-year weatherproof warranty, Arabian Ranches and Jumeirah.',
+  'crown-decor-painting': 'Marmorino and Stucco specialists for feature walls and premium villa interiors.',
+};
+
+const popular = [
+  { href: '/', label: 'Home — Compare Dubai painters', hint: 'The fastest way to get matched: tell us your space, get 5 free quotes.' },
+  { href: '/calculator/', label: 'Painting cost calculator', hint: 'Interactive 2026 calculator — interior, exterior, villa and apartment estimates.' },
+  { href: '/pricing/', label: 'Painting prices in Dubai 2026', hint: 'Full fixed-price guide across every service and apartment size.' },
+  { href: '/painter-near-me/', label: 'Painter near me', hint: 'Local painters in every Dubai community — pick yours.' },
+  { href: '/services/', label: 'All painting services', hint: 'Browse interior, exterior, villa, commercial, marmorino and more.' },
+  { href: '/areas/', label: 'All Dubai communities', hint: 'Painters by neighbourhood — Marina, Downtown, Palm and beyond.' },
 ];
 
-const totalCount = groups.reduce((n, g) => n + g.links.length, 0);
+const utilityLinks = [
+  { href: '/calculator/', label: 'Cost calculator', hint: 'Plug in space and get a fixed-fee estimate before you talk to anyone.' },
+  { href: '/pricing/', label: 'Full price guide', hint: 'Every service, every apartment size, in one table.' },
+  { href: '/painter-near-me/', label: 'Painter near me', hint: 'Skip the long list and jump straight to your community.' },
+  { href: '/faq/', label: 'FAQ', hint: '20+ answers on pricing, timelines, paint brands, warranty and booking.' },
+];
+
+const trustLinks = [
+  { href: '/about/', label: 'About Mr Painter Dubai', hint: 'How we vet vendors, what the marketplace does and does not do.' },
+  { href: '/contact/', label: 'Contact us', hint: 'WhatsApp, phone and email — usually under 30 minutes during opening hours.' },
+];
+
+const legalLinks = [
+  { href: '/privacy/', label: 'Privacy policy', hint: 'How we handle your contact details, lead routing and analytics cookies.' },
+  { href: '/terms/', label: 'Terms of service', hint: 'Marketplace terms covering quote requests, vendor relationships and disputes.' },
+  { href: '/sitemap-index.xml', label: 'XML sitemap (for crawlers)', hint: 'Machine-readable sitemap index referenced from robots.txt.' },
+  { href: '/robots.txt', label: 'robots.txt', hint: 'Crawl directives and sitemap pointers for search engines.' },
+];
+
+const totalCount =
+  popular.length +
+  services.length + 1 +
+  areas.length + 1 +
+  vendors.length +
+  utilityLinks.length +
+  trustLinks.length +
+  legalLinks.length;
 ---
 
-<BaseLayout title={title} description={description} noindex={true}>
+<BaseLayout title={title} description={description}>
   <PageHero
     eyebrow="Site map"
     title="Every page on Mr Painter Dubai"
-    subtitle={`A flat, browsable index of all ${totalCount} URLs on the site. Looking for the machine-readable XML version? It lives at /sitemap-index.xml.`}
+    subtitle={`A human-readable index of all ${totalCount} pages on the site — organised by what you're trying to do rather than by the URL path. Looking for the machine-readable XML sitemap that search engines use? It lives at /sitemap-index.xml.`}
     breadcrumbs={breadcrumbs}
   />
 
   <Section bg="white">
-    <div class="grid gap-8 sm:gap-10 lg:grid-cols-2">
-      {groups.map((g) => (
-        <article>
-          <h2 class="text-lg font-bold text-ink-900 sm:text-xl">{g.name}</h2>
-          <p class="mt-1 text-xs uppercase tracking-[0.15em] text-ink-500">{g.links.length} pages</p>
-          <ul class="mt-4 grid gap-2">
-            {g.links.map((l) => (
-              <li>
-                <a
-                  href={l.href}
-                  class="group flex items-center justify-between rounded-lg border border-ink-200/70 bg-white px-4 py-2.5 text-sm text-ink-800 transition-colors hover:border-brand-300 hover:bg-brand-50/40"
-                >
-                  <span>{l.label}</span>
-                  <svg class="h-3 w-3 text-ink-400 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </article>
+    <header class="mx-auto max-w-3xl text-center">
+      <span class="eyebrow">Start here</span>
+      <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">Most popular pages</h2>
+      <p class="mt-4 text-ink-600">
+        About 80% of visitors land on one of these six pages. If you're new to the site,
+        the calculator and the pricing guide together answer most "is this for me?" questions
+        in under two minutes — and the homepage gets you matched to five real painters straight away.
+      </p>
+    </header>
+
+    <ul class="mx-auto mt-10 grid max-w-4xl gap-3 sm:grid-cols-2">
+      {popular.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            class="group block h-full rounded-2xl bg-brand-50/40 ring-1 ring-brand-200/60 p-5 transition-all hover:bg-brand-50 hover:ring-brand-300"
+          >
+            <div class="flex items-center justify-between">
+              <span class="text-base font-semibold text-ink-900">{l.label}</span>
+              <svg class="h-4 w-4 text-brand-500 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+            <p class="mt-2 text-sm text-ink-600">{l.hint}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section bg="ink-50">
+    <header class="mx-auto max-w-3xl text-center">
+      <span class="eyebrow">By service</span>
+      <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">Painting services</h2>
+      <p class="mt-4 text-ink-600">
+        We cover the eight painting services most homes and offices in Dubai actually need —
+        from a single-day apartment repaint to a full villa exterior with a five-year warranty.
+        Each service page lists what's included, the fixed starting price, the paint brands we use,
+        and the verified vendors who specialise in that work.
+      </p>
+    </header>
+
+    <div class="mx-auto mt-10 grid max-w-5xl gap-3 sm:grid-cols-2">
+      <a
+        href="/services/"
+        class="group block rounded-xl bg-white ring-1 ring-ink-200/70 p-4 transition-colors hover:ring-brand-300"
+      >
+        <span class="text-sm font-semibold text-ink-900">All painting services →</span>
+        <p class="mt-1 text-xs text-ink-600">Service hub page — comparison of the eight categories we offer.</p>
+      </a>
+      {services.map((s) => (
+        <a
+          href={`/services/${s.slug}/`}
+          class="group block rounded-xl bg-white ring-1 ring-ink-200/70 p-4 transition-colors hover:ring-brand-300"
+        >
+          <span class="text-sm font-semibold text-ink-900">{s.name} →</span>
+          <p class="mt-1 text-xs text-ink-600">{serviceBlurbs[s.slug] ?? s.seoDescription}</p>
+        </a>
+      ))}
+    </div>
+  </Section>
+
+  <Section bg="white">
+    <header class="mx-auto max-w-3xl text-center">
+      <span class="eyebrow">By community</span>
+      <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">Dubai communities we serve</h2>
+      <p class="mt-4 text-ink-600">
+        We have dedicated pages for nine Dubai communities — the ones where we get the most
+        repeat work and where we keep enough vetted painters to send same-week quotes.
+        Each area page shows local starting prices, the kinds of buildings or villas we paint there,
+        and the specific vendors who already cover that postcode.
+      </p>
+    </header>
+
+    <div class="mx-auto mt-10 grid max-w-5xl gap-3 sm:grid-cols-2">
+      <a
+        href="/areas/"
+        class="group block rounded-xl bg-white ring-1 ring-ink-200/70 p-4 transition-colors hover:ring-brand-300"
+      >
+        <span class="text-sm font-semibold text-ink-900">All communities →</span>
+        <p class="mt-1 text-xs text-ink-600">Area hub page — every Dubai community we currently cover.</p>
+      </a>
+      {areas.map((a) => (
+        <a
+          href={`/areas/${a.slug}/`}
+          class="group block rounded-xl bg-white ring-1 ring-ink-200/70 p-4 transition-colors hover:ring-brand-300"
+        >
+          <span class="text-sm font-semibold text-ink-900">Painters in {a.name} →</span>
+          <p class="mt-1 text-xs text-ink-600">
+            {areaBlurbs[a.slug] ?? `Local pros in ${a.name}.`}
+            {' '}From AED {a.startingFrom.toLocaleString()}, {a.vendorCount} verified vendors.
+          </p>
+        </a>
       ))}
     </div>
   </Section>
 
   <Section bg="ink-50">
-    <div class="mx-auto max-w-3xl text-center">
-      <h2 class="text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">For search engines and developers</h2>
+    <header class="mx-auto max-w-3xl text-center">
+      <span class="eyebrow">Featured painters</span>
+      <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">Verified vendor profiles</h2>
       <p class="mt-4 text-ink-600">
-        The machine-readable XML sitemap is at <a href="/sitemap-index.xml" class="font-semibold text-brand-700 underline">/sitemap-index.xml</a>.
-        It is also referenced from <a href="/robots.txt" class="font-semibold text-brand-700 underline">/robots.txt</a> so all major crawlers discover it automatically.
+        Four of our most-booked painting companies have full profile pages with their portfolio,
+        verified reviews, service areas and pricing. These pages exist to help you compare crews
+        before you hire — and they make it easier for repeat customers to reach the same team again.
       </p>
-      <p class="mt-4 text-sm text-ink-500">
-        Each URL carries its own <code class="rounded bg-ink-100 px-1.5 py-0.5 font-mono text-xs">lastmod</code> timestamp based on when that page&apos;s source content was last changed.
-      </p>
+    </header>
+
+    <div class="mx-auto mt-10 grid max-w-5xl gap-3 sm:grid-cols-2">
+      {vendors.map((v) => (
+        <a
+          href={`/vendors/${v.slug}/`}
+          class="group block rounded-xl bg-white ring-1 ring-ink-200/70 p-4 transition-colors hover:ring-brand-300"
+        >
+          <span class="text-sm font-semibold text-ink-900">{v.name} →</span>
+          <p class="mt-1 text-xs text-ink-600">{vendorBlurbs[v.slug] ?? v.tagline}</p>
+        </a>
+      ))}
     </div>
+  </Section>
+
+  <Section bg="white">
+    <header class="mx-auto max-w-3xl text-center">
+      <span class="eyebrow">Tools & resources</span>
+      <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">Plan and price your job</h2>
+      <p class="mt-4 text-ink-600">
+        Before talking to a painter, you can usually answer the two biggest questions
+        — "how much will it cost?" and "is this painter near me?" — using the calculator,
+        the pricing guide and the FAQ. These pages are written to give straight answers without
+        forcing you into a quote form.
+      </p>
+    </header>
+
+    <div class="mx-auto mt-10 grid max-w-5xl gap-3 sm:grid-cols-2">
+      {utilityLinks.map((l) => (
+        <a
+          href={l.href}
+          class="group block rounded-xl bg-white ring-1 ring-ink-200/70 p-4 transition-colors hover:ring-brand-300"
+        >
+          <span class="text-sm font-semibold text-ink-900">{l.label} →</span>
+          <p class="mt-1 text-xs text-ink-600">{l.hint}</p>
+        </a>
+      ))}
+    </div>
+  </Section>
+
+  <Section bg="ink-50">
+    <header class="mx-auto max-w-3xl text-center">
+      <span class="eyebrow">About & contact</span>
+      <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">Get to know us</h2>
+      <p class="mt-4 text-ink-600">
+        Mr Painter Dubai is a marketplace, not a single painting company — we vet and route work
+        to independent painters and painting companies across the city. The pages below explain
+        how we vet vendors, how leads reach them, and the fastest ways to reach a real human
+        if something on your job needs attention.
+      </p>
+    </header>
+
+    <div class="mx-auto mt-10 grid max-w-5xl gap-3 sm:grid-cols-2">
+      {trustLinks.map((l) => (
+        <a
+          href={l.href}
+          class="group block rounded-xl bg-white ring-1 ring-ink-200/70 p-4 transition-colors hover:ring-brand-300"
+        >
+          <span class="text-sm font-semibold text-ink-900">{l.label} →</span>
+          <p class="mt-1 text-xs text-ink-600">{l.hint}</p>
+        </a>
+      ))}
+    </div>
+  </Section>
+
+  <Section bg="white">
+    <header class="mx-auto max-w-3xl text-center">
+      <span class="eyebrow">Legal & technical</span>
+      <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">For the fine print and the robots</h2>
+      <p class="mt-4 text-ink-600">
+        The privacy and terms pages cover how leads are handled and the marketplace relationship.
+        For developers and crawlers we also expose machine-readable references —
+        the XML sitemap index lists every URL with its last-modified date,
+        and robots.txt declares crawl permissions and points to the sitemap.
+      </p>
+    </header>
+
+    <ul class="mx-auto mt-10 grid max-w-3xl gap-2">
+      {legalLinks.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            class="group flex items-center justify-between rounded-lg border border-ink-200/70 bg-white px-4 py-3 text-sm text-ink-800 transition-colors hover:border-brand-300 hover:bg-brand-50/40"
+          >
+            <div>
+              <span class="font-semibold text-ink-900">{l.label}</span>
+              <span class="ml-2 text-xs text-ink-500">{l.hint}</span>
+            </div>
+            <svg class="h-3 w-3 shrink-0 text-ink-400 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </li>
+      ))}
+    </ul>
   </Section>
 
   <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
