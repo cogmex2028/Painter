@@ -31,6 +31,24 @@ const matchingVendors = vendors.filter((v) => v.services.includes(service.slug))
 const popularAreasForService = areas.filter((a) => a.popularServices?.includes(service.slug)).slice(0, 6);
 const extended = serviceExtended[service.slug];
 
+// Sibling-service map — visitors looking at one service often need a related
+// one (move-in customers care about apartment work; villa work pairs with
+// exterior, etc.). Hand-mapped so we can pick intent-aligned pairs rather
+// than guessing by category.
+const relatedServiceSlugs: Record<string, string[]> = {
+  'interior-painting': ['apartment-painting', 'texture-decorative', 'villa-painting'],
+  'exterior-painting': ['villa-painting', 'apartment-painting'],
+  'villa-painting': ['exterior-painting', 'interior-painting', 'texture-decorative'],
+  'apartment-painting': ['interior-painting', 'move-in-painting', 'move-out-painting'],
+  'commercial-painting': ['interior-painting', 'exterior-painting'],
+  'texture-decorative': ['interior-painting', 'villa-painting'],
+  'move-in-painting': ['apartment-painting', 'move-out-painting', 'interior-painting'],
+  'move-out-painting': ['apartment-painting', 'move-in-painting', 'interior-painting'],
+};
+const relatedServices = services.filter((s) =>
+  (relatedServiceSlugs[service.slug] ?? []).includes(s.slug),
+);
+
 const breadcrumbs = [
   { name: 'Home', href: '/' },
   { name: 'Services', href: '/services/' },
@@ -232,14 +250,14 @@ const breadcrumbs = [
 
   <!-- Popular areas -->
   {popularAreasForService.length > 0 && (
-    <Section eyebrow="Areas covered" title={`Where ${service.name.toLowerCase()} is most popular`} bg="white">
+    <Section eyebrow="Areas covered" title={`${service.name} across Dubai`} subtitle="Pick the community where you need work — each link goes to the local painters who specialise there." bg="white">
       <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {popularAreasForService.map((a) => (
           <li>
             <a href={`/areas/${a.slug}/`} class="card group flex items-center justify-between p-5">
               <div>
-                <p class="font-semibold text-ink-900">{a.name}</p>
-                <p class="mt-0.5 text-xs text-ink-500">{a.vendorCount} painters available</p>
+                <p class="font-semibold text-ink-900">{service.name} in {a.name}</p>
+                <p class="mt-0.5 text-xs text-ink-500">{a.vendorCount} local painters · from AED {a.startingFrom.toLocaleString()}</p>
               </div>
               <svg class="h-5 w-5 text-ink-400 transition-transform group-hover:translate-x-1 group-hover:text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -248,6 +266,33 @@ const breadcrumbs = [
           </li>
         ))}
       </ul>
+    </Section>
+  )}
+
+  <!-- Related services -->
+  {relatedServices.length > 0 && (
+    <Section eyebrow="Related services" title={`Often booked with ${service.name.toLowerCase()}`} subtitle="Customers who book this work usually compare these too." bg="ink-50">
+      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {relatedServices.map((s) => (
+          <li>
+            <a href={`/services/${s.slug}/`} class="card group flex h-full flex-col p-6">
+              <h3 class="text-lg font-bold text-ink-900">{s.name}</h3>
+              <p class="mt-2 text-sm text-ink-600">{s.short}</p>
+              <p class="mt-3 text-sm font-semibold text-ink-900">From AED {s.startingPrice.toLocaleString()}</p>
+              <span class="mt-auto pt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 transition-transform group-hover:translate-x-1">
+                Open {s.name.toLowerCase()} guide
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-8 text-center text-sm text-ink-500">
+        Comparing budgets? See the <a href="/pricing/" class="font-semibold text-brand-700 hover:text-brand-600 underline">full painting price guide for Dubai</a>
+        {' '}or use the <a href="/calculator/" class="font-semibold text-brand-700 hover:text-brand-600 underline">interactive painting cost calculator</a>.
+      </p>
     </Section>
   )}
 

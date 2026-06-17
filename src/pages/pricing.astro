@@ -8,6 +8,7 @@ import QuoteCTA from '~/components/page/QuoteCTA.astro';
 import InlineFAQ from '~/components/page/InlineFAQ.astro';
 
 import Breadcrumbs from '~/components/schema/Breadcrumbs.astro';
+import FAQSchema from '~/components/schema/FAQSchema.astro';
 import JsonLd from '~/components/schema/JsonLd.astro';
 
 import { services } from '~/data/services';
@@ -19,7 +20,7 @@ const breadcrumbs = [
   { name: 'Pricing', href: '/pricing/' },
 ];
 
-const title = 'Painting Prices in Dubai — Honest 2026 Rates';
+const title = 'Painting Prices Dubai 2026 — Fixed Quotes from AED 299';
 const description =
   'Fixed painting prices in Dubai. Studios from AED 999, 1BR from AED 1,499, villas from AED 6,999. Quote in writing, no deposit, 12-month warranty.';
 
@@ -113,7 +114,7 @@ const offerCatalog = {
 <BaseLayout title={title} description={description}>
   <PageHero
     eyebrow="Pricing"
-    title="Honest painting prices, fixed in writing."
+    title="Painting prices in Dubai — fixed in writing"
     subtitle="From a single wall touch-up to a full Frond villa repaint — every quote is fixed in writing before work starts. No deposit. No surprises on the day. No minimum spend. If a painter raises the price after arriving, we cover the gap from our quality fund."
     breadcrumbs={breadcrumbs}
     stats={[
@@ -183,6 +184,7 @@ const offerCatalog = {
   />
 
   <Breadcrumbs items={breadcrumbs.map((b) => ({ name: b.name, url: b.href }))} slot="head" />
+  <FAQSchema faqs={pricingFaqs} slot="head" />
   <JsonLd data={pricingSchema} slot="head" />
   <JsonLd data={offerCatalog} slot="head" />
 </BaseLayout>

@@ -19,7 +19,7 @@ const breadcrumbs = [
   { name: 'Areas', href: '/areas/' },
 ];
 
-const title = 'Painters by Area — 35+ Dubai Communities';
+const title = 'Painters by Area — Dubai Community Directory';
 const description =
   'Find verified painters in every Dubai community. Marina, Downtown, JLT, Jumeirah, Palm, Ranches, Mirdif, JVC and more. Free quotes, fast response.';
 
@@ -49,7 +49,7 @@ const itemListSchema = {
     subtitle="Pick your neighbourhood and meet the painters who serve it. Every vendor is verified, insured and rated by real homeowners."
     breadcrumbs={breadcrumbs}
     stats={[
-      { label: 'Areas covered', value: '35+' },
+      { label: 'Featured communities', value: `${areas.length}` },
       { label: 'Active painters', value: '120+' },
       { label: 'Avg. response', value: 'Under 1 hr' },
       { label: 'Avg. rating', value: '4.8 ★' },
@@ -77,7 +77,7 @@ const itemListSchema = {
         <div class="rounded-2xl bg-gradient-to-br from-brand-50 to-amber-50 p-6 ring-1 ring-brand-100">
           <h3 class="text-lg font-bold text-ink-900">Coverage at a glance</h3>
           <dl class="mt-5 space-y-4 text-sm">
-            <div class="flex justify-between gap-3"><dt class="text-ink-600">Active communities</dt><dd class="font-bold text-ink-900">35+</dd></div>
+            <div class="flex justify-between gap-3"><dt class="text-ink-600">Featured communities</dt><dd class="font-bold text-ink-900">{areas.length}</dd></div>
             <div class="flex justify-between gap-3"><dt class="text-ink-600">Avg. vendors per community</dt><dd class="font-bold text-ink-900">8-18</dd></div>
             <div class="flex justify-between gap-3"><dt class="text-ink-600">Avg. quote response</dt><dd class="font-bold text-emerald-700">Under 1 hour</dd></div>
             <div class="flex justify-between gap-3"><dt class="text-ink-600">Same-day starts</dt><dd class="font-bold text-emerald-700">Available</dd></div>

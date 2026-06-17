@@ -195,15 +195,15 @@ const breadcrumbs = [
 
   <!-- Popular services -->
   {matchingServices.length > 0 && (
-    <Section eyebrow="Most requested" title={`Popular services in ${area.name}`} bg="white">
+    <Section eyebrow="Most requested" title={`Popular painting services in ${area.name}`} bg="white">
       <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {matchingServices.map((s) => (
           <li>
             <a href={`/services/${s.slug}/`} class="card group flex h-full flex-col p-6">
-              <h3 class="text-lg font-bold text-ink-900">{s.name}</h3>
+              <h3 class="text-lg font-bold text-ink-900">{s.name} in {area.name}</h3>
               <p class="mt-2 text-sm text-ink-600">{s.short}</p>
               <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 transition-transform group-hover:translate-x-1">
-                See details
+                Open {s.name.toLowerCase()} guide
                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
@@ -212,6 +212,10 @@ const breadcrumbs = [
           </li>
         ))}
       </ul>
+      <p class="mt-8 text-center text-sm text-ink-500">
+        Want a budget benchmark first? See the <a href="/pricing/" class="font-semibold text-brand-700 hover:text-brand-600 underline">full painting price guide for Dubai</a>
+        {' '}or estimate your job with the <a href="/calculator/" class="font-semibold text-brand-700 hover:text-brand-600 underline">painting cost calculator</a>.
+      </p>
     </Section>
   )}
 

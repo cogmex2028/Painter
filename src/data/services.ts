@@ -393,7 +393,7 @@ export const services: Service[] = [
     startingPrice: 35,
     unit: 'AED / sqft',
     icon: 'sparkle',
-    seoTitle: 'Decorative Painting Dubai — Marmorino & Stucco',
+    seoTitle: 'Marmorino Dubai — Decorative Painting, Stucco & Venetian Plaster',
     seoDescription:
       'Italian-finish decorative painting in Dubai. Marmorino, stucco, Venetian plaster, metallic accents. By specialist artisans, from AED 35/sqft. Free design consult.',
     intro:
