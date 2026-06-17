@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 4321
+    },
+    {
+      "name": "handyman",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/Nope/Handyman services/.claude/server.js"],
+      "port": 8765
     }
   ]
 }

@@ -6,6 +6,12 @@
   "cleanUrls": true,
   "trailingSlash": true,
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.mrpainterdubai.com" }],
+      "destination": "https://mrpainterdubai.com/:path*",
+      "permanent": true
+    },
     { "source": "/painter-in-dubai", "destination": "/", "permanent": true },
     { "source": "/painter-in-dubai/", "destination": "/", "permanent": true },
     { "source": "/painting-company-in-dubai", "destination": "/about/", "permanent": true },

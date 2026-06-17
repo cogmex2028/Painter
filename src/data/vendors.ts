@@ -136,7 +136,7 @@ export const vendors: Vendor[] = [
     accent: 'from-sky-500 to-indigo-600',
     seoTitle: 'Royal Finish LLC — Apartment Painting',
     seoDescription:
-      'Royal Finish LLC — 4.8★ from 248 reviews. Same-day apartment painting in Marina, JLT, Business Bay and JVC. 410+ jobs completed, 24/7 booking, English & Hindi.',
+      'Royal Finish LLC — 4.8★ from 248 reviews. Same-day apartment painting in Marina, JLT, Business Bay and JVC. 24/7 booking, English & Hindi.',
     bio:
       'Royal Finish LLC was started in 2018 by a former hotel-FM crew lead who saw a gap in fast, reliable apartment painting. Today the team runs three crews on rotating shifts to cover same-day jobs, evening commercial work and weekend bookings. Most studios and 1BR units are painted in a single shift, with photos sent to the customer at every stage. The team works in English, Hindi, Urdu and Arabic.',
     specialities: [

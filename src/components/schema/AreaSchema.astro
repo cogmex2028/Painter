@@ -54,13 +54,6 @@ const data = {
       closes: '22:00',
     },
   ],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: site.stats.averageRating,
-    reviewCount: Math.round(site.stats.reviewCount * (area.vendorCount / site.stats.vendors)),
-    bestRating: 5,
-    worstRating: 1,
-  },
 };
 ---
 
